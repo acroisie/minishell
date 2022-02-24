@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/02/24 17:36:26 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/02/24 19:47:16 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-//void	ft_display_data(t_lst_cmd data) // To delete
-//{ // To delete
-//	int	i; // To delete
-// // To delete
-//	i = 0; // To delete
-//	while (data.args[i]) // To delete
-//	{ // To delete
-//		ft_putendl_fd(data.args[i], 1); // To delete
-//		i++; // To delete
-//	} // To delete
-//} // To delete
 
 int	main(void)
 {

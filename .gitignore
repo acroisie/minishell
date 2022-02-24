@@ -1,0 +1,5 @@
+minishell
+.vscode/
+*.a
+objs/
+libft/objs/
