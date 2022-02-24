@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/02/24 14:20:34 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/02/24 17:37:43 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_data
+typedef struct s_lst_cmd
 {
-	char			**args;
-	struct s_data	*next;
+	char				**args;
+	struct s_lst_cmd	*next;
 
-}t_data;
+}t_lst_cmd;
 
-t_data	*ft_lstnew_cell(void);
-t_data	*ft_parse_args(char *line);
+t_lst_cmd	*ft_create_cell(char **args);
+t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args);
+t_lst_cmd	*ft_parse_args(char *line);
+void		print_lst(t_lst_cmd *lst);
 
 #endif
