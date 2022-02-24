@@ -1,6 +1,6 @@
 minishell
 .vscode/
 *.a
-objs/*
-libft/objs/*
+objs
+libft/objs
 libft/libft.a
