@@ -6,15 +6,19 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/02/24 11:11:43 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/02/24 14:31:06 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_parse_args(char *line)
+t_data	*ft_parse_args(char *line)
 {
-	char	**args;
+	t_data	*data;
+	// char	**temp;
 
-	args = ft_split(line, ' ');
+	data = ft_lstnew_cell();
+	// temp = ft_split(line, '|');
+	data->args = ft_split(line, ' ');
+	return (data);
 }

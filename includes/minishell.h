@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/02/24 10:05:24 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/02/24 14:20:34 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-int	ft_parse_args(char *line);
-int	ft_supress_white_space(char *line);
+typedef struct s_data
+{
+	char			**args;
+	struct s_data	*next;
+
+}t_data;
+
+t_data	*ft_lstnew_cell(void);
+t_data	*ft_parse_args(char *line);
 
 #endif

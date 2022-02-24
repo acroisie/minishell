@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/02/24 09:39:48 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/02/24 14:21:23 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC_FLAGS = -Wall -Werror -Wextra
 NAME := minishell
 
 SRCS := main.c \
-		parse_args.c
+		parse_args.c \
+		parse_args_utils.c
 
 OBJS := $(SRCS:.c=.o)
 
@@ -32,7 +33,6 @@ objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
 
 libft :	
 		$(MAKE) -C libft
-		make bonus -C libft
 		
 clean :
 		rm -rf objs
