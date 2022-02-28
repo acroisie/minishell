@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/02/24 14:21:23 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/02/28 09:58:51 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ NAME := minishell
 
 SRCS := main.c \
 		parse_args.c \
-		parse_args_utils.c
+		parse_args_utils.c \
+		exec.c \
+		find_path.c \
 
 OBJS := $(SRCS:.c=.o)
 

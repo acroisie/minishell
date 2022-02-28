@@ -6,13 +6,13 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/02/24 17:48:33 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/02/28 12:08:23 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_lst_cmd	*ft_create_cell(char **args)
+t_lst_cmd	*ft_create_cell(char **args, int id)
 {
 	t_lst_cmd	*cell;
 
@@ -20,17 +20,20 @@ t_lst_cmd	*ft_create_cell(char **args)
 	if (cell == NULL)
 		return (NULL);
 	cell->args = args;
+	cell->path = NULL;
+	cell->pid = 0;
+	cell->id = id;
 	cell->next = NULL;
 	return (cell);
 }
 
-t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args)
+t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args, int id)
 {
 	t_lst_cmd	*cell;
 	t_lst_cmd	*temp;
 
 	temp = lst;
-	cell = ft_create_cell(args);
+	cell = ft_create_cell(args, id);
 	if (lst == NULL)
 	{
 		lst = cell;

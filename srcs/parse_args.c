@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2022/02/24 23:06:29 by acroisie         ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/02/28 09:08:48 by lnemor           ###   ########lyon.fr   */
->>>>>>> Stashed changes
+/*   Updated: 2022/02/28 12:09:51 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +35,7 @@ t_lst_cmd	*ft_parse_args(char *line)
 
 	i = 0;
 	j = 0;
-	lst_cmd = ft_create_cell(ft_split(line, ' '));
+	lst_cmd = ft_create_cell(ft_split(line, ' '), j + 1);
 	temp = ft_split(line, '|'); //Sub str
 	while (temp[i])
 		i++;
@@ -49,7 +45,7 @@ t_lst_cmd	*ft_parse_args(char *line)
 		j++;
 		while (j < i)
 		{
-			ft_lstadd_cell(lst_cmd, ft_split(temp[j], ' '));
+			ft_lstadd_cell(lst_cmd, ft_split(temp[j], ' '), j + 1);
 			j++;
 		}
 	}
