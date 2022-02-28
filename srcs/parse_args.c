@@ -6,7 +6,11 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2022/02/24 23:06:29 by acroisie         ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/02/28 09:08:48 by lnemor           ###   ########lyon.fr   */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +55,4 @@ t_lst_cmd	*ft_parse_args(char *line)
 	}
 	return (lst_cmd);
 }
+ 
