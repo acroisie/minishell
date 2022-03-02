@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lnemor <lnemor.student@42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/02/28 12:09:51 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/01 13:11:23 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_lst_cmd	*ft_parse_args(char *line)
 
 	i = 0;
 	j = 0;
-	lst_cmd = ft_create_cell(ft_split(line, ' '), j + 1);
+	lst_cmd = ft_create_cell(ft_split(line, ' '), j + 1, NULL);
 	temp = ft_split(line, '|'); //Sub str
 	while (temp[i])
 		i++;

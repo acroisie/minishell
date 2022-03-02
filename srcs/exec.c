@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lnemor <lnemor.student@42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/02/28 16:00:26 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/02 19:51:58 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,30 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 	i = 0;
 	while (lst_cmd)
 	{
-		pipe(data->pipe_fd);
+		pipe(lst_cmd->pipe_fd);
 		lst_cmd->pid = fork();
 		if (lst_cmd->pid == -1)
-			return ;
+			exit(1) ;
 		else if (lst_cmd->pid == 0)
 		{
-			if (lst_cmd->id == 1)
+			if (lst_cmd->prev == NULL && lst_cmd->next != NULL)
 			{
-				dup2(data->pipe_fd[1], STDOUT_FILENO);
-				close(data->pipe_fd[0]);
+				dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
+				close(lst_cmd->pipe_fd[0]);
 			}
-			if (!(lst_cmd->id == 1) && !(lst_cmd->next == NULL))
+			else if (lst_cmd->prev != NULL && lst_cmd->next != NULL)
 			{
-				dup2(data->pipe_fd[1], //test);
-				close(data->pipe_fd[0]);
+				dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
+				dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
+				close(lst_cmd->pipe_fd[0]);
+				close(lst_cmd->prev->pipe_fd[1]);
 			}
-			if (lst_cmd->next == NULL)
+			else if (lst_cmd->prev != NULL && lst_cmd->next == NULL)
 			{
-				dup2(data->pipe_fd[0], STDIN_FILENO);
-				close(data->pipe_fd[1]);
+				dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
+				close(lst_cmd->prev->pipe_fd[1]);
+				close(lst_cmd->pipe_fd[0]);
+				close(lst_cmd->pipe_fd[1]);
 			}
 			if (find_path(data, lst_cmd->args[0]) == 0)
 			{

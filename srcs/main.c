@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lnemor <lnemor.student@42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/02/28 15:39:53 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/02 19:44:10 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv, char **env)
 	if (!argv)
 		return (0);
 	data.new_env = env;
+	
 
 	while (1)
 	{	
@@ -42,12 +43,10 @@ int	main(int argc, char **argv, char **env)
 					waitpid(lst_cmd->pid, 0, 0);
 					dprintf(2, "waited cmd %d\n", i);
 					lst_cmd = lst_cmd->next;
-					i++;
 				}
 			}
 		}
 	}
-	close(data.pipe_fd[0]);
-	close(data.pipe_fd[1]);
+	
 	return (0);
 }
