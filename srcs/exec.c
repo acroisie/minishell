@@ -6,11 +6,31 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/07 18:00:03 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/07 18:07:41 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	do_first_cmd(t_lst_cmd	*lst_cmd)
+{
+	dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
+	close(lst_cmd->pipe_fd[1]);
+}
+
+void	do_mid_cmd(t_lst_cmd	*lst_cmd)
+{
+	dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
+	dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
+	close(lst_cmd->prev->pipe_fd[0]);
+	close(lst_cmd->pipe_fd[1]);
+}
+
+void	do_last_cmd(t_lst_cmd	*lst_cmd)
+{
+	dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
+	close(lst_cmd->prev->pipe_fd[0]);
+}
 
 void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 {
@@ -20,22 +40,11 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 	else if (lst_cmd->pid == 0)
 	{
 		if (lst_cmd->prev == NULL && lst_cmd->next != NULL)
-		{
-			dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
-			close(lst_cmd->pipe_fd[1]);
-		}
+			do_first_cmd(lst_cmd);
 		if (lst_cmd->prev != NULL && lst_cmd->next != NULL)
-		{
-			dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
-			dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
-			close(lst_cmd->prev->pipe_fd[0]);
-			close(lst_cmd->pipe_fd[1]);
-		}
+			do_mid_cmd(lst_cmd);
 		if (lst_cmd->prev != NULL && lst_cmd->next == NULL)
-		{
-			dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
-			close(lst_cmd->prev->pipe_fd[0]);
-		}
+			do_last_cmd(lst_cmd);
 		if (find_path(data, lst_cmd->args[0]) == 0)
 		{
 			ft_putstr_fd("command not found\n", 2);
