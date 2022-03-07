@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor.student@42lyon.fr>          +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/02 15:57:26 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/07 16:11:44 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,10 @@ void	print_lst(t_lst_cmd *lst)
 		i = 0;
 		while (lst->args[i])
 		{
-			printf("%s | ", lst->args[i]);
 			//if (lst->prev)
 			//	printf("prev %s\n", lst->prev->args[i]);
 			i++;
 		}
-		printf("\n------------------------\n");
 		lst = lst->next;
 	}
 }

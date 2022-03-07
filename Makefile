@@ -6,13 +6,13 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/02/28 09:58:51 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/07 15:30:18 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = -Wall -Werror -Wextra # -g3 -fsanitize=address
 
 NAME := minishell
 
