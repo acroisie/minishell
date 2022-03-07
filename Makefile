@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/02/28 09:58:51 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/07 15:44:53 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = -Wall -Werror -Wextra 
 
 NAME := minishell
 
@@ -27,7 +27,7 @@ OBJS := $(SRCS:.c=.o)
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline
+					$(CC) -o $(NAME) -framework CoreFoundation $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
 					@mkdir -p objs

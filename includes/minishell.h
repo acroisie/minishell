@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor.student@42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/01 13:08:35 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/07 15:06:51 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_lst_cmd
 {
@@ -47,8 +47,8 @@ typedef struct s_minishell
 
 }t_minishell;
 
-t_lst_cmd	*ft_create_cell(char **args, int id, t_lst_cmd	*prev);
-t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args, int id);
+t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd	*prev);
+t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args);
 t_lst_cmd	*ft_parse_args(char *line);
 void		print_lst(t_lst_cmd *lst);
 void		exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd);
