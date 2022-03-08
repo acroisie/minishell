@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/07 15:06:51 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/07 14:54:01 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ typedef struct s_minishell
 	char				**path;
 	char				*path_temp;
 	char				*path_1;
-	int					file_in;
-	int					file_out;
+	t_lst_cmd			*start_cmd;
 
 }t_minishell;
 

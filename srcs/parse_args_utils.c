@@ -63,7 +63,6 @@ void	print_lst(t_lst_cmd *lst)
 			//	printf("prev %s\n", lst->prev->args[i]);
 			i++;
 		}
-		printf("\n------------------------\n");
 		lst = lst->next;
 	}
 }
