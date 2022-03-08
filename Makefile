@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/07 15:44:53 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/08 09:06:19 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS := $(SRCS:.c=.o)
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-					$(CC) -o $(NAME) -framework CoreFoundation $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline
+					$(CC) -o $(NAME) -framework CoreFoundation $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline 
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
 					@mkdir -p objs

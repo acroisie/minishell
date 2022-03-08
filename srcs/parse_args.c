@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/07 15:31:19 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/08 10:16:31 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ static	int	args_count(const char *str, char sep)
 		if (str[i] == '"')
 		{
 			while (str[++i] != '"')
+			{
+				if (str[i] == '\0')
+					exit (1); //Add a clean exit with message: "Unclosed quotes"
+			}
+		}
+		if (str[i] == '\'')
+		{
+			while (str[++i] != '\'')
 			{
 				if (str[i] == '\0')
 					exit (1); //Add a clean exit with message: "Unclosed quotes"
@@ -68,6 +76,11 @@ static char	**fill_tab(const char *str, char **tab, char sep)
 				while (str[end] && str[++end] != '"')
 					;
 			}
+			if (str[end] == '\'')
+			{
+				while (str[end] && str[++end] != '\'')
+					;
+			}
 			end++;
 		}
 		tab[i] = malloc((end - start + 1) * sizeof(char));
@@ -87,7 +100,7 @@ char	**ft_split_args(char const *s, char c)
 	char	**tab;
 	int		word_nb;
 
-	dprintf(1, "here\n"); // To delete
+	// dprintf(1, "here\n"); // To delete
 	if (!s)
 		return (NULL);
 	word_nb = args_count(s, c);
@@ -109,7 +122,7 @@ t_lst_cmd	*ft_parse_args(char *line)
 	i = 0;
 	j = 0;
 	temp = ft_split_args(line, '|');
-	dprintf(1, "temp = %s\n", temp[0]); // To delete
+	// dprintf(1, "temp = %s\n", temp[0]); // To delete
 	lst_cmd = ft_create_cell(ft_split_args(temp[0], ' '), NULL);
 	// dprintf(1, "temp2 = %s\n", lst_cmd->args[1]); // To delete“
 	while (temp[i])

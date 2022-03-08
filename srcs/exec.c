@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/07 15:32:03 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/08 10:42:57 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 		pipe(lst_cmd->pipe_fd);
 		lst_cmd->pid = fork();
 		if (lst_cmd->pid == -1)
-			exit(1) ;
+			exit(1);
 		else if (lst_cmd->pid == 0)
 		{
 			if (lst_cmd->prev == NULL && lst_cmd->next != NULL)
