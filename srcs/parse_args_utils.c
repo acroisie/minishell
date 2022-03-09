@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/07 15:06:36 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/09 11:53:43 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd *prev)
 		return (NULL);
 	cell->args = args;
 	cell->path = NULL;
+	cell->relativ_path = NULL;
 	cell->pid = 0;
 	cell->next = NULL;
 	cell->prev = prev;
@@ -58,11 +59,10 @@ void	print_lst(t_lst_cmd *lst)
 		i = 0;
 		while (lst->args[i])
 		{
-			printf("%s */* ", lst->args[i]);
-			//if (lst->prev)
-			//	printf("prev %s\n", lst->prev->args[i]);
+			printf("%s*/*", lst->args[i]);
 			i++;
 		}
+		printf("\n");
 		lst = lst->next;
 	}
 }

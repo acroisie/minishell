@@ -3,31 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/07 18:11:51 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/08 11:09:36 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
+void	prompt(t_lst_cmd *lst_cmd, t_minishell *data, char **env)
 {
 	char		*line;
+	int			i;
+	char		**prompt;
+	char		*display;
 
+	data->new_env = env;
 	while (1)
 	{
-		line = readline("\033[1;92mminishell> \033[0m");
+		i = 0;
+		while (ft_strncmp(data->new_env[i], "PWD", 3))
+			i++;
+		prompt = ft_split(data->new_env[i], '/');
+		i = 0;
+		while (prompt[i])
+			i++;
+		display = ft_strjoin_free_s2("\033[1;92m", prompt[i - 1]);
+		display = ft_strjoin(display, "> \033[0m");
+		line = readline(display);
 		if (line)
 		{
 			add_history(line);
 			lst_cmd = ft_parse_args(line);
+			print_lst(lst_cmd); // To delete
 			data->start_cmd = lst_cmd;
 			if (lst_cmd)
-			{
 				exec_cmds(data, lst_cmd);
-			}
 			lst_cmd = data->start_cmd;
 			while (lst_cmd)
 			{
@@ -35,7 +47,6 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 				lst_cmd = lst_cmd->next;
 			}
 		}
-		line = readline("\033[1;92mminishell> \033[0m");
 	}
 }
 
@@ -48,7 +59,6 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	if (!argv)
 		return (0);
-	data.new_env = env;
-	prompt(&lst_cmd, &data);
+	prompt(&lst_cmd, &data, env);
 	return (0);
 }
