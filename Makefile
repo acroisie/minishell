@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/10 13:59:26 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/10 18:14:10 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,14 @@ CC_FLAGS = -Wall -Werror -Wextra
 NAME := minishell
 
 SRCS := main.c \
+		cells_utils.c \
 		parse_args.c \
 		parse_args_utils.c \
 		exec.c \
 		find_path.c \
 		ft_cd.c \
 		ft_env.c \
-		ft_builtins.c \
+		ft_builtins.c 
 
 OBJS := $(SRCS:.c=.o)
 
