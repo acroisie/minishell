@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/08 16:18:34 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 17:02:05 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+
+typedef struct s_lst_redir
+{
+	char				*file;
+	struct s_lst_redir	*next;
+}t_lst_redir;
 
 typedef struct s_lst_cmd
 {
@@ -29,6 +36,9 @@ typedef struct s_lst_cmd
 	char				*relativ_path;
 	int					id;
 	int					pipe_fd[2];
+	t_lst_redir			*lst_out;
+	t_lst_redir			*lst_in;
+	t_lst_redir			*lst_herdoc;
 	int					fd_in;
 	int					fd_out;
 	struct s_lst_cmd	*next;
@@ -46,8 +56,11 @@ typedef struct s_minishell
 
 }t_minishell;
 
+t_lst_redir	*ft_create_tab(char *file);
+t_lst_redir	*ft_lstadd_tab(t_lst_redir *lst, char *file);
 t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd	*prev);
 t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args);
+t_lst_redir	*ft_lstlast_tab(t_lst_redir *lst);
 t_lst_cmd	*ft_parse_args(char *line);
 void		print_lst(t_lst_cmd *lst);
 

@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/09 13:40:13 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/10 13:59:26 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
 
 libft :	
 		$(MAKE) -C libft
+		$(MAKE) bonus -C libft
 		
 clean :
 		rm -rf objs

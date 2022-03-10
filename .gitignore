@@ -2,3 +2,4 @@ objs
 *.a
 minishell
 .vscode/settings.json
+out*

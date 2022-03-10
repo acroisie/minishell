@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/08 11:09:36 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 15:22:23 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	prompt(t_lst_cmd *lst_cmd, t_minishell *data, char **env)
+void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 {
 	char		*line;
 	int			i;
 	char		**prompt;
 	char		*display;
 
-	data->new_env = env;
 	while (1)
 	{
 		i = 0;
@@ -32,11 +31,11 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data, char **env)
 		display = ft_strjoin_free_s2("\033[1;92m", prompt[i - 1]);
 		display = ft_strjoin(display, "> \033[0m");
 		line = readline(display);
-		if (line)
+		if (ft_strlen(line) != 0)
 		{
 			add_history(line);
 			lst_cmd = ft_parse_args(line);
-			print_lst(lst_cmd); // To delete
+		//	print_lst(lst_cmd); // To delete
 			data->start_cmd = lst_cmd;
 			if (lst_cmd)
 				exec_cmds(data, lst_cmd);
@@ -59,6 +58,9 @@ int	main(int argc, char **argv, char **env)
 		return (0);
 	if (!argv)
 		return (0);
-	prompt(&lst_cmd, &data, env);
+	if (!env)
+		return (0);
+	data.new_env = env;
+	prompt(&lst_cmd, &data);
 	return (0);
 }
