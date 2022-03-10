@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/09 13:34:50 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 08:23:52 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_minishell
 t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd	*prev);
 t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args);
 t_lst_cmd	*ft_parse_args(char *line);
+void		ft_quotes_clean(t_lst_cmd *lst_cmd);
 void		print_lst(t_lst_cmd *lst);
 void		exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd);
 char		*find_path(t_minishell *data, char *cmd);

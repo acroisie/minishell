@@ -6,87 +6,11 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/09 16:57:21 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/10 10:25:10 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// void	ft_quotes_clean(t_lst_cmd *lst_cmd)
-// {
-// 	int			i;
-// 	int			j;
-// 	t_lst_cmd	*start;
-
-// 	start = lst_cmd;
-// 	while (lst_cmd)
-// 	{
-// 		i = 0;
-// 		while (lst_cmd->args[i])
-// 		{
-// 			j = 0;
-// 			while (lst_cmd->args[i][j])
-// 			{
-// 				if (lst_cmd->args[i][j] == '"')
-// 				{
-// 					lst_cmd->args[i] = ft_memmove(&lst_cmd->args[i][j + 1], &lst_cmd->args[i][j], ft_strlen(lst_cmd->args[i] - 1));
-// 					j++;
-// 					while (lst_cmd->args[i][j] != '"')
-// 						j++;
-// 					lst_cmd->args[i] = ft_memmove(&lst_cmd->args[i][j + 1], &lst_cmd->args[i][j], ft_strlen(lst_cmd->args[i] - 1));
-// 				}
-// 				else if (lst_cmd->args[i][j] == '\'')
-// 				{
-// 					lst_cmd->args[i] = ft_memmove(&lst_cmd->args[i][j + 1], &lst_cmd->args[i][j], ft_strlen(lst_cmd->args[i] - 1));
-// 					j++;
-// 					while (lst_cmd->args[i][j] != '\'')
-// 						j++;
-// 					lst_cmd->args[i] = ft_memmove(&lst_cmd->args[i][j + 1], &lst_cmd->args[i][j], ft_strlen(lst_cmd->args[i] - 1));
-// 				}
-// 				j++;
-// 			}
-// 			i++;
-// 		}
-// 		lst_cmd = lst_cmd->next;
-// 	}
-// 	lst_cmd = start;
-// }
-
-void	ft_quotes_clean(t_lst_cmd *lst_cmd)
-{
-	int	i;
-	int	j;
-	int	n;
-	char	tmp;
-
-	while (lst_cmd)
-	{
-		i = 0;
-		while (lst_cmd->args[i])
-		{
-			j = 0;
-			n = 0;
-			while (lst_cmd->args[i][j])
-			{
-				if (lst_cmd->args[i][j] == '"' || lst_cmd->args[i][j] == '\'')
-				{
-					tmp = lst_cmd->args[i][j];
-					n++;
-					while (lst_cmd->args[i][n] && lst_cmd->args[i][n] != tmp)
-						lst_cmd->args[i][j++] = lst_cmd->args[i][n++];
-					n++;
-				}
-				lst_cmd->args[i][j++] = lst_cmd->args[i][n++];
-					//lst_cmd->args[i] = ft_memmove(&lst_cmd->args[i][j], &lst_cmd->args[i][j + n], ft_strlen(&lst_cmd->args[i][j + n]));		
-			}
-			lst_cmd->args[i][j++] = '\0';
-			i++;
-		}
-		lst_cmd = lst_cmd->next;
-	}
-	
-}
-
 
 static int	detect_sep(char c, char sep)
 {
@@ -148,17 +72,11 @@ static char	**fill_tab(const char *str, char **tab, char sep)
 		while (!detect_sep(str[end], sep) && str[end] != '\0')
 		{
 			if (str[end] == '"')
-			{
 				while (str[end] && str[++end] != '"')
 					;
-				// break ;
-			}
 			else if (str[end] == '\'')
-			{
 				while (str[end] && str[++end] != '\'')
 					;
-				// break ;
-			}
 			end++;
 		}
 		tab[i] = malloc((end - start + 1) * sizeof(char));
