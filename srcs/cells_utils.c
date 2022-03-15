@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_args_utils.c                                 :+:      :+:    :+:   */
+/*   cells_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/10 17:08:22 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 17:30:33 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd *prev)
+t_lst_cmd	*ft_create_cell(t_lst_cmd *prev)
 {
 	t_lst_cmd	*cell;
 
 	cell = malloc(sizeof(t_lst_cmd));
 	if (cell == NULL)
 		return (NULL);
-	cell->args = args;
+	cell->args = ft_calloc(DEFAULT_TAB_SIZE, sizeof(char *));
 	cell->path = NULL;
 	cell->relativ_path = NULL;
 	cell->pid = 0;
@@ -32,13 +32,13 @@ t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd *prev)
 	return (cell);
 }
 
-t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args)
+t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst)
 {
 	t_lst_cmd	*cell;
 	t_lst_cmd	*temp;
 
 	temp = lst;
-	cell = ft_create_cell(args, NULL);
+	cell = ft_create_cell(NULL);
 	if (lst == NULL)
 	{
 		lst = cell;

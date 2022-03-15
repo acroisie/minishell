@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/15 14:27:42 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 17:37:34 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ char	*ft_add_char(char *s1, char c)
 
 void	ft_init_var(t_var *var)
 {
-	var->lst_cmd->args == malloc(DEFAULT_TAB_SIZE * sizeof(char *)); //To double everytime when overflow
-	var->lst_cmd->args[0] == malloc(1 * sizeof(char));
-	var->lst_cmd->args[0][0] == '\0';
+	var->lst_cmd = ft_create_cell(NULL);
+	var->lst_cmd->args[0] = ft_calloc(1, sizeof(char) * 1);
+	dprintf(1, "Here");
+	var->lst_cmd->args[0][0] = '\0';
 	var->i = 0;
 	var->j = 0;
 }

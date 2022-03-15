@@ -6,25 +6,26 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/10 18:14:10 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/15 17:32:38 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = -Wall -Wextra -Werror -g
 
 NAME := minishell
 
-SRCS := main.c \
-		cells_utils.c \
-		parse_args.c \
-		parse_args_utils.c \
+SRCS := cells_utils.c \
 		exec.c \
 		find_path.c \
+		ft_builtins.c \
 		ft_cd.c \
 		ft_env.c \
-		ft_builtins.c 
+		main.c \
+		parse_args_process.c \
+		parse_args_utils.c \
+		parse_args.c
 
 OBJS := $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/15 14:29:09 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 16:33:47 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_minishell
 
 t_lst_redir	*ft_create_tab(char *file);
 t_lst_redir	*ft_lstadd_tab(t_lst_redir *lst, char *file);
-t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd	*prev);
-t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args);
+t_lst_cmd	*ft_create_cell(t_lst_cmd *prev);
+t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst);
 t_lst_redir	*ft_lstlast_tab(t_lst_redir *lst);
 void		print_lst(t_lst_cmd *lst);
 
