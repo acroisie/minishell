@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/14 16:30:45 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/15 14:29:09 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-
-# ifndef STD_TAB
-#  define STD_TAB 20
-# endif
 
 typedef struct s_lst_redir
 {
@@ -60,16 +56,7 @@ typedef struct s_minishell
 
 }t_minishell;
 
-typedef struct s_status
-{
-	int	space;
-	int	pipe;
-	int	d_quotes;
-	int	s_quote;
-	int	dollar;
-}t_status;
-
-/************************LINKED_LISTS*****************************/
+/************************LINKED_LISTS****************************/
 
 t_lst_redir	*ft_create_tab(char *file);
 t_lst_redir	*ft_lstadd_tab(t_lst_redir *lst, char *file);
@@ -78,10 +65,25 @@ t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args);
 t_lst_redir	*ft_lstlast_tab(t_lst_redir *lst);
 void		print_lst(t_lst_cmd *lst);
 
-/****************************PARSING******************************/
+/***************************PARSING*******************************/
+
+# ifndef DEFAULT_TAB_SIZE
+#  define DEFAULT_TAB_SIZE 20
+# endif
+
+typedef struct s_var
+{
+	t_lst_cmd	*lst_cmd;
+	char		**temp;
+	int			i;
+	int			j;
+}t_var;
 
 t_lst_cmd	*ft_parse_args(char *line);
 char		*ft_add_char(char *s1, char c);
+void		ft_init_var(t_var *var);
+void		ft_space_process(char *line, t_var *var);
+void		ft_d_quotes_process(char *line, t_var *var);
 
 /****************************EXEC*********************************/
 
