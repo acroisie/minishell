@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/15 17:43:03 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 09:42:32 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,25 @@ t_lst_cmd	*ft_parse_args(char *line)
 {
 	t_var		*var;
 
-	var = malloc(sizeof(t_var) * 1);
+	var = ft_calloc(sizeof(t_var) * 1);
 	ft_init_var(var);
 	while (line[var->i])
 	{
 		if (line[var->i] == ' ')
 			ft_space_process(line, var);
-		if (line[var->i] == '"')
+		else if (line[var->i] == '\'')
+			ft_s_quotes_process(line, var);
+		else if (line[var->i] == '"')
 			ft_d_quotes_process(line, var);
+		// else if (line[var->i] == '$')
+		// 	ft_dollar_sign_process(line, var);
 		else
-		{
-			var->lst_cmd->args[var->j] = ft_add_char(
-					var->lst_cmd->args[var->j], line[var->i]);
-			var->i++;
-		}
+			ft_copy_char(line, var);
 	}
+	print_lst(var->lst_cmd); // To delete
 	return (var->lst_cmd);
 }
 
 /*Todo_list:
-- var.lst_cmd.args to double everytime when overflow */
+- var.lst_cmd.args to double everytime when overflow 
+or calculate size before run this part*/

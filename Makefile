@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/15 17:32:38 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/16 09:40:41 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS := cells_utils.c \
 		ft_cd.c \
 		ft_env.c \
 		main.c \
-		parse_args_process.c \
+		parse_args_process_part1.c \
+		parse_args_process_part2.c \
 		parse_args_utils.c \
 		parse_args.c
 
