@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/16 14:06:27 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 17:05:33 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 		while (prompt[i])
 			i++;
 		display = ft_strjoin_free_s2("\033[1;92m", prompt[i - 1]);
+		i = 0;
 		display = ft_strjoin_free_s1(display, "> \033[0m");
 		line = readline(display);
 		if (ft_strlen(line) != 0)
 		{
+			add_history(line);
 			lst_cmd = ft_parse_args(line);
 			print_lst(lst_cmd); // To delete
 			data->start_cmd = lst_cmd;
@@ -44,7 +46,6 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 				waitpid(lst_cmd->pid, NULL, 0);
 				lst_cmd = lst_cmd->next;
 			}
-			add_history(line);
 		}
 	}
 }

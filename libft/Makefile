@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 15:10:13 by acroisie          #+#    #+#              #
-#    Updated: 2022/03/16 14:21:55 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/16 16:03:55 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 

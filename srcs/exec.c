@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/16 10:48:47 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 16:55:45 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 			}
 			if (lst_cmd->fd_out != 0)
 			{
-				// printf("test\n");
 				dup2(lst_cmd->fd_out, STDOUT_FILENO);
 				close(lst_cmd->fd_out);
 			}
@@ -116,6 +115,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 		if (is_builtin(lst_cmd) == 1)
 		{
 			do_builtin(data, lst_cmd);
+			exit (1);
 		}
 	}
 	return ;
@@ -127,9 +127,6 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 	t_lst_redir	*last_in;
 
 	lst_cmd = data->start_cmd;
-	// lst_cmd->lst_out->file = "out";
-	// ft_lstadd_tab(lst_cmd->lst_out, "out1");
-	// ft_lstadd_tab(lst_cmd->lst_out, "out2");
 	while (lst_cmd)
 	{
 		if (lst_cmd->next != NULL)
@@ -148,7 +145,7 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 				lst_cmd->lst_out = lst_cmd->lst_out->next;
 			}
 			last_out = ft_lstlast_tab(lst_cmd->lst_out);
-			lst_cmd->fd_out = open(last_out->file , O_TRUNC | O_RDWR
+			lst_cmd->fd_out = open(last_out->file, O_TRUNC | O_RDWR
 					| O_CREAT, 0644);
 		}
 		ft_fork(lst_cmd, data);
@@ -156,9 +153,9 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 			close(lst_cmd->prev->pipe_fd[0]);
 		if (lst_cmd->next != NULL)
 			close(lst_cmd->pipe_fd[1]);
-		if (lst_cmd->fd_in)
+		if (lst_cmd->fd_in != 0)
 			close(lst_cmd->fd_in);
-		if (lst_cmd->fd_out)
+		if (lst_cmd->fd_out != 0)
 			close(lst_cmd->fd_out);
 		lst_cmd = lst_cmd->next;
 	}
