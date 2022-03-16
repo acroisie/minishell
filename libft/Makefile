@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 15:10:13 by acroisie          #+#    #+#              #
-#    Updated: 2022/03/14 14:32:25 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/16 14:21:55 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,26 +51,20 @@ SRCS = ft_atoi.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c
-
-BONUS_SRCS = ft_lstadd_back.c \
-				ft_lstadd_front.c \
-				ft_lstclear.c \
-				ft_lstdelone.c \
-				ft_lstiter.c \
-				ft_lstlast.c \
-				ft_lstmap.c \
-				ft_lstnew.c \
-				ft_lstsize.c
+		ft_toupper.c \
+		ft_lstadd_back.c \
+		ft_lstadd_front.c \
+		ft_lstclear.c \
+		ft_lstdelone.c \
+		ft_lstiter.c \
+		ft_lstlast.c \
+		ft_lstmap.c \
+		ft_lstnew.c \
+		ft_lstsize.c
 
 OBJS := $(SRCS:.c=.o)
 
-BONUS_OBJS := $(BONUS_SRCS:.c=*.o)
-
 all : $(NAME)
-
-bonus : $(addprefix objs/, $(BONUS_OBJS))
-	ar rcs $(NAME) $(addprefix objs/, $(BONUS_OBJS))
 
 $(NAME) : $(addprefix objs/, $(OBJS))
 	ar rcs $(NAME) $(addprefix objs/, $(OBJS))
@@ -81,11 +75,11 @@ objs/%.o : %.c libft.h
 	
 clean :
 	rm -rf objs
-	rm -rf $(addprefix objs/, $(OBJS)) $(addprefix objs/, $(BONUS_OBJS))
+	rm -rf $(addprefix objs/, $(OBJS))
 
 fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
 
-.PHONY : all, clean, fclean, bonus
+.PHONY : all clean fclean re

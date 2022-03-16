@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/16 09:42:32 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 15:02:48 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ t_lst_cmd	*ft_parse_args(char *line)
 {
 	t_var		*var;
 
-	var = ft_calloc(sizeof(t_var) * 1);
+	var = ft_calloc(1, sizeof(t_var));
 	ft_init_var(var);
 	while (line[var->i])
 	{
-		if (line[var->i] == ' ')
+		if (line[var->i] == '|')
+			ft_pipe_process(line, var);
+		else if (line[var->i] == ' ')
 			ft_space_process(line, var);
 		else if (line[var->i] == '\'')
 			ft_s_quotes_process(line, var);
@@ -31,7 +33,6 @@ t_lst_cmd	*ft_parse_args(char *line)
 		else
 			ft_copy_char(line, var);
 	}
-	print_lst(var->lst_cmd); // To delete
 	return (var->lst_cmd);
 }
 

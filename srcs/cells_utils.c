@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/15 17:30:33 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 14:52:02 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,15 @@ t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst)
 	t_lst_cmd	*temp;
 
 	temp = lst;
-	cell = ft_create_cell(NULL);
+	cell = ft_create_cell(temp);
 	if (lst == NULL)
 	{
 		lst = cell;
 		return (cell);
 	}
 	while (temp->next != NULL)
-	{
 		temp = temp->next;
-	}
 	temp->next = cell;
-	temp->next->prev = temp;
 	return (cell);
 }
 

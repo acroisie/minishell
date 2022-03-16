@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/16 09:39:00 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 13:56:39 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		print_lst(t_lst_cmd *lst);
 typedef struct s_var
 {
 	t_lst_cmd	*lst_cmd;
+	// t_minishell	*minishell;
 	int			i;
 	int			j;
 }t_var;
@@ -81,6 +82,7 @@ typedef struct s_var
 t_lst_cmd	*ft_parse_args(char *line);
 char		*ft_add_char(char *s1, char c);
 void		ft_init_var(t_var *var);
+void		ft_pipe_process(char *line, t_var *var);
 void		ft_space_process(char *line, t_var *var);
 void		ft_s_quotes_process(char *line, t_var *var);
 void		ft_d_quotes_process(char *line, t_var *var);
