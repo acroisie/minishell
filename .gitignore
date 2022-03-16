@@ -3,3 +3,4 @@ objs
 minishell
 .vscode/settings.json
 out*
+.DS_Store

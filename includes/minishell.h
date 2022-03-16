@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/10 17:02:05 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 13:56:39 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,38 @@ typedef struct s_minishell
 
 }t_minishell;
 
+/************************LINKED_LISTS****************************/
+
 t_lst_redir	*ft_create_tab(char *file);
 t_lst_redir	*ft_lstadd_tab(t_lst_redir *lst, char *file);
-t_lst_cmd	*ft_create_cell(char **args, t_lst_cmd	*prev);
-t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst, char **args);
+t_lst_cmd	*ft_create_cell(t_lst_cmd *prev);
+t_lst_cmd	*ft_lstadd_cell(t_lst_cmd *lst);
 t_lst_redir	*ft_lstlast_tab(t_lst_redir *lst);
-t_lst_cmd	*ft_parse_args(char *line);
 void		print_lst(t_lst_cmd *lst);
+
+/***************************PARSING*******************************/
+
+# ifndef DEFAULT_TAB_SIZE
+#  define DEFAULT_TAB_SIZE 20
+# endif
+
+typedef struct s_var
+{
+	t_lst_cmd	*lst_cmd;
+	// t_minishell	*minishell;
+	int			i;
+	int			j;
+}t_var;
+
+t_lst_cmd	*ft_parse_args(char *line);
+char		*ft_add_char(char *s1, char c);
+void		ft_init_var(t_var *var);
+void		ft_pipe_process(char *line, t_var *var);
+void		ft_space_process(char *line, t_var *var);
+void		ft_s_quotes_process(char *line, t_var *var);
+void		ft_d_quotes_process(char *line, t_var *var);
+void		ft_dollar_sign_process(char *line, t_var var);
+void		ft_copy_char(char *line, t_var *var);
 
 /****************************EXEC*********************************/
 

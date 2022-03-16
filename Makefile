@@ -6,25 +6,27 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/10 18:14:10 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/16 14:20:58 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = -Wall -Wextra -Werror
 
 NAME := minishell
 
-SRCS := main.c \
-		cells_utils.c \
-		parse_args.c \
-		parse_args_utils.c \
+SRCS := cells_utils.c \
 		exec.c \
 		find_path.c \
+		ft_builtins.c \
 		ft_cd.c \
 		ft_env.c \
-		ft_builtins.c 
+		main.c \
+		parse_args_process_part01.c \
+		parse_args_process_part02.c \
+		parse_args_utils.c \
+		parse_args.c
 
 OBJS := $(SRCS:.c=.o)
 
@@ -39,7 +41,6 @@ objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
 
 libft :	
 		$(MAKE) -C libft
-		$(MAKE) bonus -C libft
 		
 clean :
 		rm -rf objs
