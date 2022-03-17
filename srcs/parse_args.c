@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/16 15:02:48 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/16 16:56:43 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ t_lst_cmd	*ft_parse_args(char *line)
 			ft_s_quotes_process(line, var);
 		else if (line[var->i] == '"')
 			ft_d_quotes_process(line, var);
-		// else if (line[var->i] == '$')
-		// 	ft_dollar_sign_process(line, var);
+		//else if (line[var->i] == '$')
+		//	ft_dollar_sign_process(line, var);
 		else
 			ft_copy_char(line, var);
 	}
+	while (var->lst_cmd->prev)
+		var->lst_cmd = var->lst_cmd->prev;
 	return (var->lst_cmd);
 }
 
