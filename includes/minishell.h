@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/16 15:16:20 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 11:27:09 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		ft_pipe_process(char *line, t_var *var);
 void		ft_space_process(char *line, t_var *var);
 void		ft_s_quotes_process(char *line, t_var *var);
 void		ft_d_quotes_process(char *line, t_var *var);
-void		ft_dollar_sign_process(char *line, t_var var);
+// void		ft_dollar_sign_process(char *line, t_var *var);
 void		ft_copy_char(char *line, t_var *var);
 
 /****************************EXEC*********************************/

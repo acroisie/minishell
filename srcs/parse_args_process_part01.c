@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part01.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/16 16:54:06 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/17 11:27:05 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,15 @@ void	ft_space_process(char *line, t_var *var)
 	var->j++;
 	while (line[var->i] == ' ')
 		var->i++;
-	var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
-	var->lst_cmd->args[var->j][0] = '\0';
+	if (line[var->i] == '|')
+		ft_pipe_process(line, var);
+	else if (line[var->i] == '\0')
+		return ;
+	else
+	{	
+		var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
+		var->lst_cmd->args[var->j][0] = '\0';
+	}
 }
 
 void	ft_s_quotes_process(char *line, t_var *var)
