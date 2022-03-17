@@ -20,7 +20,8 @@ int	is_builtin(t_lst_cmd *lst_cmd)
 		|| ft_strncmp(lst_cmd->args[0], "env",
 			ft_strlen(lst_cmd->args[0])) == 0)
 		return (1);
-	return (0);
+	else
+		return (0);
 }
 
 void	do_builtin(t_minishell *data, t_lst_cmd *lst_cmd)

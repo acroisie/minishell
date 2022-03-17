@@ -98,7 +98,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 			}
 		}
 		if (find_path(data, lst_cmd->args[0]) == 0
-			&& lst_cmd->args[0][0] != '/')
+			&& lst_cmd->args[0][0] != '/' && is_builtin(lst_cmd) == 0)
 		{
 			ft_putstr_fd("command not found\n", 2);
 			exit (0);
