@@ -16,9 +16,9 @@ int	is_builtin(t_lst_cmd *lst_cmd)
 {
 	if (lst_cmd->args[0] == NULL)
 		return (0);
-	if (ft_strncmp(lst_cmd->args[0], "cd", ft_strlen(lst_cmd->args[0])) == 0
+	if (ft_strncmp(lst_cmd->args[0], "cd", ft_strlen("cd") == 0
 		|| ft_strncmp(lst_cmd->args[0], "env",
-			ft_strlen(lst_cmd->args[0])) == 0)
+			ft_strlen("env")) == 0))
 		return (1);
 	else
 		return (0);
