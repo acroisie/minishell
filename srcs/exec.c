@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/16 16:55:45 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 15:23:17 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 				exit(1);
 		}
 		if (is_builtin(lst_cmd) == 1)
-		{
 			do_builtin(data, lst_cmd);
-			exit (1);
-		}
 	}
 	return ;
 }
