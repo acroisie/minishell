@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:00:59 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/10 15:22:28 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 15:56:19 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,12 @@ void	ft_cd(t_minishell *data, char **cmd_args)
 	if (cmd_args[1])
 	{
 		if (chdir(cmd_args[1]))
-		{
 			dprintf(2, "error file\n");
-		}
 	}
 	else if (!cmd_args[1])
 	{
 		if (chdir(home[1]))
-		{
 			dprintf(2, "no home\n");
-		}
 	}
 	getcwd(data->cd_pwd, sizeof(data->cd_pwd));
 	data->new_env[i] = ft_strjoin("PWD=", data->cd_pwd);

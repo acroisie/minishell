@@ -3,37 +3,39 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/17 11:15:52 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/18 16:57:55 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-CC_FLAGS = -Wall -Wextra -Werror
+CC_FLAGS = -Wall -Werror -Wextra
 
 NAME := minishell
 
-SRCS := cells_utils.c \
+SRCS := main.c \
+		parse_args.c \
+		parse_args_utils.c \
 		exec.c \
 		find_path.c \
-		ft_builtins.c \
 		ft_cd.c \
 		ft_env.c \
-		main.c \
+		ft_builtins.c \
+		exec_utils.c \
+		cells_utils.c \
 		parse_args_process_part01.c \
 		parse_args_process_part02.c \
-		parse_args_utils.c \
-		parse_args.c
+		ft_strlencustom.c \
 
 OBJS := $(SRCS:.c=.o)
 
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline
+					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline 
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
 					@mkdir -p objs

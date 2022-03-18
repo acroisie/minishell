@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cells_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/16 14:52:02 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 16:34:04 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_lst_redir	*ft_create_tab(char *file)
 		return (NULL);
 	lst->file = file;
 	lst->next = NULL;
+	lst->append = 0;
 	return (lst);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/17 11:27:09 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 16:58:26 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef struct s_lst_redir
 {
 	char				*file;
+	int					append;
 	struct s_lst_redir	*next;
 }t_lst_redir;
 
@@ -93,6 +94,9 @@ void		ft_copy_char(char *line, t_var *var);
 
 void		exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd);
 char		*find_path(t_minishell *data, char *cmd);
+void		open_redir(t_lst_cmd *lst_cmd);
+void		init_dup(t_lst_cmd *lst_cmd);
+int			ft_strlencustom(char *s);
 
 /***************************BUILTINS******************************/
 

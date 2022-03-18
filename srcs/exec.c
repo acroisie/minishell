@@ -6,70 +6,11 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/18 15:23:17 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/18 17:31:30 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	do_first_cmd(t_lst_cmd	*lst_cmd)
-{
-	if (lst_cmd->fd_in != 0)
-	{
-		dup2(lst_cmd->fd_in, STDIN_FILENO);
-		close(lst_cmd->fd_in);
-	}
-	if (lst_cmd->fd_out != 0)
-	{
-		dup2(lst_cmd->fd_out, STDOUT_FILENO);
-		close(lst_cmd->fd_out);
-	}
-	else
-	{
-		dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
-		close(lst_cmd->pipe_fd[1]);
-	}
-}
-
-void	do_mid_cmd(t_lst_cmd	*lst_cmd)
-{
-	if (lst_cmd->prev->fd_in != 0)
-	{
-		dup2(lst_cmd->prev->fd_in, STDIN_FILENO);
-		close(lst_cmd->prev->fd_in);
-	}
-	if (lst_cmd->fd_out != 0)
-	{
-		dup2(lst_cmd->fd_out, STDOUT_FILENO);
-		close(lst_cmd->fd_out);
-	}
-	else
-	{
-		dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
-		dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
-		close(lst_cmd->prev->pipe_fd[0]);
-		close(lst_cmd->pipe_fd[1]);
-	}
-}
-
-void	do_last_cmd(t_lst_cmd	*lst_cmd)
-{
-	if (lst_cmd->prev->fd_in != 0)
-	{
-		dup2(lst_cmd->prev->fd_in, STDIN_FILENO);
-		close(lst_cmd->prev->fd_in);
-	}
-	if (lst_cmd->fd_out != 0)
-	{
-		dup2(lst_cmd->fd_out, STDOUT_FILENO);
-		close(lst_cmd->fd_out);
-	}
-	else
-	{
-		dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
-		close(lst_cmd->prev->pipe_fd[0]);
-	}
-}
 
 void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 {
@@ -78,25 +19,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 		exit(1);
 	else if (lst_cmd->pid == 0)
 	{
-		if (lst_cmd->prev == NULL && lst_cmd->next != NULL)
-			do_first_cmd(lst_cmd);
-		if (lst_cmd->prev != NULL && lst_cmd->next != NULL)
-			do_mid_cmd(lst_cmd);
-		if (lst_cmd->prev != NULL && lst_cmd->next == NULL)
-			do_last_cmd(lst_cmd);
-		if (lst_cmd->prev == NULL && lst_cmd->next == NULL)
-		{
-			if (lst_cmd->fd_in != 0)
-			{
-				dup2(lst_cmd->fd_in, STDIN_FILENO);
-				close(lst_cmd->fd_in);
-			}
-			if (lst_cmd->fd_out != 0)
-			{
-				dup2(lst_cmd->fd_out, STDOUT_FILENO);
-				close(lst_cmd->fd_out);
-			}
-		}
+		init_dup(lst_cmd);
 		if (find_path(data, lst_cmd->args[0]) == 0
 			&& lst_cmd->args[0][0] != '/' && is_builtin(lst_cmd) == 0)
 		{
@@ -117,34 +40,31 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 	}
 	return ;
 }
+int		heredoc(t_lst_cmd *t_lst_cmd)
+{
+	
+}
 
 void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 {
-	t_lst_redir	*last_out;
-	t_lst_redir	*last_in;
+	char	*line;
 
 	lst_cmd = data->start_cmd;
+	lst_cmd->lst_herdoc = ft_create_tab("test");
+	lst_cmd->lst_herdoc->next = ft_create_tab("test2");
 	while (lst_cmd)
 	{
+		open_redir(lst_cmd);
+		if (lst_cmd->lst_herdoc != NULL)
+		{
+			while (strncmp(line, lst_cmd->lst_herdoc->file,
+					ft_strlencustom(lst_cmd->lst_herdoc->file)) != 0)
+				line = readline(">");
+			dprintf(2, "debug\n");
+			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
+		}
 		if (lst_cmd->next != NULL)
 			pipe(lst_cmd->pipe_fd);
-		if (lst_cmd->lst_in->file != NULL)
-		{
-			last_in = ft_lstlast_tab(lst_cmd->lst_in);
-			lst_cmd->fd_in = open(last_in->file, O_RDONLY);
-		}
-		if (lst_cmd->lst_out->file != NULL)
-		{
-			while (lst_cmd->lst_out->next)
-			{
-				open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
-					| O_CREAT, 0644);
-				lst_cmd->lst_out = lst_cmd->lst_out->next;
-			}
-			last_out = ft_lstlast_tab(lst_cmd->lst_out);
-			lst_cmd->fd_out = open(last_out->file, O_TRUNC | O_RDWR
-					| O_CREAT, 0644);
-		}
 		ft_fork(lst_cmd, data);
 		if (lst_cmd->prev != NULL)
 			close(lst_cmd->prev->pipe_fd[0]);
