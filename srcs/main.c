@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/18 15:45:38 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 09:41:05 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 		if (ft_strlen(line) != 0)
 		{
 			add_history(line);
-			lst_cmd = ft_parse_args(line);
+			lst_cmd = ft_parse_args(line, data->new_env);
 			print_lst(lst_cmd);
 			data->start_cmd = lst_cmd;
 			if (lst_cmd)

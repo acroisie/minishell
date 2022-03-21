@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/18 16:58:26 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 13:43:56 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,18 @@ void		print_lst(t_lst_cmd *lst);
 typedef struct s_var
 {
 	t_lst_cmd	*lst_cmd;
-	// t_minishell	*minishell;
 	int			i;
 	int			j;
 }t_var;
 
-t_lst_cmd	*ft_parse_args(char *line);
+t_lst_cmd	*ft_parse_args(char *line, char **env);
 char		*ft_add_char(char *s1, char c);
 void		ft_init_var(t_var *var);
 void		ft_pipe_process(char *line, t_var *var);
 void		ft_space_process(char *line, t_var *var);
 void		ft_s_quotes_process(char *line, t_var *var);
-void		ft_d_quotes_process(char *line, t_var *var);
-// void		ft_dollar_sign_process(char *line, t_var *var);
+void		ft_d_quotes_process(char *line, t_var *var, char **env);
+void		ft_dollar_sign_process(char *line, t_var *var, char **env);
 void		ft_copy_char(char *line, t_var *var);
 
 /****************************EXEC*********************************/

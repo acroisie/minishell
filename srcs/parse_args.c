@@ -6,13 +6,13 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/17 11:27:13 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 13:43:47 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_lst_cmd	*ft_parse_args(char *line)
+t_lst_cmd	*ft_parse_args(char *line, char **env)
 {
 	t_var		*var;
 
@@ -27,9 +27,9 @@ t_lst_cmd	*ft_parse_args(char *line)
 		else if (line[var->i] == '\'')
 			ft_s_quotes_process(line, var);
 		else if (line[var->i] == '"')
-			ft_d_quotes_process(line, var);
-		// else if (line[var->i] == '$')
-		// 	ft_dollar_sign_process(line, var);
+			ft_d_quotes_process(line, var, env);
+		else if (line[var->i] == '$')
+			ft_dollar_sign_process(line, var, env);
 		else
 			ft_copy_char(line, var);
 	}

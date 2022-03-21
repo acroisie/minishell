@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/18 17:31:30 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 09:30:13 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,29 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 	}
 	return ;
 }
-int		heredoc(t_lst_cmd *t_lst_cmd)
-{
+// int		heredoc(t_lst_cmd *t_lst_cmd)
+// {
 	
-}
+// }
 
 void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 {
-	char	*line;
+	// char	*line;
 
 	lst_cmd = data->start_cmd;
-	lst_cmd->lst_herdoc = ft_create_tab("test");
-	lst_cmd->lst_herdoc->next = ft_create_tab("test2");
+	// lst_cmd->lst_herdoc = ft_create_tab("test");
+	// lst_cmd->lst_herdoc->next = ft_create_tab("test2");
 	while (lst_cmd)
 	{
 		open_redir(lst_cmd);
-		if (lst_cmd->lst_herdoc != NULL)
-		{
-			while (strncmp(line, lst_cmd->lst_herdoc->file,
-					ft_strlencustom(lst_cmd->lst_herdoc->file)) != 0)
-				line = readline(">");
-			dprintf(2, "debug\n");
-			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
-		}
+		// if (lst_cmd->lst_herdoc != NULL)
+		// {
+		// 	while (strncmp(line, lst_cmd->lst_herdoc->file,
+		// 			ft_strlencustom(lst_cmd->lst_herdoc->file)) != 0)
+		// 		line = readline(">");
+		// 	dprintf(2, "debug\n");
+		// 	lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
+		// }
 		if (lst_cmd->next != NULL)
 			pipe(lst_cmd->pipe_fd);
 		ft_fork(lst_cmd, data);

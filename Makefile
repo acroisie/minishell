@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/18 16:57:55 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/21 09:35:31 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ OBJS := $(SRCS:.c=.o)
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline 
+					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline  -framework CoreFoundation
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
 					@mkdir -p objs
