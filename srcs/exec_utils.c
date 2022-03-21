@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/18 16:40:24 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/21 14:21:18 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	open_redir(t_lst_cmd *lst_cmd)
 				open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
 					| O_CREAT, 0644);
 			else
-				open(lst_cmd->lst_out->file, O_RDWR
+				open(lst_cmd->lst_out->file, O_APPEND | O_RDWR
 					| O_CREAT, 0644);
 			lst_cmd->lst_out = lst_cmd->lst_out->next;
 		}
@@ -121,7 +121,7 @@ void	open_redir(t_lst_cmd *lst_cmd)
 			lst_cmd->fd_out = open(last_out->file, O_TRUNC | O_RDWR
 					| O_CREAT, 0644);
 		else
-			lst_cmd->fd_out = open(last_out->file, O_RDWR
+			lst_cmd->fd_out = open(last_out->file, O_APPEND | O_RDWR
 					| O_CREAT, 0644);
 	}
 }

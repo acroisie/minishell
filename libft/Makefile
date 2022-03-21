@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 15:10:13 by acroisie          #+#    #+#              #
-#    Updated: 2022/03/16 16:03:55 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/21 11:37:38 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = ft_atoi.c \
 		ft_destlen.c \
 		ft_strmapi.c \
 		ft_strncmp.c \
+		ft_strcmp.c \
 		ft_strndup.c \
 		ft_strnstr.c \
 		ft_strrchr.c \

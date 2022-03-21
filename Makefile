@@ -6,13 +6,13 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/21 09:35:31 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/03/21 11:07:07 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = # -Wall -Werror -Wextra
 
 NAME := minishell
 
