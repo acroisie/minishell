@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/22 16:27:00 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:45:10 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,15 @@ void	ft_s_quotes_process(char *line, t_var *var)
 	var->i++;
 }
 
+/* Do a specific case for echo $? */
+
 void	ft_d_quotes_process(char *line, t_var *var, char **env)
 {
 	var->i++;
 	while (line[var->i] != '"')
 	{
 		if (line[var->i] == '$')
-			ft_dollar_sign_process(line, var, env);
+			ft_dol_sign_process(line, var, env, 0);
 		else if (line[var->i] == '\0') // Modify to make a clean end
 		{
 			printf("unclosed quotes\n");
@@ -78,16 +80,18 @@ void	ft_d_quotes_process(char *line, t_var *var, char **env)
 	var->i++;
 }
 
-void	ft_dollar_sign_process(char *line, t_var *var, char **env)
+void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 {
 	char	*temp;
 	int		mem;
 	int		k;
+	int		l;
 
 	var->i++;
 	mem = var->i;
 	k = 0;
-	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|') 
+	l = 0;
+	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|')
 	{
 		var->lst_cmd->args[var->j] = ft_add_char(
 				var->lst_cmd->args[var->j], '$');
@@ -102,9 +106,11 @@ void	ft_dollar_sign_process(char *line, t_var *var, char **env)
 		{
 			if (env[k][ft_strlen(temp)] == '=')
 			{
-				var->lst_cmd->args[var->j] = ft_strjoin(
+					var->lst_cmd->args[var->j] = ft_strjoin_free_s1(
 						var->lst_cmd->args[var->j],
 						&env[k][ft_strlen(temp) + 1]);
+				if (option)
+					// printf("Do different stuff \n");
 				return ;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/22 13:32:35 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 11:10:31 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void		print_lst(t_lst_cmd *lst);
 
 # ifndef DEFAULT_TAB_SIZE
 #  define DEFAULT_TAB_SIZE 20
-#  define TABLE "ABCDEFGHIJKLMNOPQRSTUVWXYZ_"
 # endif
 
 typedef struct s_var
@@ -87,8 +86,9 @@ void		ft_pipe_process(char *line, t_var *var);
 void		ft_space_process(char *line, t_var *var);
 void		ft_s_quotes_process(char *line, t_var *var);
 void		ft_d_quotes_process(char *line, t_var *var, char **env);
-void		ft_dollar_sign_process(char *line, t_var *var, char **env);
+void		ft_dol_sign_process(char *line, t_var *var, char **env, int option);
 void		ft_tilde_process(t_var *var, char **env);
+void		ft_redir_process(char *line, t_var *var, char **env);
 void		ft_copy_char(char *line, t_var *var);
 
 /****************************EXEC*********************************/

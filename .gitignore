@@ -5,3 +5,4 @@ minishell
 out*
 .DS_Store
 *.out
+.vscode/

@@ -6,13 +6,13 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:30:19 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/14 14:32:04 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 10:34:07 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+int	ft_isspace(int c)
 {
 	if (c == ' ')
 		return (1);

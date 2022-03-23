@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/22 10:52:12 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 15:45:45 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,19 @@ void	ft_tilde_process(t_var *var, char **env)
 		k++;
 	}
 }
+
+// void	ft_redir_process(char *line, t_var *var, char **env)
+// {
+// 	char	mem;
+
+// 	if (line[var->i] == '<')
+// 		mem = 1;
+// 	else
+// 		mem = 2;
+// 	var->i++;
+// 	if (line[var->i] == line[var->i - 1])
+// 		if (mem == 1)
+// 			printf("Heredoc\n");    // To delete
+// 		else
+// 			printf("Add line to\n");    // To delete
+// }

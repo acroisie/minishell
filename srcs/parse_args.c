@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/22 14:49:44 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 15:45:31 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 		else if (line[var->i] == '"')
 			ft_d_quotes_process(line, var, env);
 		else if (line[var->i] == '$')
-			ft_dollar_sign_process(line, var, env);
+			ft_dol_sign_process(line, var, env, 1);
 		else if (line[var->i] == '~')
 			ft_tilde_process(var, env);
+		// else if (line[var->i] == '<' || line[var->i] == '>')
+		// 	ft_redir_process(line, var, env);
 		else
 			ft_copy_char(line, var);
 	}
