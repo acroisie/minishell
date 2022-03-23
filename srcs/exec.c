@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/22 17:36:41 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 13:22:41 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,15 @@ int	ft_heredoc(t_lst_cmd *lst_cmd)
 void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	lst_cmd = data->start_cmd;
-	lst_cmd->lst_herdoc = ft_create_tab("a");
-	lst_cmd->lst_herdoc->next = ft_create_tab("b");
-	//lst_cmd->next->lst_herdoc = ft_create_tab("a");
-	//lst_cmd->next->lst_herdoc->next = ft_create_tab("b");
 	while (lst_cmd)
 	{
 		open_redir(lst_cmd);
 		if (lst_cmd->next != NULL)
 			pipe(lst_cmd->pipe_fd);
-		if (lst_cmd->lst_herdoc)
+		while (lst_cmd->lst_herdoc)
 		{
-			while (lst_cmd->lst_herdoc)
-			{
-				ft_heredoc(lst_cmd);
-				lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
-			}
+			ft_heredoc(lst_cmd);
+			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
 		}
 		ft_fork(lst_cmd, data);
 		if (lst_cmd->prev != NULL)

@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/22 17:31:34 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 13:17:46 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	do_last_cmd(t_lst_cmd	*lst_cmd)
 {
 	int	in;
 
-	if (lst_cmd->prev->fd_in != -1)
-		in = lst_cmd->prev->fd_in;
+	if (lst_cmd->fd_in != -1 && lst_cmd)
+		in = lst_cmd->fd_in;
 	else
 		in = lst_cmd->prev->pipe_fd[0];
 	if (lst_cmd->fd_out != -1)
