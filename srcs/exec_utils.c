@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/21 14:21:18 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 17:31:34 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,61 +14,52 @@
 
 void	do_first_cmd(t_lst_cmd	*lst_cmd)
 {
-	if (lst_cmd->fd_in != 0)
+	int	out;
+
+	out = lst_cmd->pipe_fd[1];
+	if (lst_cmd->fd_in != -1)
 	{
 		dup2(lst_cmd->fd_in, STDIN_FILENO);
 		close(lst_cmd->fd_in);
 	}
-	if (lst_cmd->fd_out != 0)
-	{
-		dup2(lst_cmd->fd_out, STDOUT_FILENO);
-		close(lst_cmd->fd_out);
-	}
-	else
-	{
-		dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
-		close(lst_cmd->pipe_fd[1]);
-	}
+	if (lst_cmd->fd_out != -1)
+		out = lst_cmd->fd_out;
+	dup2(out, STDOUT_FILENO);
+	close(out);
 }
 
 void	do_mid_cmd(t_lst_cmd	*lst_cmd)
 {
-	if (lst_cmd->prev->fd_in != 0)
-	{
-		dup2(lst_cmd->prev->fd_in, STDIN_FILENO);
-		close(lst_cmd->prev->fd_in);
-	}
-	if (lst_cmd->fd_out != 0)
-	{
-		dup2(lst_cmd->fd_out, STDOUT_FILENO);
-		close(lst_cmd->fd_out);
-	}
-	else
-	{
-		dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
-		dup2(lst_cmd->pipe_fd[1], STDOUT_FILENO);
-		close(lst_cmd->prev->pipe_fd[0]);
-		close(lst_cmd->pipe_fd[1]);
-	}
+	int	in;
+	int	out;
+
+	in = lst_cmd->prev->pipe_fd[0];
+	out = lst_cmd->pipe_fd[1];
+	if (lst_cmd->prev->fd_in != -1)
+		in = lst_cmd->prev->fd_in;
+	if (lst_cmd->fd_out != -1)
+		out = lst_cmd->fd_out;
+	dup2(in, STDIN_FILENO);
+	close(in);
+	dup2(out, STDOUT_FILENO);
+	close(out);
 }
 
 void	do_last_cmd(t_lst_cmd	*lst_cmd)
 {
-	if (lst_cmd->prev->fd_in != 0)
-	{
-		dup2(lst_cmd->prev->fd_in, STDIN_FILENO);
-		close(lst_cmd->prev->fd_in);
-	}
-	if (lst_cmd->fd_out != 0)
+	int	in;
+
+	if (lst_cmd->prev->fd_in != -1)
+		in = lst_cmd->prev->fd_in;
+	else
+		in = lst_cmd->prev->pipe_fd[0];
+	if (lst_cmd->fd_out != -1)
 	{
 		dup2(lst_cmd->fd_out, STDOUT_FILENO);
 		close(lst_cmd->fd_out);
 	}
-	else
-	{
-		dup2(lst_cmd->prev->pipe_fd[0], STDIN_FILENO);
-		close(lst_cmd->prev->pipe_fd[0]);
-	}
+	dup2(in, STDIN_FILENO);
+	close(in);
 }
 
 void	init_dup(t_lst_cmd *lst_cmd)
@@ -81,12 +72,12 @@ void	init_dup(t_lst_cmd *lst_cmd)
 		do_last_cmd(lst_cmd);
 	if (lst_cmd->prev == NULL && lst_cmd->next == NULL)
 	{
-		if (lst_cmd->fd_in != 0)
+		if (lst_cmd->fd_in != -1)
 		{
 			dup2(lst_cmd->fd_in, STDIN_FILENO);
 			close(lst_cmd->fd_in);
 		}
-		if (lst_cmd->fd_out != 0)
+		if (lst_cmd->fd_out != -1)
 		{
 			dup2(lst_cmd->fd_out, STDOUT_FILENO);
 			close(lst_cmd->fd_out);

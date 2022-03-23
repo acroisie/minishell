@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/21 14:23:47 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/22 17:36:41 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,50 +47,67 @@ int	ft_heredoc(t_lst_cmd *lst_cmd)
 {
 	char	*line;
 	pid_t	pid;
+	int		fds[2];
 
+	if (pipe(fds) == -1)
+		return (-1);
 	pid = fork();
-	if (pid == -1)
-		exit(0);
-	else if (pid == 0)
+	if (pid == 0)
 	{
-		dprintf(2, "write this to close heredoc :  %s \n", lst_cmd->lst_herdoc->file);
+		close(fds[0]);
 		while (1)
 		{
 			line = readline(">");
+			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
+				ft_putendl_fd(line, fds[1]);
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
+			{
+				free(line);
 				exit(0);
+			}
+			free(line);
 		}
 	}
 	else
+	{
 		waitpid(pid, 0, 0);
+		close(fds[1]);
+		if (lst_cmd->lst_herdoc->next == NULL)
+			lst_cmd->fd_in = fds[0];
+		if (lst_cmd->lst_herdoc->next)
+			close(fds[0]);
+	}
 	return (0);
 }
 
 void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	lst_cmd = data->start_cmd;
-	lst_cmd->lst_herdoc = ft_create_tab("test");
-	lst_cmd->lst_herdoc->next = ft_create_tab("test2");
-	lst_cmd->next->lst_herdoc = ft_create_tab("test");
-	lst_cmd->next->lst_herdoc->next = ft_create_tab("test2");
+	lst_cmd->lst_herdoc = ft_create_tab("a");
+	lst_cmd->lst_herdoc->next = ft_create_tab("b");
+	//lst_cmd->next->lst_herdoc = ft_create_tab("a");
+	//lst_cmd->next->lst_herdoc->next = ft_create_tab("b");
 	while (lst_cmd)
 	{
-		while (lst_cmd->lst_herdoc)
-		{
-			ft_heredoc(lst_cmd);
-			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
-		}
 		open_redir(lst_cmd);
 		if (lst_cmd->next != NULL)
 			pipe(lst_cmd->pipe_fd);
+		if (lst_cmd->lst_herdoc)
+		{
+			while (lst_cmd->lst_herdoc)
+			{
+				ft_heredoc(lst_cmd);
+				lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
+			}
+		}
 		ft_fork(lst_cmd, data);
 		if (lst_cmd->prev != NULL)
 			close(lst_cmd->prev->pipe_fd[0]);
 		if (lst_cmd->next != NULL)
 			close(lst_cmd->pipe_fd[1]);
-		if (lst_cmd->fd_in != 0)
+		if (lst_cmd->fd_in != -1)
 			close(lst_cmd->fd_in);
-		if (lst_cmd->fd_out != 0)
+		if (lst_cmd->fd_out != -1)
 			close(lst_cmd->fd_out);
 		lst_cmd = lst_cmd->next;
 	}
