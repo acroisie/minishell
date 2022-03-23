@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part01.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/22 16:27:00 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 19:47:47 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_dollar_sign_process(char *line, t_var *var, char **env)
 	var->i++;
 	mem = var->i;
 	k = 0;
-	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|') 
+	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|')
 	{
 		var->lst_cmd->args[var->j] = ft_add_char(
 				var->lst_cmd->args[var->j], '$');

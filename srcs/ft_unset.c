@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 19:34:54 by lnemor           ###   ########lyon.fr   */
+/*   Created: 2022/03/23 16:28:13 by lnemor            #+#    #+#             */
+/*   Updated: 2022/03/23 19:53:47 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_unset(t_minishell *data, char **args)
 {
-	t_lst_cmd	lst_cmd;
-	t_minishell	data;
+	int		i;
+	char	*temp;
 
-	if (argc != 1)
-		return (0);
-	if (!argv)
-		return (0);
-	if (!env)
-		return (0);
-	data.new_env = env;
-	prompt(&lst_cmd, &data);
+	i = 0;
+	while (data->new_env[i])
+	{
+		if (ft_strncmp(args[1], data->new_env[i], ft_strlen(args[1])) == 0)
+			break ;
+		i++;
+	}
+	if (i == ft_destlen(data->new_env))
+		exit(1);
+	if (data->new_env[i])
+	{
+		temp = data->new_env[i];
+		data->new_env[i] = ft_strdup("");
+	}
 	return (0);
 }

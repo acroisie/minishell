@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   return_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 19:34:54 by lnemor           ###   ########lyon.fr   */
+/*   Created: 2022/03/23 14:30:41 by lnemor            #+#    #+#             */
+/*   Updated: 2022/03/23 16:16:39 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	return_error_builtin(char *cmd, char *arg, char *msg, int nb)
 {
-	t_lst_cmd	lst_cmd;
-	t_minishell	data;
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(msg, 2);
+	g_rvalue = nb;
+}
 
-	if (argc != 1)
-		return (0);
-	if (!argv)
-		return (0);
-	if (!env)
-		return (0);
-	data.new_env = env;
-	prompt(&lst_cmd, &data);
-	return (0);
+void	return_error(char *arg, char *msg, int nb)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(msg, 2);
+	g_rvalue = nb;
 }

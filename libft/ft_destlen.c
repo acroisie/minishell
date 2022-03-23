@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_destlen(const char **s)
+int	ft_destlen(char **s)
 {
 	int	i;
 
