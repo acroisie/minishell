@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/22 16:59:05 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:02:34 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ t_lst_cmd	*ft_create_cell(t_lst_cmd *prev)
 	cell->pid = 0;
 	cell->fd_in = -1;
 	cell->fd_out = -1;
-	cell->lst_in = ft_create_tab(NULL);
-	cell->lst_out = ft_create_tab(NULL);
+	cell->lst_in = NULL;
+	cell->lst_out = NULL;
+	cell->lst_herdoc = NULL;
 	cell->next = NULL;
 	cell->prev = prev;
 	return (cell);

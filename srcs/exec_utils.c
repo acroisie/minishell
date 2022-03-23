@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 13:17:46 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:03:41 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ void	open_redir(t_lst_cmd *lst_cmd)
 	t_lst_redir	*last_out;
 	t_lst_redir	*last_in;
 
-	if (lst_cmd->lst_in->file != NULL)
+	if (lst_cmd->lst_in != NULL)
 	{
 		last_in = ft_lstlast_tab(lst_cmd->lst_in);
 		lst_cmd->fd_in = open(last_in->file, O_RDONLY);
 	}
-	if (lst_cmd->lst_out->file != NULL)
+	if (lst_cmd->lst_out != NULL)
 	{
 		while (lst_cmd->lst_out->next)
 		{

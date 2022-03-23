@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 13:22:41 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:00:51 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 {
-	char	*line;
-
 	lst_cmd->pid = fork();
 	if (lst_cmd->pid == -1)
 		exit(1);
@@ -88,8 +86,9 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 		open_redir(lst_cmd);
 		if (lst_cmd->next != NULL)
 			pipe(lst_cmd->pipe_fd);
-		while (lst_cmd->lst_herdoc)
+		while (lst_cmd->lst_herdoc != NULL)
 		{
+			dprintf(2, "debug\n");
 			ft_heredoc(lst_cmd);
 			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
 		}
