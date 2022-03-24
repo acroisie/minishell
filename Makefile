@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/23 13:44:58 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/23 20:41:51 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,20 @@ SRCS := main.c \
 		parse_args_process_part01.c \
 		parse_args_process_part02.c \
 		ft_strlencustom.c \
+		redir.c \
+		return_error.c \
+		ft_unset.c \
+		ft_prompt.c \
+		ft_pwd.c
 
 OBJS := $(SRCS:.c=.o)
 
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline  -framework CoreFoundation -g3 -fsanitize=address
+					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline  -framework CoreFoundation
 
-objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a
+objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a libft/libft.h
 					@mkdir -p objs
 					$(CC) $(CC_FLAGS) -c $< -o $@
 

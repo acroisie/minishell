@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 14:03:41 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/23 14:21:19 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,37 +82,5 @@ void	init_dup(t_lst_cmd *lst_cmd)
 			dup2(lst_cmd->fd_out, STDOUT_FILENO);
 			close(lst_cmd->fd_out);
 		}
-	}
-}
-
-void	open_redir(t_lst_cmd *lst_cmd)
-{
-	t_lst_redir	*last_out;
-	t_lst_redir	*last_in;
-
-	if (lst_cmd->lst_in != NULL)
-	{
-		last_in = ft_lstlast_tab(lst_cmd->lst_in);
-		lst_cmd->fd_in = open(last_in->file, O_RDONLY);
-	}
-	if (lst_cmd->lst_out != NULL)
-	{
-		while (lst_cmd->lst_out->next)
-		{
-			if (lst_cmd->lst_out->append == 0)
-				open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
-					| O_CREAT, 0644);
-			else
-				open(lst_cmd->lst_out->file, O_APPEND | O_RDWR
-					| O_CREAT, 0644);
-			lst_cmd->lst_out = lst_cmd->lst_out->next;
-		}
-		last_out = ft_lstlast_tab(lst_cmd->lst_out);
-		if (last_out->append == 0)
-			lst_cmd->fd_out = open(last_out->file, O_TRUNC | O_RDWR
-					| O_CREAT, 0644);
-		else
-			lst_cmd->fd_out = open(last_out->file, O_APPEND | O_RDWR
-					| O_CREAT, 0644);
 	}
 }

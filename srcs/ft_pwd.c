@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 19:34:54 by lnemor           ###   ########lyon.fr   */
+/*   Created: 2022/03/23 20:38:39 by lnemor            #+#    #+#             */
+/*   Updated: 2022/03/23 20:48:52 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_pwd(t_minishell *data)
 {
-	t_lst_cmd	lst_cmd;
-	t_minishell	data;
+	int	i;
 
-	if (argc != 1)
-		return (0);
-	if (!argv)
-		return (0);
-	if (!env)
-		return (0);
-	data.new_env = env;
-	prompt(&lst_cmd, &data);
+	i = -1;
+	while (data->new_env[++i])
+		if (ft_strncmp(data->new_env[i], "PWD", 3) == 0)
+			break ;
+	ft_putendl_fd(data->new_env[i], 1);
 	return (0);
 }
