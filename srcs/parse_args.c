@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/23 15:45:31 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 13:03:49 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_lst_cmd	*ft_parse_args(char *line, char **env)
 {
-	t_var		*var;
 
+	t_var		*var;
 	var = ft_calloc(1, sizeof(t_var));
 	ft_init_var(var);
 	while (line[var->i])

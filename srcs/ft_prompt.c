@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 20:35:16 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 12:59:57 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 	while (lst_cmd)
 	{
 		waitpid(lst_cmd->pid, NULL, 0);
+		ft_free_split(lst_cmd->args);
 		lst_cmd = lst_cmd->next;
 	}
+	free(lst_cmd);
 }
 
 void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
