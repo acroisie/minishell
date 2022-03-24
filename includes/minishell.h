@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 20:42:10 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 15:11:16 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void		print_lst(t_lst_cmd *lst);
 typedef struct s_var
 {
 	t_lst_cmd	*lst_cmd;
+	int			output;
 	int			i;
 	int			j;
 }t_var;
@@ -85,6 +86,8 @@ typedef struct s_var
 t_lst_cmd	*ft_parse_args(char *line, char **env);
 char		*ft_add_char(char *s1, char c);
 void		ft_init_var(t_var *var);
+void		ft_write_char_output(char *line, t_var *var);
+void		ft_write_string_output(int k, t_var *var, char **env);
 void		ft_pipe_process(char *line, t_var *var);
 void		ft_space_process(char *line, t_var *var);
 void		ft_s_quotes_process(char *line, t_var *var);

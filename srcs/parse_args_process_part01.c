@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part01.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/23 14:45:10 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 15:12:07 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_pipe_process(char *line, t_var *var)
 	var->lst_cmd = var->lst_cmd->next;
 	var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
 	var->lst_cmd->args[var->j][0] = '\0';
+	var->output = 0;
 }
 
 void	ft_space_process(char *line, t_var *var)
@@ -36,6 +37,7 @@ void	ft_space_process(char *line, t_var *var)
 	{	
 		var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
 		var->lst_cmd->args[var->j][0] = '\0';
+		var->output = 0;
 	}
 }
 
@@ -49,14 +51,13 @@ void	ft_s_quotes_process(char *line, t_var *var)
 			printf("unclosed quotes\n");
 			exit (1);
 		}
-		var->lst_cmd->args[var->j] = ft_add_char(
-				var->lst_cmd->args[var->j], line[var->i]);
-		var->i++;
+		else
+			ft_write_char_output(line, var);
 	}
 	var->i++;
 }
 
-/* Do a specific case for echo $? */
+/* Do a specific case for echo $?*/
 
 void	ft_d_quotes_process(char *line, t_var *var, char **env)
 {
@@ -71,11 +72,7 @@ void	ft_d_quotes_process(char *line, t_var *var, char **env)
 			exit (1);
 		}
 		else
-		{
-			var->lst_cmd->args[var->j] = ft_add_char(
-					var->lst_cmd->args[var->j], line[var->i]);
-			var->i++;
-		}
+			ft_write_char_output(line, var);
 	}
 	var->i++;
 }
@@ -106,9 +103,7 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 		{
 			if (env[k][ft_strlen(temp)] == '=')
 			{
-					var->lst_cmd->args[var->j] = ft_strjoin_free_s1(
-						var->lst_cmd->args[var->j],
-						&env[k][ft_strlen(temp) + 1]);
+				ft_write_string_output(k, var, env);
 				if (option)
 					// printf("Do different stuff \n");
 				return ;

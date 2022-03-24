@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cells_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/23 14:02:34 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/24 15:55:00 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_lst_redir	*ft_create_tab(char *file)
 {
 	t_lst_redir	*lst;
 
-	lst = malloc(sizeof(t_lst_cmd));
+	lst = malloc(sizeof(t_lst_redir));
 	if (lst == NULL)
 		return (NULL);
 	lst->file = file;
