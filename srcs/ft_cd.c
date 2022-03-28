@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:00:59 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 20:30:42 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 20:02:34 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 void	ft_cd2(t_minishell *data, int i, int j, char **cmd_args)
 {
-	char	**home;
+	char		**home;
+	struct stat	s;
 
 	home = ft_split(data->new_env[j], '=');
-	if (cmd_args[1])
+	stat(cmd_args[1], &s);
+	if (S_ISREG(s.st_mode))
+		return_error_builtin("cd: ", cmd_args[1], ": Not a directory", 1);
+	if (access(cmd_args[1], X_OK) == -1 && access(cmd_args[1], F_OK) == 0)
+		return_error_builtin("cd: ", cmd_args[1], ": Permision denied", 1);
+	else if (cmd_args[1])
 	{
 		if (chdir(cmd_args[1]) == -1)
-		{
 			return_error_builtin("cd: ", cmd_args[1],
 				": No such file or directory", 1);
-			dprintf(2, "test\n");
-			g_rvalue = 1;
-			exit(1);
-		}
 	}
 	else if (!cmd_args[1])
 		chdir(home[1]);
@@ -34,7 +35,7 @@ void	ft_cd2(t_minishell *data, int i, int j, char **cmd_args)
 	data->new_env[i] = ft_strjoin("PWD=", data->cd_pwd);
 }
 
-void	ft_cd(t_minishell *data, char **cmd_args)
+void	ft_cd(t_minishell *data, char **cmd_args, t_lst_cmd *lst_cmd)
 {
 	int		i;
 	int		j;
@@ -53,12 +54,10 @@ void	ft_cd(t_minishell *data, char **cmd_args)
 		if (ft_strncmp(data->new_env[j], "HOME", 4) == 0)
 			break ;
 	if (j == ft_destlen(data->new_env) && !cmd_args[1])
-	{
 		return_error_builtin("cd: ", "HOME", " not set", 1);
-		g_rvalue = 1;
-		exit(1);
-	}
 	getcwd(data->cd_pwd, sizeof(data->cd_pwd));
 	data->new_env[k] = ft_strjoin("OLDPWD=", data->cd_pwd);
 	ft_cd2(data, i, j, cmd_args);
+	if (lst_cmd->next || lst_cmd->prev)
+		exit(0);
 }

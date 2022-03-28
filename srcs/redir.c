@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 19:28:28 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 10:49:23 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,42 @@ void	ft_heredoc2(t_lst_cmd *lst_cmd, pid_t pid, int fds[2])
 		lst_cmd->fd_in = fds[0];
 	if (lst_cmd->lst_herdoc->next)
 		close(fds[0]);
+	close(fds[0]);
+}
+
+void	ft_dollar_sign_process(char *line, t_var *var, char **env)
+{
+	char	*temp;
+	int		mem;
+	int		k;
+
+	var->i++;
+	mem = var->i;
+	k = 0;
+	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|')
+	{
+		var->lst_cmd->args[var->j] = ft_add_char(
+				var->lst_cmd->args[var->j], '$');
+		return ;
+	}
+	while (ft_isalnum(line[var->i]) || line[var->i] == '_')
+		var->i++;
+	temp = ft_strndup(&line[mem], (var->i - mem));
+	while (env[k])
+	{
+		if (!ft_strncmp(env[k], temp, ft_strlen(temp) - 1))
+		{
+			if (env[k][ft_strlen(temp)] == '=')
+			{
+				var->lst_cmd->args[var->j] = ft_strjoin(
+						var->lst_cmd->args[var->j],
+						&env[k][ft_strlen(temp) + 1]);
+				return ;
+			}
+		}
+		k++;
+	}
+	free(temp);
 }
 
 int	ft_heredoc(t_lst_cmd *lst_cmd)

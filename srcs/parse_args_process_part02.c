@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part02.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
 /*   Updated: 2022/03/24 15:11:27 by acroisie         ###   ########lyon.fr   */
@@ -14,9 +14,9 @@
 
 void	ft_copy_char(char *line, t_var *var)
 {
-	var->lst_cmd->args[var->j] = ft_add_char(
+		var->lst_cmd->args[var->j] = ft_add_char(
 			var->lst_cmd->args[var->j], line[var->i]);
-	var->i++;
+		var->i++;
 }
 
 void	ft_tilde_process(t_var *var, char **env)

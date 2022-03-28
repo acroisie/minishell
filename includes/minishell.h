@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/24 15:11:16 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/25 19:52:42 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <dirent.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 int		g_rvalue;
 
@@ -55,8 +58,10 @@ typedef struct s_minishell
 	char				**new_env;
 	char				**path;
 	char				cd_pwd[256];
+	char				pwd[256];
 	char				*path_temp;
 	t_lst_cmd			*start_cmd;
+	char				*line;
 
 }t_minishell;
 
@@ -96,6 +101,7 @@ void		ft_dol_sign_process(char *line, t_var *var, char **env, int option);
 void		ft_tilde_process(t_var *var, char **env);
 void		ft_redir_process(char *line, t_var *var, char **env);
 void		ft_copy_char(char *line, t_var *var);
+void		ft_redir_process(char *line, t_var *var);
 
 /****************************EXEC*********************************/
 
@@ -109,12 +115,13 @@ int			ft_heredoc(t_lst_cmd *lst_cmd);
 
 /***************************BUILTINS******************************/
 
-void		ft_cd(t_minishell *data, char **cmd_args);
+void		ft_cd(t_minishell *data, char **cmd_args, t_lst_cmd *lst_cmd);
 void		ft_env(t_minishell *data);
 int			is_builtin(t_lst_cmd *lst_cmd);
 void		do_builtin(t_minishell *data, t_lst_cmd *lst_cmd);
 int			ft_unset(t_minishell *data, char **args);
 int			ft_pwd(t_minishell *data);
+void		ft_export(t_minishell *data, char **args);
 
 /****************************UTILS*******************************/
 

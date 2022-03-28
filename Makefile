@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/23 20:41:51 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/25 18:57:51 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ SRCS := main.c \
 		return_error.c \
 		ft_unset.c \
 		ft_prompt.c \
-		ft_pwd.c
+		ft_pwd.c \
+		ft_export.c \
+		ft_exit.c
 
 OBJS := $(SRCS:.c=.o)
 
