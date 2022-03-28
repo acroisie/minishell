@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/24 15:12:07 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/26 17:43:03 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 	char	*temp;
 	int		mem;
 	int		k;
-	int		l;
+	// int		l;
 
 	var->i++;
 	mem = var->i;
 	k = 0;
-	l = 0;
+	// l = 0;
 	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|')
 	{
 		var->lst_cmd->args[var->j] = ft_add_char(

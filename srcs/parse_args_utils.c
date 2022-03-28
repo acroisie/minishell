@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/24 15:54:08 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 10:12:11 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ char	*ft_add_char(char *s1, char c)
 void	ft_init_var(t_var *var)
 {
 	var->lst_cmd = ft_create_cell(NULL);
-	var->lst_cmd->lst_in = ft_create_tab(NULL);
-	var->lst_cmd->lst_out = ft_create_tab(NULL);
 	var->lst_cmd->args[0] = ft_calloc(1, sizeof(char) * 1);
 	var->lst_cmd->args[0][0] = '\0';
 	var->output = 0;
@@ -75,18 +73,15 @@ void	ft_write_string_output(int k, t_var *var, char **env)
 	{
 		var->lst_cmd->args[var->j] = ft_strjoin_free_s1(
 				var->lst_cmd->args[var->j], &env[k][5]);
-		var->i++;
 	}
 	else if (var->output == 1)
 	{
 		var->lst_cmd->lst_in->file = ft_strjoin_free_s1(
 				var->lst_cmd->args[var->j], &env[k][5]);
-		var->i++;
 	}
 	else if (var->output == 2)
 	{
 		var->lst_cmd->lst_out->file = ft_strjoin_free_s1(
 				var->lst_cmd->args[var->j], &env[k][5]);
-		var->i++;
 	}
 }
