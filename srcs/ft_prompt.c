@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/25 16:09:43 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 12:11:56 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 	add_history(line);
 	lst_cmd = ft_parse_args(line, data->new_env);
 	free(line);
-	print_lst(lst_cmd);
+	print_lst(lst_cmd); // To delete
 	data->start_cmd = lst_cmd;
 	if (lst_cmd)
 		exec_cmds(data, lst_cmd);

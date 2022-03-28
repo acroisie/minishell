@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/26 17:43:03 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 14:29:59 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	ft_space_process(char *line, t_var *var)
 		var->j++;
 	while (line[var->i] == ' ')
 		var->i++;
-	if (line[var->i] == '\0' || line[var->i] == '|')
+	if (line[var->i] == '\0' || line[var->i] == '|'
+		|| line[var->i] == '<' || line[var->i] == '>')
 		return ;
 	else
 	{	

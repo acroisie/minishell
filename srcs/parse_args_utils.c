@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/28 10:12:11 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 14:13:54 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	ft_write_char_output(char *line, t_var *var)
 	else if (var->output == 1)
 	{
 		var->lst_cmd->lst_in->file = ft_add_char(
-				var->lst_cmd->args[var->j], line[var->i]);
+				var->lst_cmd->lst_in->file, line[var->i]);
 		var->i++;
 	}
 	else if (var->output == 2)
 	{
 		var->lst_cmd->lst_out->file = ft_add_char(
-				var->lst_cmd->args[var->j], line[var->i]);
+				var->lst_cmd->lst_out->file, line[var->i]);
 		var->i++;
 	}
 }
@@ -77,11 +77,11 @@ void	ft_write_string_output(int k, t_var *var, char **env)
 	else if (var->output == 1)
 	{
 		var->lst_cmd->lst_in->file = ft_strjoin_free_s1(
-				var->lst_cmd->args[var->j], &env[k][5]);
+				var->lst_cmd->lst_in->file, &env[k][5]);
 	}
 	else if (var->output == 2)
 	{
 		var->lst_cmd->lst_out->file = ft_strjoin_free_s1(
-				var->lst_cmd->args[var->j], &env[k][5]);
+				var->lst_cmd->lst_out->file, &env[k][5]);
 	}
 }

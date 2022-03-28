@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/24 14:20:55 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 13:02:35 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 		else if (line[var->i] == '~')
 			ft_tilde_process(var, env);
 		else if (line[var->i] == '<' || line[var->i] == '>')
-			ft_redir_process(line, var, env);
+			ft_redir_process(line, var);
 		else
-			ft_copy_char(line, var);
+			ft_write_char_output(line, var);
 	}
 	while (var->lst_cmd->prev)
 		var->lst_cmd = var->lst_cmd->prev;
