@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/29 19:10:46 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 20:38:52 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,50 +85,40 @@ char	*dollar_here(char *line, t_minishell *data)
 	int		i;
 	int		j;
 	int		k;
-	int		l;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	k = 0;
-	l = 0;
-	temp = ft_strdup("");
 	var_env = ft_strdup("");
-	while (line[i])
+	temp = ft_strdup("");
+	while (line[++i])
 	{
 		if (line[i] == '$')
 		{
-			dprintf(2, "bebug\n");
 			i++;
 			if (ft_isalnum(line[i]) == 0)
 				return (line);
-			while (ft_isalnum(line[i]))
-			{	
-				var_env[j] = line[i];
-				j++;
-				i++;
-			}
+			while (ft_isalnum(line[i]) || line[i] == '_')
+				var_env[j++] = line[i++];
 			j = -1;
 			while (data->new_env[++j])
 				if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env)))
 					break ;
-			while (data->new_env[j][k] != '=')
+			if (j <= ft_destlen(data->new_env))
+			{
+				while (data->new_env[j][k] != '=')
+					k++;
 				k++;
-			k++;
-			var = malloc(sizeof(char) * ft_strlen(data->new_env[j]) - k + 1);
-			var = ft_substr(data->new_env[j], k, ft_strlen(data->new_env[j]));
-			temp = ft_strjoin_free_s1(temp, var);
-			free(var_env);
-			l = ft_strlen(temp) + 1;
+				var = ft_substr(data->new_env[j], k, ft_strlen(data->new_env[j]));
+				temp = ft_strjoin_free_s1(temp, var);
+				free(var_env);
+				free(var);
+			}
+			i--;
 		}
 		else
-		{
-			dprintf(2, "{%c\n", line[i]);
-			temp[l] = line[i];
-		}
-		l++;
-		i++;
+			temp = ft_add_char(temp, line[i]);
 	}
-	temp[l] = '\0';
 	return (temp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 19:12:45 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 19:47:29 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,25 @@ void	ft_redir_process(char *line, t_var *var)
 	}
 	else if (line[var->i] == '>')
 	{
-		/* la partie pour le appen c'est le bail 
-		juste en dessous BG*/
-		
-		// if (line[var->i + 1] == '>')
-		// {
-		// 	var->i++;
-		// 	var->lst_cmd->lst_out->append = 1;
-		// }
 		if (!var->lst_cmd->lst_out)
 		{
 			var->lst_cmd->lst_out = ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
 			var->first_out = var->lst_cmd->lst_out;
+			if (line[var->i + 1] == '>')
+			{
+				var->i++;
+				var->lst_cmd->lst_out->append = 1;
+			}
 		}
 		else
 		{
 			ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
 			var->lst_cmd->lst_out = var->lst_cmd->lst_out->next;
+			if (line[var->i + 1] == '>')
+			{
+				var->i++;
+				var->lst_cmd->lst_out->append = 1;
+			}
 		}
 		var->output = 2;
 	}
