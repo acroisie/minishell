@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/28 13:53:35 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 12:44:27 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 			pipe(lst_cmd->pipe_fd);
 		while (lst_cmd->lst_herdoc != NULL)
 		{
-			ft_heredoc(lst_cmd);
+			ft_heredoc(lst_cmd, data);
 			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
 		}
 		ft_fork(lst_cmd, data);

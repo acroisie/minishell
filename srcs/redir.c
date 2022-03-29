@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/28 10:49:23 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 15:23:41 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,45 +74,57 @@ void	ft_heredoc2(t_lst_cmd *lst_cmd, pid_t pid, int fds[2])
 		lst_cmd->fd_in = fds[0];
 	if (lst_cmd->lst_herdoc->next)
 		close(fds[0]);
-	close(fds[0]);
 }
 
-void	ft_dollar_sign_process(char *line, t_var *var, char **env)
+char	*dollar_here(char *line, t_minishell *data)
 {
 	char	*temp;
-	int		mem;
+	char	*var_env;
+	char	**var;
+	int		i;
+	int		j;
 	int		k;
+	int		l;
 
-	var->i++;
-	mem = var->i;
+	i = 0;
+	j = 0;
 	k = 0;
-	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|')
+	l = 0;
+	temp = malloc(sizeof(char) * 500000000);
+	var_env = malloc(sizeof(char ) * 500000);
+	while (line[i])
 	{
-		var->lst_cmd->args[var->j] = ft_add_char(
-				var->lst_cmd->args[var->j], '$');
-		return ;
-	}
-	while (ft_isalnum(line[var->i]) || line[var->i] == '_')
-		var->i++;
-	temp = ft_strndup(&line[mem], (var->i - mem));
-	while (env[k])
-	{
-		if (!ft_strncmp(env[k], temp, ft_strlen(temp) - 1))
+		if (line[i] == '$')
 		{
-			if (env[k][ft_strlen(temp)] == '=')
-			{
-				var->lst_cmd->args[var->j] = ft_strjoin(
-						var->lst_cmd->args[var->j],
-						&env[k][ft_strlen(temp) + 1]);
-				return ;
+			dprintf(2, "%c\n", line[i]);
+			i++;
+			if (ft_isalnum(line[i]) == 0)
+				return (line);
+			while (ft_isalnum(line[i]))
+			{	
+				var_env[j] = line[i];
+				j++;
+				i++;
 			}
+			j = -1;
+			while (data->new_env[++j])
+				if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env)))
+					break ;
+			var = ft_split(data->new_env[j], '=');
+			temp = ft_strjoin_free_s1(temp, var[1]);
+			free(var_env);
+			l = ft_strlen(temp) + 1;
 		}
-		k++;
+		else
+			temp[l] = line[i];
+		dprintf(2, "%c\n", temp[l]);
+		l++;
+		i++;
 	}
-	free(temp);
+	return (temp);
 }
 
-int	ft_heredoc(t_lst_cmd *lst_cmd)
+int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 {
 	char	*line;
 	pid_t	pid;
@@ -126,9 +138,9 @@ int	ft_heredoc(t_lst_cmd *lst_cmd)
 		close(fds[0]);
 		while (1)
 		{
-			line = readline(">");
+			line = readline("> ");
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
-				ft_putendl_fd(line, fds[1]);
+				ft_putendl_fd(dollar_here(line, data), fds[1]);
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
 				the_noar(line);
 			free(line);

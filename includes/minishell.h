@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
 /*   Updated: 2022/03/28 11:28:48 by acroisie         ###   ########lyon.fr   */
@@ -35,6 +35,7 @@ typedef struct s_lst_redir
 	struct s_lst_redir	*next;
 }t_lst_redir;
 
+
 typedef struct s_lst_cmd
 {
 	pid_t				pid;
@@ -46,6 +47,7 @@ typedef struct s_lst_cmd
 	t_lst_redir			*lst_out;
 	t_lst_redir			*lst_in;
 	t_lst_redir			*lst_herdoc;
+	struct s_minishell	*data;
 	int					fd_in;
 	int					fd_out;
 	struct s_lst_cmd	*next;
@@ -64,7 +66,6 @@ typedef struct s_minishell
 	char				*line;
 
 }t_minishell;
-
 /************************LINKED_LISTS****************************/
 
 t_lst_redir	*ft_create_tab(char *file);
@@ -111,7 +112,7 @@ char		*find_path(t_minishell *data, char *cmd);
 void		open_redir(t_lst_cmd *lst_cmd);
 void		init_dup(t_lst_cmd *lst_cmd);
 int			ft_strlencustom(char *s);
-int			ft_heredoc(t_lst_cmd *lst_cmd);
+int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 
 /***************************BUILTINS******************************/
 
