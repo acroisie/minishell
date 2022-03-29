@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part02.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 15:21:15 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 17:57:15 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,24 @@ void	ft_tilde_process(t_var *var, char **env)
 
 void	ft_redir_process(char *line, t_var *var)
 {
-	if (line[var->i] == '<')
+	if (line[var->i] == '<' && line[var->i] == '<')
+	{
+		if (!var->lst_cmd->lst_herdoc)
+		{
+			var->lst_cmd->lst_herdoc = ft_lstadd_tab(var->lst_cmd->lst_herdoc, NULL);
+			var->first_out = var->lst_cmd->lst_herdoc;
+		}
+		else
+		{
+			ft_lstadd_tab(var->lst_cmd->lst_herdoc, NULL);
+			var->lst_cmd->lst_herdoc = var->lst_cmd->lst_herdoc->next;
+		}
+		// var->lst_cmd->lst_herdoc->file = ft_calloc(1, sizeof(char) * 1);
+		// var->lst_cmd->lst_herdoc->file[0] = '\0';
+		var->output = 3;
+		var->i++;
+	}
+	else if (line[var->i] == '<')
 	{
 		if (!var->lst_cmd->lst_in)
 		{
@@ -53,11 +70,11 @@ void	ft_redir_process(char *line, t_var *var)
 			ft_lstadd_tab(var->lst_cmd->lst_in, NULL);
 			var->lst_cmd->lst_in = var->lst_cmd->lst_in->next;
 		}
-		var->lst_cmd->lst_in->file = ft_calloc(1, sizeof(char) * 1);
-		var->lst_cmd->lst_in->file[0] = '\0';
+		// var->lst_cmd->lst_in->file = ft_calloc(1, sizeof(char) * 1);
+		// var->lst_cmd->lst_in->file[0] = '\0';
 		var->output = 1;
 	}
-	if (line[var->i] == '>')
+	else if (line[var->i] == '>')
 	{
 		if (!var->lst_cmd->lst_out)
 		{
@@ -69,8 +86,8 @@ void	ft_redir_process(char *line, t_var *var)
 			ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
 			var->lst_cmd->lst_out = var->lst_cmd->lst_out->next;
 		}
-		var->lst_cmd->lst_out->file = ft_calloc(1, sizeof(char) * 1);
-		var->lst_cmd->lst_out->file[0] = '\0';
+		// var->lst_cmd->lst_out->file = ft_calloc(1, sizeof(char) * 1);
+		// var->lst_cmd->lst_out->file[0] = '\0';
 		var->output = 2;
 	}
 	var->i++;

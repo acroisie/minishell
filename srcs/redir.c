@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/29 15:16:41 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 17:32:57 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,10 @@ char	*dollar_here(char *line, t_minishell *data)
 	char	**var;
 	int		i;
 	int		j;
-	int		k;
 	int		l;
 
 	i = 0;
 	j = 0;
-	k = 0;
 	l = 0;
 	temp = malloc(sizeof(char) * 500000000);
 	var_env = malloc(sizeof(char ) * 500000);
