@@ -6,7 +6,11 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/28 16:58:22 by lnemor           ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/03/29 13:27:22 by acroisie         ###   ########lyon.fr   */
+>>>>>>> 54280faa938793e7c6df39c4cd52dc576a49da2e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +106,6 @@ void		ft_dol_sign_process(char *line, t_var *var, char **env, int option);
 void		ft_tilde_process(t_var *var, char **env);
 void		ft_redir_process(char *line, t_var *var);
 void		ft_copy_char(char *line, t_var *var);
-// void		ft_redir_process(char *line, t_var *var);
 
 /****************************EXEC*********************************/
 

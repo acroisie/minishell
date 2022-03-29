@@ -6,7 +6,11 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/28 17:09:11 by lnemor           ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/03/29 11:21:23 by acroisie         ###   ########lyon.fr   */
+>>>>>>> 54280faa938793e7c6df39c4cd52dc576a49da2e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +100,10 @@ t_lst_redir	*ft_lstlast_tab(t_lst_redir *lst)
 void	print_lst(t_lst_cmd *lst)
 {
 	int	i;
+	// int	j;
 
 	i = 0;
+	// j = 0;
 	while (lst)
 	{
 		i = 0;
@@ -106,6 +112,13 @@ void	print_lst(t_lst_cmd *lst)
 			printf("%s*/*", lst->args[i]);
 			i++;
 		}
+		// while (lst->lst_out)
+		// {
+		// 	printf("%s*/*", lst->lst_out->file);
+		// 	j++;
+		// 	printf("\n");
+		// 	lst->lst_out = lst->lst_out->next;
+		// }
 		printf("\n");
 		lst = lst->next;
 	}

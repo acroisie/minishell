@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/28 15:10:37 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 13:24:59 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_redir_process(char *line, t_var *var)
 	}
 	if (line[var->i] == '>')
 	{
-		if (!var->lst_cmd->lst_in)
+		if (!var->lst_cmd->lst_out)
 			var->lst_cmd->lst_out = ft_create_tab(NULL);
 		else
 			ft_lstadd_tab(var->lst_cmd->lst_out, var->lst_cmd->lst_out->file);
