@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/24 15:55:00 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 11:21:23 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ t_lst_redir	*ft_lstlast_tab(t_lst_redir *lst)
 void	print_lst(t_lst_cmd *lst)
 {
 	int	i;
+	// int	j;
 
 	i = 0;
+	// j = 0;
 	while (lst)
 	{
 		i = 0;
@@ -106,6 +108,13 @@ void	print_lst(t_lst_cmd *lst)
 			printf("%s*/*", lst->args[i]);
 			i++;
 		}
+		// while (lst->lst_out)
+		// {
+		// 	printf("%s*/*", lst->lst_out->file);
+		// 	j++;
+		// 	printf("\n");
+		// 	lst->lst_out = lst->lst_out->next;
+		// }
 		printf("\n");
 		lst = lst->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/28 14:29:59 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/28 15:36:02 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,16 @@ void	ft_pipe_process(char *line, t_var *var)
 
 void	ft_space_process(char *line, t_var *var)
 {
-	if (var->lst_cmd->args[var->j][0] != '\0')
-		var->j++;
 	while (line[var->i] == ' ')
 		var->i++;
 	if (line[var->i] == '\0' || line[var->i] == '|'
 		|| line[var->i] == '<' || line[var->i] == '>')
 		return ;
-	else
-	{	
-		var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
-		var->lst_cmd->args[var->j][0] = '\0';
-		var->output = 0;
-	}
+	if (var->lst_cmd->args[var->j][0] != '\0')
+		var->j++;
+	var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
+	var->lst_cmd->args[var->j][0] = '\0';
+	var->output = 0;
 }
 
 void	ft_s_quotes_process(char *line, t_var *var)

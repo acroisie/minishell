@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/28 10:49:23 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 13:24:48 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	open_redir2(t_lst_cmd *lst_cmd)
 {
 	while (lst_cmd->lst_out->next)
 	{
+		dprintf(1, "lst_out: %s\n", lst_cmd->lst_out->file);
 		if (lst_cmd->lst_out->append == 0)
 		{
 			if (open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR

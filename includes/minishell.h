@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/28 11:28:48 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 13:27:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void		ft_dol_sign_process(char *line, t_var *var, char **env, int option);
 void		ft_tilde_process(t_var *var, char **env);
 void		ft_redir_process(char *line, t_var *var);
 void		ft_copy_char(char *line, t_var *var);
-// void		ft_redir_process(char *line, t_var *var);
 
 /****************************EXEC*********************************/
 
