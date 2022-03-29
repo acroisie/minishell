@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part02.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 13:24:59 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 15:21:15 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,15 @@ void	ft_redir_process(char *line, t_var *var)
 	if (line[var->i] == '<')
 	{
 		if (!var->lst_cmd->lst_in)
-			var->lst_cmd->lst_in = ft_create_tab(NULL);
+		{
+			var->lst_cmd->lst_in = ft_lstadd_tab(var->lst_cmd->lst_in, NULL);
+			var->first_in = var->lst_cmd->lst_in;
+		}
 		else
-			ft_lstadd_tab(var->lst_cmd->lst_in, var->lst_cmd->lst_in->file);
+		{
+			ft_lstadd_tab(var->lst_cmd->lst_in, NULL);
+			var->lst_cmd->lst_in = var->lst_cmd->lst_in->next;
+		}
 		var->lst_cmd->lst_in->file = ft_calloc(1, sizeof(char) * 1);
 		var->lst_cmd->lst_in->file[0] = '\0';
 		var->output = 1;
@@ -54,9 +60,15 @@ void	ft_redir_process(char *line, t_var *var)
 	if (line[var->i] == '>')
 	{
 		if (!var->lst_cmd->lst_out)
-			var->lst_cmd->lst_out = ft_create_tab(NULL);
+		{
+			var->lst_cmd->lst_out = ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
+			var->first_out = var->lst_cmd->lst_out;
+		}
 		else
-			ft_lstadd_tab(var->lst_cmd->lst_out, var->lst_cmd->lst_out->file);
+		{
+			ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
+			var->lst_cmd->lst_out = var->lst_cmd->lst_out->next;
+		}
 		var->lst_cmd->lst_out->file = ft_calloc(1, sizeof(char) * 1);
 		var->lst_cmd->lst_out->file[0] = '\0';
 		var->output = 2;

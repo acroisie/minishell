@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 13:26:56 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 15:16:01 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 	}
 	while (var->lst_cmd->prev)
 		var->lst_cmd = var->lst_cmd->prev;
+	var->lst_cmd->lst_out = var->first_out;
 	return (var->lst_cmd);
 }
 

@@ -6,13 +6,10 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/03/28 17:09:11 by lnemor           ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/03/29 11:21:23 by acroisie         ###   ########lyon.fr   */
->>>>>>> 54280faa938793e7c6df39c4cd52dc576a49da2e
+/*   Updated: 2022/03/29 13:56:58 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 

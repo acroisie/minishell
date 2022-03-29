@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/03/28 15:23:41 by lnemor           ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/03/29 13:24:48 by acroisie         ###   ########lyon.fr   */
->>>>>>> 54280faa938793e7c6df39c4cd52dc576a49da2e
+/*   Updated: 2022/03/29 15:16:41 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -20,7 +17,6 @@ void	open_redir2(t_lst_cmd *lst_cmd)
 {
 	while (lst_cmd->lst_out->next)
 	{
-		dprintf(1, "lst_out: %s\n", lst_cmd->lst_out->file);
 		if (lst_cmd->lst_out->append == 0)
 		{
 			if (open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR

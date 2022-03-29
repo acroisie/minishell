@@ -6,11 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/03/28 16:58:22 by lnemor           ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/03/29 13:27:22 by acroisie         ###   ########lyon.fr   */
->>>>>>> 54280faa938793e7c6df39c4cd52dc576a49da2e
+/*   Updated: 2022/03/29 15:20:05 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +84,8 @@ void		print_lst(t_lst_cmd *lst);
 typedef struct s_var
 {
 	t_lst_cmd	*lst_cmd;
+	t_lst_redir	*first_out;
+	t_lst_redir	*first_in;
 	int			output;
 	int			i;
 	int			j;
