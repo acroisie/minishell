@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 17:57:15 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 19:21:17 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ void	ft_tilde_process(t_var *var, char **env)
 
 void	ft_redir_process(char *line, t_var *var)
 {
-	if (line[var->i] == '<' && line[var->i] == '<')
+	if (line[var->i] == '<' && line[var->i + 1] == '<')
 	{
 		if (!var->lst_cmd->lst_herdoc)
 		{
-			var->lst_cmd->lst_herdoc = ft_lstadd_tab(var->lst_cmd->lst_herdoc, NULL);
+			var->lst_cmd->lst_herdoc = ft_lstadd_tab(
+					var->lst_cmd->lst_herdoc, NULL);
 			var->first_out = var->lst_cmd->lst_herdoc;
 		}
 		else
@@ -53,8 +54,6 @@ void	ft_redir_process(char *line, t_var *var)
 			ft_lstadd_tab(var->lst_cmd->lst_herdoc, NULL);
 			var->lst_cmd->lst_herdoc = var->lst_cmd->lst_herdoc->next;
 		}
-		// var->lst_cmd->lst_herdoc->file = ft_calloc(1, sizeof(char) * 1);
-		// var->lst_cmd->lst_herdoc->file[0] = '\0';
 		var->output = 3;
 		var->i++;
 	}
@@ -70,12 +69,18 @@ void	ft_redir_process(char *line, t_var *var)
 			ft_lstadd_tab(var->lst_cmd->lst_in, NULL);
 			var->lst_cmd->lst_in = var->lst_cmd->lst_in->next;
 		}
-		// var->lst_cmd->lst_in->file = ft_calloc(1, sizeof(char) * 1);
-		// var->lst_cmd->lst_in->file[0] = '\0';
 		var->output = 1;
 	}
 	else if (line[var->i] == '>')
 	{
+		/* la partie pour le appen c'est le bail 
+		juste en dessous BG*/
+		
+		// if (line[var->i + 1] == '>')
+		// {
+		// 	var->i++;
+		// 	var->lst_cmd->lst_out->append = 1;
+		// }
 		if (!var->lst_cmd->lst_out)
 		{
 			var->lst_cmd->lst_out = ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
@@ -86,8 +91,6 @@ void	ft_redir_process(char *line, t_var *var)
 			ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
 			var->lst_cmd->lst_out = var->lst_cmd->lst_out->next;
 		}
-		// var->lst_cmd->lst_out->file = ft_calloc(1, sizeof(char) * 1);
-		// var->lst_cmd->lst_out->file[0] = '\0';
 		var->output = 2;
 	}
 	var->i++;
