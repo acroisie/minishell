@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/28 12:44:27 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 17:58:35 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	lst_cmd = data->start_cmd;
-	// lst_cmd->lst_herdoc = ft_create_tab("a");
+	lst_cmd->lst_herdoc = ft_create_tab("a");
 	while (lst_cmd)
 	{
 		open_redir(lst_cmd);
