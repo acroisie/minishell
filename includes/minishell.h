@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/29 15:20:05 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 18:30:05 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_var
 	t_lst_cmd	*lst_cmd;
 	t_lst_redir	*first_out;
 	t_lst_redir	*first_in;
+	t_lst_redir	*first_here;
 	int			output;
 	int			i;
 	int			j;

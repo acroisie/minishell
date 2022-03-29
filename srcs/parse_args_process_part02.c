@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part02.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 19:21:17 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 19:12:45 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ void	ft_redir_process(char *line, t_var *var)
 	{
 		if (!var->lst_cmd->lst_herdoc)
 		{
-			var->lst_cmd->lst_herdoc = ft_lstadd_tab(
-					var->lst_cmd->lst_herdoc, NULL);
-			var->first_out = var->lst_cmd->lst_herdoc;
+			var->lst_cmd->lst_herdoc = ft_lstadd_tab(var->lst_cmd->lst_herdoc, NULL);
+			var->first_here = var->lst_cmd->lst_herdoc;
 		}
 		else
 		{
@@ -57,7 +56,7 @@ void	ft_redir_process(char *line, t_var *var)
 		var->output = 3;
 		var->i++;
 	}
-	else if (line[var->i] == '<')
+	else if (line[var->i] == '<' && line[var->i + 1] != '<')
 	{
 		if (!var->lst_cmd->lst_in)
 		{

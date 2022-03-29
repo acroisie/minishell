@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/29 17:59:13 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/29 19:10:46 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,23 @@ char	*dollar_here(char *line, t_minishell *data)
 {
 	char	*temp;
 	char	*var_env;
-	char	**var;
+	char	*var;
 	int		i;
 	int		j;
+	int		k;
 	int		l;
 
 	i = 0;
 	j = 0;
+	k = 0;
 	l = 0;
-	temp = malloc(sizeof(char) * 500000000);
-	var_env = malloc(sizeof(char ) * 500000);
+	temp = ft_strdup("");
+	var_env = ft_strdup("");
 	while (line[i])
 	{
 		if (line[i] == '$')
 		{
-			dprintf(2, "%c\n", line[i]);
+			dprintf(2, "bebug\n");
 			i++;
 			if (ft_isalnum(line[i]) == 0)
 				return (line);
@@ -109,17 +111,24 @@ char	*dollar_here(char *line, t_minishell *data)
 			while (data->new_env[++j])
 				if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env)))
 					break ;
-			var = ft_split(data->new_env[j], '=');
-			temp = ft_strjoin_free_s1(temp, var[1]);
+			while (data->new_env[j][k] != '=')
+				k++;
+			k++;
+			var = malloc(sizeof(char) * ft_strlen(data->new_env[j]) - k + 1);
+			var = ft_substr(data->new_env[j], k, ft_strlen(data->new_env[j]));
+			temp = ft_strjoin_free_s1(temp, var);
 			free(var_env);
 			l = ft_strlen(temp) + 1;
 		}
 		else
+		{
+			dprintf(2, "{%c\n", line[i]);
 			temp[l] = line[i];
-		dprintf(2, "%c\n", temp[l]);
+		}
 		l++;
 		i++;
 	}
+	temp[l] = '\0';
 	return (temp);
 }
 
