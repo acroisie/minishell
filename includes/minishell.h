@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/29 18:30:05 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 10:42:02 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ void		ft_write_char_output(char *line, t_var *var);
 void		ft_write_string_output(int k, t_var *var, char **env);
 void		ft_pipe_process(char *line, t_var *var);
 void		ft_space_process(char *line, t_var *var);
-void		ft_s_quotes_process(char *line, t_var *var);
-void		ft_d_quotes_process(char *line, t_var *var, char **env);
+void		ft_quotes_process(char *line, t_var *var, char **env);
 void		ft_dol_sign_process(char *line, t_var *var, char **env, int option);
 void		ft_tilde_process(t_var *var, char **env);
 void		ft_redir_process(char *line, t_var *var);
