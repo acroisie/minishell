@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/29 18:31:48 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/30 19:50:24 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 	else if (lst_cmd->pid == 0)
 	{
 		init_dup(lst_cmd);
-		if (is_builtin(lst_cmd) == 1)
+		if (is_builtin(lst_cmd) != 0)
+		{
 			do_builtin(data, lst_cmd);
+			exit(0);
+		}
 		else if (lst_cmd->args[0][0] == '.' && lst_cmd->args[0][1] == '/')
 			execve(lst_cmd->args[0], lst_cmd->args, data->new_env);
 		else if (find_path(data, lst_cmd->args[0]) == 0
@@ -62,7 +65,10 @@ void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 			ft_heredoc(lst_cmd, data);
 			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
 		}
-		ft_fork(lst_cmd, data);
+		if (is_builtin(lst_cmd) == 2 && !lst_cmd->prev && !lst_cmd->next)
+			do_builtin(data, lst_cmd);
+		else
+			ft_fork(lst_cmd, data);
 		if (lst_cmd->prev != NULL)
 			close(lst_cmd->prev->pipe_fd[0]);
 		if (lst_cmd->next != NULL)

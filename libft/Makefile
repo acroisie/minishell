@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 15:10:13 by acroisie          #+#    #+#              #
-#    Updated: 2022/03/28 13:45:31 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/31 14:34:35 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,4 +83,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re .PHONY

@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:16:53 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/25 18:55:05 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/30 19:44:39 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ int	is_builtin(t_lst_cmd *lst_cmd)
 {
 	if (lst_cmd->args[0] == NULL)
 	{
-		dprintf(2, "trst\n");
 		return (0);
 	}
-	if ((ft_strncmp(lst_cmd->args[0], "cd",
-				ft_strlen(lst_cmd->args[0]) + 1) == 0)
-		|| (ft_strncmp(lst_cmd->args[0], "env",
+	if ((ft_strncmp(lst_cmd->args[0], "env",
 				ft_strlen(lst_cmd->args[0]) + 1) == 0)
 		|| (ft_strncmp(lst_cmd->args[0], "unset",
 				ft_strlen(lst_cmd->args[0]) + 1) == 0)
@@ -34,6 +31,9 @@ int	is_builtin(t_lst_cmd *lst_cmd)
 	{
 		return (1);
 	}
+	else if (ft_strncmp(lst_cmd->args[0], "cd",
+			ft_strlen(lst_cmd->args[0]) + 1) == 0)
+		return (2);
 	else
 		return (0);
 }
