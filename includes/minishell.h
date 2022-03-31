@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/31 16:23:28 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 21:09:44 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_lst_redir
 	int					append;
 	struct s_lst_redir	*next;
 }t_lst_redir;
-
 
 typedef struct s_lst_cmd
 {
@@ -124,10 +123,13 @@ void		do_builtin(t_minishell *data, t_lst_cmd *lst_cmd);
 int			ft_unset(t_minishell *data, char **args);
 int			ft_pwd(t_minishell *data);
 void		ft_export(t_minishell *data, char **args);
+void		ft_exit(t_lst_cmd *lst_cmd);
 
 /****************************UTILS*******************************/
 
 void		return_error(char *arg, char *msg, int nb);
 void		return_error_builtin(char *cmd, char *arg, char *msg, int nb);
+void		return_error_exit(char *cmd, char *arg, char *msg, int nb);
+void		return_error_export(char *cmd, char *arg, char *msg, int nb);
 
 #endif

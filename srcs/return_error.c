@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:30:41 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/30 19:53:17 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 21:12:39 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,30 @@ void	return_error_builtin(char *cmd, char *arg, char *msg, int nb)
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(arg, 2);
 	ft_putendl_fd(msg, 2);
-	g_rvalue = nb;
+	g_rvalue = nb % 256;
 	if (strncmp(cmd, "cd", 2) != 0)
-		exit(nb);
+		exit(nb % 256);
+}
+
+void	return_error_exit(char *cmd, char *arg, char *msg, int nb)
+{
+	ft_putendl_fd("exit", 2);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(msg, 2);
+	g_rvalue = nb % 256;
+	if (strncmp(cmd, "cd", 2) != 0)
+		exit(nb % 256);
+}
+
+void	return_error_export(char *cmd, char *arg, char *msg, int nb)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(msg, 2);
+	g_rvalue = nb % 256;
 }
 
 void	return_error(char *arg, char *msg, int nb)
@@ -28,5 +49,6 @@ void	return_error(char *arg, char *msg, int nb)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putendl_fd(msg, 2);
-	g_rvalue = nb;
+	g_rvalue = nb % 256;
+	return ;
 }

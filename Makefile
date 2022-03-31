@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/03/31 14:33:09 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/03/31 22:13:23 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,17 @@ SRCS := main.c \
 		ft_export.c \
 		ft_exit.c
 
+ifneq ($(shell uname), Linux)
+READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
+READLINE_INC_DIR_FLAG := -I$(shell brew --prefix readline)/include
+endif
+
 OBJS := $(SRCS:.c=.o)
 
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a -lreadline -framework CoreFoundation
+					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline -framework CoreFoundation
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a libft/libft.h
 					@mkdir -p objs

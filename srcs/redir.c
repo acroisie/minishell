@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/29 20:38:52 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 15:49:40 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,7 @@ char	*dollar_here(char *line, t_minishell *data)
 	{
 		if (line[i] == '$')
 		{
-			i++;
-			if (ft_isalnum(line[i]) == 0)
+			if (ft_isalnum(line[i++]) == 0)
 				return (line);
 			while (ft_isalnum(line[i]) || line[i] == '_')
 				var_env[j++] = line[i++];
@@ -108,8 +107,8 @@ char	*dollar_here(char *line, t_minishell *data)
 			{
 				while (data->new_env[j][k] != '=')
 					k++;
-				k++;
-				var = ft_substr(data->new_env[j], k, ft_strlen(data->new_env[j]));
+				var = ft_substr(data->new_env[j], k++,
+						ft_strlen(data->new_env[j]));
 				temp = ft_strjoin_free_s1(temp, var);
 				free(var_env);
 				free(var);

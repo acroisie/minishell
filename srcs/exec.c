@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/30 19:50:24 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 15:53:34 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 			exit(0);
 		}
 		else if (lst_cmd->args[0][0] == '.' && lst_cmd->args[0][1] == '/')
+		{
 			execve(lst_cmd->args[0], lst_cmd->args, data->new_env);
+		}
 		else if (find_path(data, lst_cmd->args[0]) == 0
 			&& (lst_cmd->args[0][0] != '/' || (lst_cmd->args[0][0]
 			== '/' && lst_cmd->args[0][1] == '/')))
