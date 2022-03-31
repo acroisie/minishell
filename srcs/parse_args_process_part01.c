@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 19:17:36 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 10:42:42 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,15 @@ void	ft_space_process(char *line, t_var *var)
 	var->output = 0;
 }
 
-void	ft_s_quotes_process(char *line, t_var *var)
+void	ft_quotes_process(char *line, t_var *var, char **env)
 {
-	var->i++;
-	while (line[var->i] != '\'')
-	{
-		if (line[var->i] == '\0') // Modify to make a clean end
-		{
-			printf("unclosed quotes\n");
-			exit (1);
-		}
-		else
-			ft_write_char_output(line, var);
-	}
-	var->i++;
-}
+	char	mem;
 
-/* Do a specific case for echo $?*/
-
-void	ft_d_quotes_process(char *line, t_var *var, char **env)
-{
+	mem = line[var->i];
 	var->i++;
-	while (line[var->i] != '"')
+	while (line[var->i] != mem)
 	{
-		if (line[var->i] == '$')
+		if (line[var->i] == '$' && mem == '"')
 			ft_dol_sign_process(line, var, env, 0);
 		else if (line[var->i] == '\0') // Modify to make a clean end
 		{

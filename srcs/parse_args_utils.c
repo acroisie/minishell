@@ -6,11 +6,18 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/29 17:54:51 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 10:10:53 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_copy_char(char *line, t_var *var)
+{
+	var->lst_cmd->args[var->j] = ft_add_char(
+			var->lst_cmd->args[var->j], line[var->i]);
+	var->i++;
+}
 
 char	*ft_add_char(char *s1, char c)
 {
