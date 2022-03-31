@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/30 18:25:50 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 16:50:38 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 			line = readline("\033[1;92mminishel> \033[0m");
 		if (ft_strlen(line) != 0)
 			execute_line(lst_cmd, data, line);
+		if (!line)
+			exit (0);
 	}
 }

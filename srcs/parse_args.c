@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/31 10:42:35 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 16:16:20 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,4 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 - var.lst_cmd.args to double everytime when overflow 
 or calculate size before run this part*/
 /* Do a specific case for echo $?*/
+/* Do ft_echo */
