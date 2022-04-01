@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/31 18:38:01 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 11:05:21 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,26 +80,26 @@ void	ft_write_char_output(char *line, t_var *var)
 	}
 }
 
-void	ft_write_string_output(int k, t_var *var, char **env, int mem)
+void	ft_write_string_output(int k, t_var *var, char **env, int n)
 {
 	if (var->output == 0)
 	{
 		var->lst_cmd->args[var->j] = ft_strjoin_free_s1(
-				var->lst_cmd->args[var->j], &env[k][mem - 1]);
+				var->lst_cmd->args[var->j], &env[k][n + 1]);
 	}
 	else if (var->output == 1)
 	{
 		var->lst_cmd->lst_in->file = ft_strjoin_free_s1(
-				var->lst_cmd->lst_in->file, &env[k][mem - 1]);
+				var->lst_cmd->lst_in->file, &env[k][n + 1]);
 	}
 	else if (var->output == 2)
 	{
 		var->lst_cmd->lst_out->file = ft_strjoin_free_s1(
-				var->lst_cmd->lst_out->file, &env[k][mem - 1]);
+				var->lst_cmd->lst_out->file, &env[k][n + 1]);
 	}
 	else if (var->output == 3)
 	{
 		var->lst_cmd->lst_herdoc->file = ft_strjoin_free_s1(
-				var->lst_cmd->lst_herdoc->file, &env[k][mem - 1]);
+				var->lst_cmd->lst_herdoc->file, &env[k][n + 1]);
 	}
 }

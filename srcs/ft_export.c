@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/31 23:12:14 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 10:06:44 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_export(t_minishell *data, char **args)
 	int		i;
 	int		j;
 	int		equal;
-	char	**split;
+	// char	**split;
 
 	i = -1;
 	dest = malloc(sizeof(char *) * ft_destlen(data->new_env) + 1);
@@ -67,7 +67,7 @@ void	ft_export(t_minishell *data, char **args)
 			args[1] = ft_add_char(args[1], '=');
 		else if (equal > 0)
 		{
-			split = ft_split(args[1], '=');
+			// split = ft_split(args[1], '=');
 			
 		}
 		dest = ft_addline(dest, args[1]);
