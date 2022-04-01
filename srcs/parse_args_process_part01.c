@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/31 16:26:51 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/01 09:46:05 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,27 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 	int		mem;
 	int		k;
 
-	var->i++;
-	mem = var->i;
 	k = 0;
-	if (line[var->i] == ' ' || line[var->i] == '\0' || line[var->i] == '|')
+	if (line[var->i + 1] == ' ' || line[var->i + 1] == '\0'
+		|| line[var->i + 1] == '|')
 	{
-		var->lst_cmd->args[var->j] = ft_add_char(
-				var->lst_cmd->args[var->j], '$');
+		ft_write_char_output(line, var);
+		var->i++;
 		return ;
 	}
+	var->i++;
+	mem = var->i;
 	while (ft_isalnum(line[var->i]) || line[var->i] == '_')
 		var->i++;
 	temp = ft_strndup(&line[mem], (var->i - mem));
 	while (env[k])
 	{
+		dprintf(1, "%c\n", env[k][ft_strlen(temp) - 1]); // To delete
 		if (!ft_strncmp(env[k], temp, ft_strlen(temp) - 1))
 		{
 			if (env[k][ft_strlen(temp)] == '=')
 			{
-				ft_write_string_output(k, var, env);
+				ft_write_string_output(k, var, env, mem);
 				if (option)
 					// printf("Do different stuff \n");
 				return ;

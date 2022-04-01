@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/31 10:19:25 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 18:30:59 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_tilde_process(t_var *var, char **env)
 		{
 			if (env[k][4] == '=')
 			{
-				ft_write_string_output(k, var, env);
+				ft_write_string_output(k, var, env, 5);
 				return ;
 			}
 		}

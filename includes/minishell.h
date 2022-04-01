@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/31 21:09:44 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 18:29:57 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_lst_cmd	*ft_parse_args(char *line, char **env);
 char		*ft_add_char(char *s1, char c);
 void		ft_init_var(t_var *var);
 void		ft_write_char_output(char *line, t_var *var);
-void		ft_write_string_output(int k, t_var *var, char **env);
+void		ft_write_string_output(int k, t_var *var, char **env, int mem);
 void		ft_pipe_process(char *line, t_var *var);
 void		ft_space_process(char *line, t_var *var);
 void		ft_quotes_process(char *line, t_var *var, char **env);
