@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/04 13:31:47 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 14:42:52 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char	*ft_insert(char *line, char **env, t_var *var, int k, int i)
 void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 {
 	char	*temp;
+	char	**rvalue;
 	int		mem;
 	int		k;
 
@@ -92,6 +93,14 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 	}
 	var->i++;
 	mem = var->i;
+	if (line[var->i] == '?')
+	{
+		var->i++;
+		rvalue = malloc(2 * sizeof (char *));
+		rvalue[0] = ft_itoa(g_rvalue);
+		ft_write_string_output(0, var, rvalue, -1);
+		return ;
+	}
 	while (ft_isalnum(line[var->i]) || line[var->i] == '_')
 		var->i++;
 	temp = ft_strndup(&line[mem], (var->i - mem));
@@ -103,9 +112,7 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 			{
 				if (option)
 				{
-					line = ft_insert(line, env, var, k, ft_strlen(temp));
-					dprintf(1, "line; %s\n", line); //To delete
-					dprintf(1, "line; %i\n", var->i); //TO delete
+					line = ft_insert(line, env, var, k, ft_strlen(temp)); // WIP
 					return ;
 				}
 				else
