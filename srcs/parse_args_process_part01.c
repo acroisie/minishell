@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/04 14:42:52 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 16:52:14 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ char	*ft_insert(char *line, char **env, t_var *var, int k, int i)
 	char	*end;
 
 	end = ft_strdup(&line[var->i]);
-	dprintf(1, "end; %s\n", end);
+	dprintf(1, "end; %s\n", end); //To delete
 	var->i = (var->i - i - 1);
 	line[var->i] = '\0';
-	dprintf(1, "line1; %s\n", line);
+	dprintf(1, "line1; %s\n", line); //To delete
 	line = ft_strjoin(line, &env[k][i + 1]);
-	dprintf(1, "line2; %s\n", line);
+	dprintf(1, "line2; %s\n", line); //To delete
 	line = ft_strjoin(line, end);
-	dprintf(1, "line3; %s\n", line);
+	dprintf(1, "line3; %s\n", line); //To delete
 	return (line);
 }
 
