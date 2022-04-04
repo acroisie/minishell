@@ -19,7 +19,7 @@ void	ft_export(t_minishell *data, char **args)
 	int		i;
 	int		j;
 	int		equal;
-	// char	**split;
+	char	**split;
 
 	i = -1;
 	dest = malloc(sizeof(char *) * ft_destlen(data->new_env) + 1);
@@ -59,25 +59,49 @@ void	ft_export(t_minishell *data, char **args)
 				return (return_error_export("export: `", args[1],
 						"': not a valid identifier", 1));
 			if (args[1][j] == '=')
+			{
 				equal++;
+				j++;
+			}
 			if (ft_isalpha(args[1][j]) || args[1][j] == '_')
 				j++;
+			else
+				return (return_error_export("export: `", args[1],
+						"': not a valid identifier", 1));
 		}
-		if (equal == 0)
-			args[1] = ft_add_char(args[1], '=');
-		else if (equal > 0)
+		if (equal > 0)
 		{
-			// split = ft_split(args[1], '=');
-			
+			split = ft_split(args[1], '=');
+			i = 0;
+			while (data->new_env[i] != NULL)
+			{
+				if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
+					break;
+				i++;
+			}
+				;
+			if (i != ft_destlen(data->new_env))
+				data->new_env[i] = ft_strdup(args[1]);
+			else 
+			{
+				dest = ft_addline(dest, args[1]);
+				dest[ft_destlen(dest)] = NULL;
+			}
 		}
-		dest = ft_addline(dest, args[1]);
-		dest[(ft_destlen(dest))] = NULL;
-		while (dest[++i])
+		else
 		{
-			data->new_env[i] = ft_strdup(dest[i]);
-			dprintf(2, "da");
-			free(dest[i]);
+			if (equal == 0)
+				args[1] = ft_add_char(args[1], '=');
+			dest = ft_addline(dest, args[1]);
+			dest[ft_destlen(dest)] = NULL;
+			i = 0;
+			while (dest[i])
+			{
+				data->new_env[i] = ft_strdup(dest[i]);
+				i++;
+			}
+			data->new_env[i] = NULL;
 		}
-		free(dest);
+		return ;
 	}
 }

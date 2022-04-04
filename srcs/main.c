@@ -28,6 +28,7 @@ int	main(int argc, char **argv, char **env)
 	data.new_env = malloc(sizeof(char *) * ft_destlen(env) + 1);
 	while (env[++i])
 		data.new_env[i] = ft_strdup(env[i]);
+	data.new_env[i] = NULL;
 	prompt(&lst_cmd, &data);
 	return (0);
 }

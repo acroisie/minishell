@@ -47,7 +47,7 @@ OBJS := $(SRCS:.c=.o)
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline -framework CoreFoundation
+					$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a libft/libft.h
 					@mkdir -p objs

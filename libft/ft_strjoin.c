@@ -44,15 +44,16 @@ char	**ft_addline(char **src1, char *s2)
 
 	i = 0;
 	j = 0;
-	dest = malloc((ft_destlen(src1) + 1) * sizeof(char *));
+	dest = malloc((ft_destlen(src1) + 2) * sizeof(char *));
 	if (dest == NULL)
 		return (NULL);
 	while (src1[j])
 		dest[i++] = src1[j++];
 	j = 0;
+	dprintf(2, "%s\n", dest[i]);
 	dest[i] = ft_strdup(s2);
-	dest[++i] = NULL;
 	free(s2);
+	dest[i + 1] = NULL;
 	return (dest);
 }
 
