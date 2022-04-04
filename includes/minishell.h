@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/31 18:29:57 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 13:37:06 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void		open_redir(t_lst_cmd *lst_cmd);
 void		init_dup(t_lst_cmd *lst_cmd);
 int			ft_strlencustom(char *s);
 int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
+void		the_noar2(unsigned int nb);
 
 /***************************BUILTINS******************************/
 

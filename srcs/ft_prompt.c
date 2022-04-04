@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/31 16:50:38 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 13:38:25 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 		if (ft_strlen(line) != 0)
 			execute_line(lst_cmd, data, line);
 		if (!line)
-			exit (0);
+			the_noar2(0);
 	}
 }

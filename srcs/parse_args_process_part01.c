@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/01 11:05:53 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 13:31:47 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,22 @@ void	ft_quotes_process(char *line, t_var *var, char **env)
 	var->i++;
 }
 
+char	*ft_insert(char *line, char **env, t_var *var, int k, int i)
+{
+	char	*end;
+
+	end = ft_strdup(&line[var->i]);
+	dprintf(1, "end; %s\n", end);
+	var->i = (var->i - i - 1);
+	line[var->i] = '\0';
+	dprintf(1, "line1; %s\n", line);
+	line = ft_strjoin(line, &env[k][i + 1]);
+	dprintf(1, "line2; %s\n", line);
+	line = ft_strjoin(line, end);
+	dprintf(1, "line3; %s\n", line);
+	return (line);
+}
+
 void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 {
 	char	*temp;
@@ -85,9 +101,15 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 		{
 			if (env[k][ft_strlen(temp)] == '=')
 			{
-				ft_write_string_output(k, var, env, ft_strlen(temp));
 				if (option)
-					// ft_write_string_output(k, var, env, ft_strlen(temp));
+				{
+					line = ft_insert(line, env, var, k, ft_strlen(temp));
+					dprintf(1, "line; %s\n", line); //To delete
+					dprintf(1, "line; %i\n", var->i); //TO delete
+					return ;
+				}
+				else
+					ft_write_string_output(k, var, env, ft_strlen(temp));
 				return ;
 			}
 		}

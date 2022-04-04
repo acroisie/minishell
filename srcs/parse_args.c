@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/03/31 16:16:20 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/04 13:16:27 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 			ft_redir_process(line, var);
 		else
 			ft_write_char_output(line, var);
+		dprintf(1, "line %s\n", line);
 	}
 	ft_set_first_link(var);
 	return (var->lst_cmd);
