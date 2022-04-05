@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/05 11:48:42 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/05 15:01:11 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS := main.c \
 		exec.c \
 		find_path.c \
 		ft_cd.c \
+		ft_echo.c \
 		ft_env.c \
 		ft_builtins.c \
 		exec_utils.c \

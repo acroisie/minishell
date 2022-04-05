@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 13:22:33 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 14:43:03 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 		if (i != ft_destlen(data->new_env))
 		{
 			prompt = ft_split(data->new_env[i], '/');
-			dprintf(1, "address; %p\n", line); // To delete
 			line = switch_display(prompt, line);
-			dprintf(1, "address; %p\n", line); // To delete
 		}
 		else
 			line = readline("\033[1;92mminishel> \033[0m");
 		if (ft_strlen(line) != 0)
 			execute_line(lst_cmd, data, line);
+		else if (line)
+			free(line);
 		if (!line)
 			the_noar2(0);
 	}

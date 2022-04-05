@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/05 09:20:00 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:06:57 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 			ft_write_char_output(line, var);
 	}
 	ft_set_first_link(var);
+	dprintf(1, "Address : %p\n", var); //To delete
 	return (var->lst_cmd);
 }
-
-/*Todo_list:
-- var.lst_cmd.args to double everytime when overflow 
-or calculate size before run this part*/
-/* Fix root leaks from prompt*/
-/* Fix < segfault*/
-/* Fix << fork*/
-/* Do ft_echo || maybe it's ok ?*/

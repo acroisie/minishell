@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 09:58:53 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 14:58:29 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int			ft_unset(t_minishell *data, char **args);
 int			ft_pwd(t_minishell *data);
 void		ft_export(t_minishell *data, char **args);
 void		ft_exit(t_lst_cmd *lst_cmd);
+void		ft_echo(char **args);
 
 /****************************UTILS*******************************/
 
