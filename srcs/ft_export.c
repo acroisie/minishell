@@ -3,104 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/01 10:06:44 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:25:36 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-//ce fdp de export segfault
+
+void	copy_dest(t_minishell *data, char **dest)
+{
+	int	i;
+
+	i = -1;
+	while (dest[++i])
+			data->new_env[i] = ft_strdup(dest[i]);
+		data->new_env[i] = NULL;
+}
+
+int	check_arg(char **args)
+{
+	int	equal;
+	int	j;
+
+	equal = 0;
+	j = 0;
+	while (args[1][j])
+	{
+		if (!ft_isalpha(args[1][0]))
+			return (return_error_export("export: `", args[1],
+					"': not a valid identifier", 1));
+		if (args[1][j] == '=')
+		{
+			equal++;
+			j++;
+		}
+		if (ft_isalpha(args[1][j]) || args[1][j] == '_')
+			j++;
+		else
+			return (return_error_export("export: `", args[1],
+					"': not a valid identifier", 1));
+	}
+	return (equal);
+}
+
+char	**replace_exist_line(t_minishell *data, char **args, char **dest)
+{
+	char	**split;
+	int		i;
+
+	i = -1;
+	split = ft_split(args[1], '=');
+	while (data->new_env[++i] != NULL)
+	{
+		if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
+			break ;
+	}
+	if (i == ft_destlen(data->new_env) && ft_strncmp(data->new_env[i],
+			split[0], ft_strlen(split[0])))
+		data->new_env[i] = ft_strdup(args[1]);
+	else
+		return (ft_addline(dest, args[1]));
+	return (dest);
+}
+
 void	ft_export(t_minishell *data, char **args)
 {
 	char	**dest;
-	char	*temp;
 	int		i;
-	int		j;
-	int		equal;
-	char	**split;
 
 	i = -1;
 	dest = malloc(sizeof(char *) * ft_destlen(data->new_env) + 1);
 	while (data->new_env[++i])
 		dest[i] = ft_strdup(data->new_env[i]);
-	i = -1;
-	while (dest[++i] && dest[i + 1])
-	{
-		if (ft_strcmp(dest[i], dest[i + 1]) > 0)
-		{
-			temp = dest[i];
-			dest[i] = dest[i + 1];
-			dest[i + 1] = temp;
-			i = -1;
-		}
-	}
 	if (!args[1])
-	{
-		i = -1;
-		while (dest[++i])
-		{
-			dest[i] = ft_strjoin_free_s2("declare -x ", dest[i]);
-			ft_putendl_fd(dest[i], 1);
-			free(dest[i]);
-		}
-		free (dest);
-		return ;
-	}
+		return (display_export(dest));
 	else
 	{
-		equal = 0;
-		j = 0;
-		i = -1;
-		while (args[1][j])
-		{
-			if (!ft_isalpha(args[1][0]))
-				return (return_error_export("export: `", args[1],
-						"': not a valid identifier", 1));
-			if (args[1][j] == '=')
-			{
-				equal++;
-				j++;
-			}
-			if (ft_isalpha(args[1][j]) || args[1][j] == '_')
-				j++;
-			else
-				return (return_error_export("export: `", args[1],
-						"': not a valid identifier", 1));
-		}
-		if (equal > 0)
-		{
-			split = ft_split(args[1], '=');
-			i = 0;
-			while (data->new_env[i] != NULL)
-			{
-				if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
-					break;
-				i++;
-			}
-				;
-			if (i != ft_destlen(data->new_env))
-				data->new_env[i] = ft_strdup(args[1]);
-			else 
-			{
-				dest = ft_addline(dest, args[1]);
-				dest[ft_destlen(dest)] = NULL;
-			}
-		}
+		if (check_arg(args) > 0)
+			dest = replace_exist_line(data, args, dest);
 		else
 		{
-			if (equal == 0)
+			if (check_arg(args) == 0)
 				args[1] = ft_add_char(args[1], '=');
 			dest = ft_addline(dest, args[1]);
-			dest[ft_destlen(dest)] = NULL;
-			i = 0;
-			while (dest[i])
-			{
-				data->new_env[i] = ft_strdup(dest[i]);
-				i++;
-			}
-			data->new_env[i] = NULL;
+			copy_dest(data, dest);
 		}
 		return ;
 	}

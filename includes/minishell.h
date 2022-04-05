@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 14:58:29 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:52:55 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -132,6 +133,7 @@ void		ft_echo(char **args);
 void		return_error(char *arg, char *msg, int nb);
 void		return_error_builtin(char *cmd, char *arg, char *msg, int nb);
 void		return_error_exit(char *cmd, char *arg, char *msg, int nb);
-void		return_error_export(char *cmd, char *arg, char *msg, int nb);
+int			return_error_export(char *cmd, char *arg, char *msg, int nb);
+void		display_export(char **dest);
 
 #endif

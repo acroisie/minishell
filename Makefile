@@ -36,7 +36,8 @@ SRCS := main.c \
 		ft_prompt.c \
 		ft_pwd.c \
 		ft_export.c \
-		ft_exit.c
+		ft_exit.c \
+		display_export.c
 
 ifneq ($(shell uname), Linux)
 READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib

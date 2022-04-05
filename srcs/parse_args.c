@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/05 15:06:57 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:20:08 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 			ft_write_char_output(line, var);
 	}
 	ft_set_first_link(var);
-	dprintf(1, "Address : %p\n", var); //To delete
 	return (var->lst_cmd);
 }

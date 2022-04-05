@@ -54,6 +54,7 @@ char	**ft_addline(char **src1, char *s2)
 	dest[i] = ft_strdup(s2);
 	free(s2);
 	dest[i + 1] = NULL;
+	dest[ft_destlen(dest)] = NULL;
 	return (dest);
 }
 

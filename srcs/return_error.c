@@ -35,13 +35,14 @@ void	return_error_exit(char *cmd, char *arg, char *msg, int nb)
 		exit(nb % 256);
 }
 
-void	return_error_export(char *cmd, char *arg, char *msg, int nb)
+int	return_error_export(char *cmd, char *arg, char *msg, int nb)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(arg, 2);
 	ft_putendl_fd(msg, 2);
 	g_rvalue = nb % 256;
+	return (-1);
 }
 
 void	return_error(char *arg, char *msg, int nb)

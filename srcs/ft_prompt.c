@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 14:43:03 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 16:01:06 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 {
 	add_history(line);
 	lst_cmd = ft_parse_args(line, data->new_env);
-	print_lst(lst_cmd); // To delete
 	free(line);
 	data->start_cmd = lst_cmd;
 	if (lst_cmd)
+	{
 		exec_cmds(data, lst_cmd);
+	}
 	lst_cmd = data->start_cmd;
 	while (lst_cmd)
 	{
@@ -62,7 +63,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 
 	while (1)
 	{
-		signal(SIGINT, ft_ctrl_c);
+		//signal(SIGINT, ft_ctrl_c);
 		i = -1;
 		while (data->new_env[++i])
 			if (ft_strncmp(data->new_env[i], "PWD", 3) == 0)
