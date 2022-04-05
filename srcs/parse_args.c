@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/05 15:20:08 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 15:58:12 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_set_first_link(t_var *var)
 
 t_lst_cmd	*ft_parse_args(char *line, char **env)
 {
-	t_var		*var;
+	t_var	*var;
 
 	var = ft_calloc(1, sizeof(t_var));
 	ft_init_var(var);
