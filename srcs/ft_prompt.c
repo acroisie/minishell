@@ -6,11 +6,17 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/04 14:02:04 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 10:00:50 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_ctrl_c(int signal)
+{
+	(void) signal;
+	printf("do some stuff");
+}
 
 char	*switch_display(char **prompt, char *line)
 {
@@ -56,6 +62,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 
 	while (1)
 	{
+		signal(SIGINT, ft_ctrl_c);
 		i = -1;
 		while (data->new_env[++i])
 			if (ft_strncmp(data->new_env[i], "PWD", 3) == 0)
