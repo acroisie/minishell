@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/04 16:52:14 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 08:31:46 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_quotes_process(char *line, t_var *var, char **env)
 	var->i++;
 }
 
-char	*ft_insert(char *line, char **env, t_var *var, int k, int i)
+void	ft_insert(char *line, char **env, t_var *var, int k, int i)
 {
 	char	*end;
 
@@ -73,7 +73,6 @@ char	*ft_insert(char *line, char **env, t_var *var, int k, int i)
 	dprintf(1, "line2; %s\n", line); //To delete
 	line = ft_strjoin(line, end);
 	dprintf(1, "line3; %s\n", line); //To delete
-	return (line);
 }
 
 void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
@@ -112,8 +111,7 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 			{
 				if (option)
 				{
-					line = ft_insert(line, env, var, k, ft_strlen(temp)); // WIP
-					return ;
+					ft_insert(line, env, var, k, ft_strlen(temp)); // WIP
 				}
 				else
 					ft_write_string_output(k, var, env, ft_strlen(temp));
