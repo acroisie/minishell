@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 10:00:50 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 13:22:33 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_ctrl_c(int signal)
 {
 	(void) signal;
-	printf("do some stuff");
+	printf("do some stuff"); //To delete
 }
 
 char	*switch_display(char **prompt, char *line)
@@ -70,7 +70,9 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 		if (i != ft_destlen(data->new_env))
 		{
 			prompt = ft_split(data->new_env[i], '/');
+			dprintf(1, "address; %p\n", line); // To delete
 			line = switch_display(prompt, line);
+			dprintf(1, "address; %p\n", line); // To delete
 		}
 		else
 			line = readline("\033[1;92mminishel> \033[0m");

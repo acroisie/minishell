@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/05 08:31:46 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/05 11:45:02 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 			{
 				if (option)
 				{
-					ft_insert(line, env, var, k, ft_strlen(temp)); // WIP
+					// ft_insert(line, env, var, k, ft_strlen(temp)); // WIP
 				}
 				else
 					ft_write_string_output(k, var, env, ft_strlen(temp));
