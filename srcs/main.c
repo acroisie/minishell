@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 15:06:17 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 17:06:25 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-
 /*Todo_list:
-- var.lst_cmd.args to double everytime when overflow 
-or calculate size before run this part*/
+
 /* Trim spaces in env variables*/
 /* Fix root leaks from prompt*/
 /* Fix < segfault*/
 /* Fix << fork*/
 /* Error messages for builtin*/
+/* Signals */
