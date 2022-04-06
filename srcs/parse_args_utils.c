@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/01 11:05:21 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 16:52:55 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_init_var(t_var *var)
 	var->output = 0;
 	var->i = 0;
 	var->j = 0;
+	var->tab_size = DEFAULT_TAB_SIZE;
 }
 
 void	ft_write_char_output(char *line, t_var *var)

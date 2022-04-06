@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:39:39 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/05 15:03:41 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 11:25:14 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_flag(char *arg)
 	int	i;
 
 	i = 0;
+	if (!arg)
+		return (0);
 	if (arg[i] == '-')
 	{
 		i++;

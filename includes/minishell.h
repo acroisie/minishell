@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 15:52:55 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 16:57:40 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_var
 	int			output;
 	int			i;
 	int			j;
+	int			tab_size;
 }t_var;
 
 t_lst_cmd	*ft_parse_args(char *line, char **env);
@@ -104,6 +105,7 @@ void		ft_dol_sign_process(char *line, t_var *var, char **env, int option);
 void		ft_tilde_process(t_var *var, char **env);
 void		ft_redir_process(char *line, t_var *var);
 void		ft_copy_char(char *line, t_var *var);
+char		**ft_double_array(t_var *var);
 
 /****************************EXEC*********************************/
 
