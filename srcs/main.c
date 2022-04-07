@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/07 13:52:24 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 17:14:35 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-/*Todo_list:*/
+/* Todo_list: */
 
-/* Trim spaces in env variables*/
-/* Fix leaks from prompt*/
-/* Fix < segfault*/
-/* Fix << fork*/
-/* Error messages for builtin*/
+/* Trim spaces in env variables */
+/* Fix leaks from prompt */
+/* Fix < segfault */
+/* Fix << fork */
+/* Error messages for builtin */
 /* Signals */
+/* Norm */
+/* cat | cat | ls  */

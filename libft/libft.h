@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:20:05 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/04 10:57:44 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 18:24:32 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,8 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
 int				ft_strcmp(const char *s1, const char *s2);
+void			*ft_gc_calloc(size_t elementCount, size_t elementSize);
+int				ft_gc_free(void *ptr);
+void			ft_gc_destroy(void);
 
 #endif
