@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:07:24 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/04 10:56:22 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 13:34:46 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ char	**ft_addline(char **src1, char *s2)
 	if (dest == NULL)
 		return (NULL);
 	while (src1[j])
-		dest[i++] = src1[j++];
+		dest[i++] = ft_strdup(src1[j++]);
 	j = 0;
-	dprintf(2, "%s\n", dest[i]);
 	dest[i] = ft_strdup(s2);
-	free(s2);
 	dest[i + 1] = NULL;
 	dest[ft_destlen(dest)] = NULL;
 	return (dest);

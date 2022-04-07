@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 16:01:06 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 11:12:14 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 	while (lst_cmd)
 	{
 		waitpid(lst_cmd->pid, NULL, 0);
-		ft_free_split(lst_cmd->args);
 		lst_cmd = lst_cmd->next;
 	}
 	free(lst_cmd);
@@ -63,7 +62,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 
 	while (1)
 	{
-		//signal(SIGINT, ft_ctrl_c);
+		signal(SIGINT, ft_ctrl_c);
 		i = -1;
 		while (data->new_env[++i])
 			if (ft_strncmp(data->new_env[i], "PWD", 3) == 0)

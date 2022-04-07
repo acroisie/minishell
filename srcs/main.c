@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/06 17:06:25 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 13:52:24 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,19 @@ int	main(int argc, char **argv, char **env)
 	if (!env)
 		return (0);
 	i = -1;
-	data.new_env = malloc(sizeof(char *) * ft_destlen(env) + 1);
+	data.new_env = ft_calloc(sizeof(char *), ft_destlen(env));
 	while (env[++i])
 		data.new_env[i] = ft_strdup(env[i]);
 	data.new_env[i] = NULL;
+	i = -1;
 	prompt(&lst_cmd, &data);
 	return (0);
 }
 
-/*Todo_list:
+/*Todo_list:*/
 
 /* Trim spaces in env variables*/
-/* Fix root leaks from prompt*/
+/* Fix leaks from prompt*/
 /* Fix < segfault*/
 /* Fix << fork*/
 /* Error messages for builtin*/

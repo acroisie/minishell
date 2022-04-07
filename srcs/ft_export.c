@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 15:25:36 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 13:36:04 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	**replace_exist_line(t_minishell *data, char **args, char **dest)
 		data->new_env[i] = ft_strdup(args[1]);
 	else
 		return (ft_addline(dest, args[1]));
+	ft_free_split(split);
 	return (dest);
 }
 
@@ -74,9 +75,10 @@ void	ft_export(t_minishell *data, char **args)
 	int		i;
 
 	i = -1;
-	dest = malloc(sizeof(char *) * ft_destlen(data->new_env) + 1);
+	dest = malloc(sizeof(char *) * ft_destlen(data->new_env) + 2);
 	while (data->new_env[++i])
 		dest[i] = ft_strdup(data->new_env[i]);
+	dest[i] = NULL;
 	if (!args[1])
 		return (display_export(dest));
 	else
@@ -90,6 +92,7 @@ void	ft_export(t_minishell *data, char **args)
 			dest = ft_addline(dest, args[1]);
 			copy_dest(data, dest);
 		}
+		ft_free_split(dest);
 		return ;
 	}
 }
