@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:16:53 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 15:00:37 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 15:29:05 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	do_builtin(t_minishell *data, t_lst_cmd *lst_cmd)
 	if (ft_strncmp(lst_cmd->args[0], "pwd", ft_strlen("pwd")) == 0)
 		ft_pwd(data);
 	if (ft_strncmp(lst_cmd->args[0], "export", ft_strlen("export")) == 0)
-		ft_export(data, lst_cmd->args);
+		ft_export(data, lst_cmd);
 	if (ft_strncmp(lst_cmd->args[0], "exit", ft_strlen("exit")) == 0)
 		ft_exit(lst_cmd);
 	if (ft_strncmp(lst_cmd->args[0], "echo", ft_strlen("echo")) == 0)

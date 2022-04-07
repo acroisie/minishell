@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 10:02:52 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/15 09:28:44 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 16:27:53 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

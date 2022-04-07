@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/07 17:02:58 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 15:39:52 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int			is_builtin(t_lst_cmd *lst_cmd);
 void		do_builtin(t_minishell *data, t_lst_cmd *lst_cmd);
 int			ft_unset(t_minishell *data, char **args);
 int			ft_pwd(t_minishell *data);
-void		ft_export(t_minishell *data, char **args);
+void		ft_export(t_minishell *data, t_lst_cmd *lst_cmd);
 void		ft_exit(t_lst_cmd *lst_cmd);
 void		ft_echo(char **args);
 

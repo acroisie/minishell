@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:20:17 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/07 13:33:54 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 18:26:18 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,21 @@ char	**sort_env(char **dest)
 
 void	display_export(char **dest)
 {
-	int	i;
+	int		i;
+	char	**temp;
 
 	i = -1;
-	while (dest[++i])
+	dest = sort_env((dest));
+	while (dest[++i])                       //verifier les free
 	{
+		temp = ft_split(dest[i], '=');
+		temp[1] = ft_strjoin(temp[1], "\"");
+		temp[0] = ft_strjoin(temp[0], "=\"");
+		temp[0] = ft_strjoin(temp[0], temp[1]);
+		dest[i] = ft_strdup(temp[0]);
 		dest[i] = ft_strjoin_free_s2("declare -x ", dest[i]);
 		ft_putendl_fd(dest[i], 1);
+		ft_free_split(temp);
 	}
 	i = -1;
 	ft_free_split(dest);

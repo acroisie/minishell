@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/05 14:48:20 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 17:16:56 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,13 +139,8 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 			line = dollar_here(line, data);
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
 				ft_putendl_fd(line, fds[1]);
-			dprintf(2, "list {%s} | line : {%s}\n", lst_cmd->lst_herdoc->file, line);
-			dprintf(2, "comp %i \n", ft_strcmp(line, lst_cmd->lst_herdoc->file));
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
-			{
-				dprintf(2, "caca \n");
 				the_noar(line);
-			}
 			free(line);
 		}
 	}
