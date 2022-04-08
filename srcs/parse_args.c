@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/08 10:00:36 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 14:06:28 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 	ft_init_var(var);
 	while (line[var->i])
 	{
+		if (var->temp != NULL)
+		{
+			dprintf(2, "line1: %s\n", line);
+			line = ft_strdup(var->temp);
+			dprintf(2, "line2: %s\n", line);
+			var->temp = NULL;
+		}
 		if (line[var->i] == '|')
 			ft_pipe_process(line, var);
 		else if (line[var->i] == ' ')

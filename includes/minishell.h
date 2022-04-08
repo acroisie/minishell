@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/08 09:20:41 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 13:53:00 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_var
 	int			i;
 	int			j;
 	int			tab_size;
+	char		*temp;
 }t_var;
 
 t_lst_cmd	*ft_parse_args(char *line, char **env);
