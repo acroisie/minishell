@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/07 17:14:35 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 10:34:05 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ int	main(int argc, char **argv, char **env)
 
 /* Todo_list: */
 
-/* Trim spaces in env variables */
+/* Fix ft_double_array */
 /* Fix leaks from prompt */
 /* Fix < segfault */
 /* Fix << fork */
 /* Error messages for builtin */
+/* bash error return to put in env */
 /* Signals */
 /* Norm */
 /* cat | cat | ls  */
