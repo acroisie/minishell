@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/07 18:24:26 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 18:02:42 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,59 @@ void	copy_dest(t_minishell *data, char **dest)
 	while (dest[++i])
 			data->new_env[i] = ft_strdup(dest[i]);
 		data->new_env[i] = NULL;
+	ft_free_split(dest);
 }
 
-int	check_arg(char **args)
+int	count_equal(char *args)
 {
-	int		equal;
-	int		j;
-	char	*temp;
+	int	j;
+	int	equal;
 
 	equal = 0;
-	j = 0;
-	temp = ft_strdup(args[1]);
-	while (temp[j])
+	j = -1;
+	while (args[++j])
 	{
-		if (!ft_isalpha(temp[0]) && !(temp[0] == '_'))
-			return (return_error_export("export: `", temp,
+		if (!ft_isalpha(args[0]) && !(args[0] == '_'))
+			return (return_error_export("export: `", args,
 					"': not a valid identifier", 1));
-		if (temp[j] == '=')
-		{
+		if (args[j] == '=')
 			equal++;
-		}
-		if (ft_isalnum(temp[j]) || temp[j] == '_' || temp[j] == '=')
+	}
+	return (equal);
+}
+
+int	check_arg(char *args)
+{
+	int		j;
+	char	**temp;
+
+	temp = ft_split(args, '=');
+	j = 0;
+	while (temp[0][j])
+	{
+		if (!ft_isalpha(temp[0][0]) && !(temp[0][0] == '_'))
+			return (return_error_export("export: `", temp[0],
+					"': not a valid identifier", 1));
+		if (ft_isalnum(temp[0][j]) || temp[0][j] == '_' || temp[0][j] == '='
+			|| ft_isspace(j))
 			j++;
 		else
-			return (return_error_export("export: `", temp,
+			return (return_error_export("export: `", temp[0],
 					"': not a valid identifier", 1));
 	}
-	free(temp);
-	return (equal);
+	ft_free_split(temp);
+	return (0);
 }
 
 char	**replace_exist_line(t_minishell *data, char **args, char **dest)
 {
 	char	**split;
 	int		i;
+	char	*temp;
 
 	i = -1;
-	split = ft_split(args[1], '=');
+	temp = ft_strdup(args[1]);
+	split = ft_split(temp, '=');
 	while (data->new_env[++i] != NULL)
 	{
 		if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
@@ -64,12 +80,11 @@ char	**replace_exist_line(t_minishell *data, char **args, char **dest)
 	}
 	if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
 			split[0], ft_strlen(split[0])))
-	{
-		dest[i] = ft_strdup(args[1]);
-	}
+		dest[i] = ft_strdup(temp);
 	else
-		return (ft_addline(dest, args[1]));
+		return (ft_addline(dest, temp));
 	ft_free_split(split);
+	free(temp);
 	return (dest);
 }
 
@@ -87,10 +102,11 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 		return (display_export(dest));
 	else
 	{
-		if (check_arg(lst_cmd->args) > 0)
+		if (check_arg(lst_cmd->args[1]) == 0
+			&& count_equal(lst_cmd->args[1]) > 0)
 		{
 			dest = replace_exist_line(data, lst_cmd->args, dest);
-			copy_dest(data, dest);
+			return (copy_dest(data, dest));
 		}
 		ft_free_split(dest);
 		return ;

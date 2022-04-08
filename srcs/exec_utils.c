@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/23 14:21:19 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 18:51:11 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	do_first_cmd(t_lst_cmd	*lst_cmd)
 		out = lst_cmd->fd_out;
 	dup2(out, STDOUT_FILENO);
 	close(out);
+	close(lst_cmd->pipe_fd[0]);
 }
 
 void	do_mid_cmd(t_lst_cmd	*lst_cmd)
@@ -43,6 +44,7 @@ void	do_mid_cmd(t_lst_cmd	*lst_cmd)
 	close(in);
 	dup2(out, STDOUT_FILENO);
 	close(out);
+	close(lst_cmd->pipe_fd[0]);
 }
 
 void	do_last_cmd(t_lst_cmd	*lst_cmd)

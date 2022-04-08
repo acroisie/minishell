@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:07:24 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/07 13:34:46 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 17:50:31 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	**ft_addline(char **src1, char *s2)
 	dest[i] = ft_strdup(s2);
 	dest[i + 1] = NULL;
 	dest[ft_destlen(dest)] = NULL;
+	ft_free_split(src1);
+	free(s2);
 	return (dest);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:20:17 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/07 18:26:18 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/08 17:38:19 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,21 @@ char	**sort_env(char **dest)
 void	display_export(char **dest)
 {
 	int		i;
-	char	**temp;
+	char	**split;
+	char	*temp;
 
 	i = -1;
 	dest = sort_env((dest));
-	while (dest[++i])                       //verifier les free
+	while (dest[++i])
 	{
-		temp = ft_split(dest[i], '=');
-		temp[1] = ft_strjoin(temp[1], "\"");
-		temp[0] = ft_strjoin(temp[0], "=\"");
-		temp[0] = ft_strjoin(temp[0], temp[1]);
-		dest[i] = ft_strdup(temp[0]);
-		dest[i] = ft_strjoin_free_s2("declare -x ", dest[i]);
+		split = ft_split(dest[i], '=');
+		free(dest[i]);
+		temp = ft_strjoin("=\"", split[1]);
+		temp = ft_strjoin_free_s1(temp, "\"");
+		temp = ft_strjoin_free_s2(split[0], temp);
+		dest[i] = ft_strjoin_free_s2("declare -x ", temp);
 		ft_putendl_fd(dest[i], 1);
-		ft_free_split(temp);
+		ft_free_split(split);
 	}
-	i = -1;
 	ft_free_split(dest);
 }
