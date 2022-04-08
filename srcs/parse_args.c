@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/06 16:57:20 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 18:46:01 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_double_array(t_var *var)
 
 	i = 0;
 	var->tab_size = (var->tab_size * 2) + 1;
-	temp = ft_calloc(var->tab_size, sizeof(char *));
+	temp = ft_gc_calloc(var->tab_size, sizeof(char *));
 	while (var->lst_cmd->args[i])
 	{
 		temp[i] = ft_strdup(var->lst_cmd->args[i]);
@@ -42,7 +42,7 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 {
 	t_var	*var;
 
-	var = ft_calloc(1, sizeof(t_var));
+	var = ft_gc_calloc(1, sizeof(t_var));
 	ft_init_var(var);
 	while (line[var->i])
 	{
@@ -50,8 +50,8 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 			ft_pipe_process(line, var);
 		else if (line[var->i] == ' ')
 		{
-			if (var->j >= var->tab_size - 1)
-				var->lst_cmd->args = ft_double_array(var);
+			// if (var->j >= var->tab_size - 1)
+			// 	var->lst_cmd->args = ft_double_array(var);
 			ft_space_process(line, var);
 		}
 		else if (line[var->i] == '\'' || line[var->i] == '"')

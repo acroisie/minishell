@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cells_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/05 14:48:33 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 18:28:38 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_lst_cmd	*ft_create_cell(t_lst_cmd *prev)
 	cell = malloc(sizeof(t_lst_cmd));
 	if (cell == NULL)
 		return (NULL);
-	cell->args = ft_calloc(DEFAULT_TAB_SIZE, sizeof(char *));
+	cell->args = ft_gc_calloc(DEFAULT_TAB_SIZE, sizeof(char *));
 	cell->path = NULL;
 	cell->relativ_path = NULL;
 	cell->pid = 0;

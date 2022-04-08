@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part01.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/07 11:04:27 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 18:28:41 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_pipe_process(char *line, t_var *var)
 	while (line[var->i] == ' ')
 		var->i++;
 	var->lst_cmd = var->lst_cmd->next;
-	var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
+	var->lst_cmd->args[var->j] = ft_gc_calloc(1, sizeof(char));
 	var->lst_cmd->args[var->j][0] = '\0';
 	var->output = 0;
 }
@@ -34,7 +34,7 @@ void	ft_space_process(char *line, t_var *var)
 		return ;
 	if (var->lst_cmd->args[var->j][0] != '\0')
 		var->j++;
-	var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
+	var->lst_cmd->args[var->j] = ft_gc_calloc(1, sizeof(char));
 	var->lst_cmd->args[var->j][0] = '\0';
 	var->output = 0;
 }
