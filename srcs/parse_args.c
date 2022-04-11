@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/08 14:06:28 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/11 14:36:19 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 char	**ft_double_array(t_var *var)
 {
+	dprintf(2, "////////////Here////////////////\n"); //To delete
 	int		i;
 	char	**temp;
 
@@ -46,19 +47,18 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 	ft_init_var(var);
 	while (line[var->i])
 	{
-		if (var->temp != NULL)
+		if (var->temp)
 		{
-			dprintf(2, "line1: %s\n", line);
 			line = ft_strdup(var->temp);
-			dprintf(2, "line2: %s\n", line);
 			var->temp = NULL;
 		}
 		if (line[var->i] == '|')
 			ft_pipe_process(line, var);
 		else if (line[var->i] == ' ')
 		{
-			// if (var->j >= var->tab_size - 1)
-			// 	var->lst_cmd->args = ft_double_array(var);
+			if (var->j >= var->tab_size - 1)
+				var->lst_cmd->args = ft_double_array(var);
+			dprintf(2, "Array size: %d\n", var->tab_size); // to delete
 			ft_space_process(line, var);
 		}
 		else if (line[var->i] == '\'' || line[var->i] == '"')

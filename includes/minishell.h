@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 13:41:11 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/11 14:15:27 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		print_lst(t_lst_cmd *lst);
 /***************************PARSING*******************************/
 
 # ifndef DEFAULT_TAB_SIZE
-#  define DEFAULT_TAB_SIZE 42
+#  define DEFAULT_TAB_SIZE 3
 # endif
 
 typedef struct s_var
