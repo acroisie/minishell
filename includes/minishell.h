@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/08 19:25:21 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/11 13:41:11 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void		ft_tilde_process(t_var *var, char **env);
 void		ft_redir_process(char *line, t_var *var);
 void		ft_copy_char(char *line, t_var *var);
 char		**ft_double_array(t_var *var);
+int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 
 /****************************EXEC*********************************/
 
@@ -137,5 +138,6 @@ void		return_error_builtin(char *cmd, char *arg, char *msg, int nb);
 void		return_error_exit(char *cmd, char *arg, char *msg, int nb);
 int			return_error_export(char *cmd, char *arg, char *msg, int nb);
 void		display_export(char **dest);
+void		the_noar(char *line);
 
 #endif

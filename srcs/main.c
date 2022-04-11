@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/08 10:34:05 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/11 14:26:52 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int	main(int argc, char **argv, char **env)
 
 /* Fix ft_double_array */
 /* Fix leaks from prompt */
-/* Fix < segfault */
-/* Fix << fork */
 /* Error messages for builtin */
-/* bash error return to put in env */
+/* Exit biltins */
 /* Signals */
 /* Norm */
-/* cat | cat | ls  */
