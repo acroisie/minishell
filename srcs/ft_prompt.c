@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 17:56:54 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 15:52:18 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	ft_ctrl_c(int signal)
 {
 	(void) signal;
-	printf("do some stuff"); //To delete
+	ft_putchar_fd('\n', 0);
+	rl_replace_line("", 0);
+	rl_newline(0, 0);
+	rl_redisplay();
 }
 
 char	*switch_display(char **prompt, char *line)
