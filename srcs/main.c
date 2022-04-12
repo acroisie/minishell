@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 14:26:52 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 08:56:55 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	main(int argc, char **argv, char **env)
 
 /* Todo_list: */
 
-/* Fix ft_double_array */
-/* Fix leaks from prompt */
+/* Fix leaks */
 /* Error messages for builtin */
-/* Exit biltins */
+/* Exit builtins */
 /* Signals */
 /* Norm */
