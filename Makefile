@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/12 09:24:41 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/12 10:35:22 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS := main.c \
 		cells_utils.c \
 		parse_args_process_part01.c \
 		parse_args_process_part02.c \
+		parse_args_process_part03.c \
 		ft_strlencustom.c \
 		redir.c \
 		return_error.c \
