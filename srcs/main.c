@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 09:16:25 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 09:30:06 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int argc, char **argv, char **env)
 
 /* Todo_list: */
 
-/* Fix leaks */
 /* Error messages for builtin */
 /* Exit builtins */
 /* Signals */
