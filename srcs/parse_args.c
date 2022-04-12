@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 08:56:21 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 09:16:27 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_double_array(t_var *var)
 
 	i = 0;
 	var->tab_size = (var->tab_size * 2);
-	temp = ft_calloc(var->tab_size + 1, sizeof(char *));
+	temp = ft_gc_calloc(var->tab_size + 1, sizeof(char *));
 	while (i <= var->j)
 	{
 		temp[i] = ft_strdup(var->lst_cmd->args[i]);
@@ -43,7 +43,7 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 {
 	t_var	*var;
 
-	var = ft_calloc(1, sizeof(t_var));
+	var = ft_gc_calloc(1, sizeof(t_var));
 	ft_init_var(var);
 	while (line[var->i])
 	{

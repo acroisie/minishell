@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/08 08:47:26 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 09:16:24 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_lst_cmd	*ft_create_cell(t_lst_cmd *prev)
 {
 	t_lst_cmd	*cell;
 
-	cell = ft_calloc(1, sizeof(t_lst_cmd));
+	cell = ft_gc_calloc(1, sizeof(t_lst_cmd));
 	if (cell == NULL)
 		return (NULL);
-	cell->args = ft_calloc(DEFAULT_TAB_SIZE, sizeof(char *));
+	cell->args = ft_gc_calloc(DEFAULT_TAB_SIZE, sizeof(char *));
 	cell->path = NULL;
 	cell->relativ_path = NULL;
 	cell->pid = 0;
@@ -56,7 +56,7 @@ t_lst_redir	*ft_create_tab(char *file)
 {
 	t_lst_redir	*lst;
 
-	lst = ft_calloc(1, sizeof(t_lst_redir));
+	lst = ft_gc_calloc(1, sizeof(t_lst_redir));
 	if (lst == NULL)
 		return (NULL);
 	lst->file = file;

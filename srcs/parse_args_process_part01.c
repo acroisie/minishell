@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part01.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/11 14:26:14 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 09:16:26 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_pipe_process(char *line, t_var *var)
 	while (line[var->i] == ' ')
 		var->i++;
 	var->lst_cmd = var->lst_cmd->next;
-	var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
+	var->lst_cmd->args[var->j] = ft_gc_calloc(1, sizeof(char));
 	var->lst_cmd->args[var->j][0] = '\0';
 	var->output = 0;
 }
@@ -34,7 +34,7 @@ void	ft_space_process(char *line, t_var *var)
 		return ;
 	if (var->lst_cmd->args[var->j][0] != '\0')
 		var->j++;
-	var->lst_cmd->args[var->j] = ft_calloc(1, sizeof(char));
+	var->lst_cmd->args[var->j] = ft_gc_calloc(1, sizeof(char));
 	var->lst_cmd->args[var->j][0] = '\0';
 	var->output = 0;
 }
@@ -92,7 +92,7 @@ void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
 	if (line[var->i] == '?')
 	{
 		var->i++;
-		rvalue = ft_calloc(2, sizeof (char *));
+		rvalue = ft_gc_calloc(2, sizeof (char *));
 		rvalue[0] = ft_itoa(g_rvalue);
 		ft_write_string_output(0, var, rvalue, -1);
 		return ;

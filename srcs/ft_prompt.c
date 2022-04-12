@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/08 15:08:49 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 09:21:56 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 {
 	add_history(line);
 	lst_cmd = ft_parse_args(line, data->new_env);
-	// print_lst(lst_cmd); //To delete
 	free(line);
 	data->start_cmd = lst_cmd;
 	if (lst_cmd)
@@ -52,7 +51,7 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 		waitpid(lst_cmd->pid, NULL, 0);
 		lst_cmd = lst_cmd->next;
 	}
-	free(lst_cmd);
+	ft_gc_free(lst_cmd);
 }
 
 void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
@@ -81,6 +80,5 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 			free(line);
 		if (!line)
 			the_noar2(0);
-		// ft_gc_destroy();
 	}
 }
