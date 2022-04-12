@@ -6,10 +6,9 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 09:16:24 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 10:14:46 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/minishell.h"
 
@@ -93,30 +92,22 @@ t_lst_redir	*ft_lstlast_tab(t_lst_redir *lst)
 		lst = lst->next;
 	return (lst);
 }
-
+/*
 void	print_lst(t_lst_cmd *lst)
 {
 	int	i;
-	// int	j;
 
 	i = 0;
-	// j = 0;
 	while (lst)
 	{
 		i = 0;
 		while (lst->args[i])
 		{
-			printf("%s*/*", lst->args[i]);
+			printf("%s+0+", lst->args[i]);
 			i++;
 		}
-		// while (lst->lst_out)
-		// {
-		// 	printf("%s*/*", lst->lst_out->file);
-		// 	j++;
-		// 	printf("\n");
-		// 	lst->lst_out = lst->lst_out->next;
-		// }
 		printf("\n");
 		lst = lst->next;
 	}
 }
+*/

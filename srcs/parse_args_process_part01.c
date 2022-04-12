@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 09:16:26 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 10:16:18 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_quotes_process(char *line, t_var *var, char **env)
 			ft_dol_sign_process(line, var, env, 0);
 		else if (line[var->i] == '\0')
 		{
-			printf("unclosed quotes\n");
+			ft_putendl_fd("unclosed quotes\n", 2);
 			return ;
 		}
 		else

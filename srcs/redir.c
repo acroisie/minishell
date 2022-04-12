@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 14:30:05 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 10:30:06 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/minishell.h"
 

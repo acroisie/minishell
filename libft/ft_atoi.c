@@ -60,10 +60,8 @@ unsigned int	ft_atol(char const *str)
 	while ((str[i] >= 3 && str[i] <= 13) || str[i] == ' ')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-	{
 		if (str[i++] == '-')
 			sign = sign * -1;
-	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = result * 10 + (str[i++] - 48);
@@ -74,6 +72,5 @@ unsigned int	ft_atol(char const *str)
 	}
 	if (overflow == 1)
 		return (result * sign);
-	else
-		return (overflow);
+	return (overflow);
 }

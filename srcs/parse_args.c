@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 09:16:27 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 10:29:20 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ void	ft_set_first_link(t_var *var)
 	var->lst_cmd->lst_herdoc = var->first_here;
 }
 
+void	ft_trigger_space(char *line, t_var *var)
+{
+	if (var->j >= var->tab_size - 1)
+		var->lst_cmd->args = ft_double_array(var);
+	ft_space_process(line, var);
+}
+
+char	*ft_replace_line(t_var *var)
+{
+	char	*trash;
+
+	trash = ft_strdup(var->temp);
+	var->temp = NULL;
+	return (trash);
+}
+
 t_lst_cmd	*ft_parse_args(char *line, char **env)
 {
 	t_var	*var;
@@ -48,18 +64,11 @@ t_lst_cmd	*ft_parse_args(char *line, char **env)
 	while (line[var->i])
 	{
 		if (var->temp)
-		{
-			line = ft_strdup(var->temp);
-			var->temp = NULL;
-		}
+			line = ft_replace_line(var);
 		if (line[var->i] == '|')
 			ft_pipe_process(line, var);
 		else if (line[var->i] == ' ')
-		{
-			if (var->j >= var->tab_size - 1)
-				var->lst_cmd->args = ft_double_array(var);
-			ft_space_process(line, var);
-		}
+			ft_trigger_space(line, var);
 		else if (line[var->i] == '\'' || line[var->i] == '"')
 			ft_quotes_process(line, var, env);
 		else if (line[var->i] == '$')
