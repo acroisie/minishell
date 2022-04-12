@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 10:15:36 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/11 17:56:54 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 	free(line);
 	data->start_cmd = lst_cmd;
 	if (lst_cmd)
-	{
 		exec_cmds(data, lst_cmd);
-	}
 	lst_cmd = data->start_cmd;
 	while (lst_cmd)
 	{
-		waitpid(lst_cmd->pid, NULL, 0);
+		waitpid(lst_cmd->pid, &g_rvalue, 0);
+		if (WIFEXITED(g_rvalue))
+			g_rvalue = WEXITSTATUS(g_rvalue);
 		lst_cmd = lst_cmd->next;
 	}
 	ft_gc_free(lst_cmd);

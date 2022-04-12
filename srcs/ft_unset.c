@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:28:13 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/28 17:13:14 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 11:25:07 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_unset(t_minishell *data, char **args)
 		i++;
 	}
 	if (i == ft_destlen(data->new_env))
-		exit(1);
+		exit(0);
 	if (data->new_env[i])
 		data->new_env[i] = ft_strdup("");
 	return (0);

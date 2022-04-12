@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 10:30:06 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 11:36:23 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,11 @@ void	open_redir(t_lst_cmd *lst_cmd)
 	if (lst_cmd->lst_in != NULL)
 	{
 		if (lst_cmd->lst_in->file)
-		{
-			lst_cmd->fd_in = open(ft_lstlast_tab(lst_cmd->lst_in)->file,
-					O_RDONLY);
-			if (lst_cmd->fd_in < 0)
-				return_error(lst_cmd->lst_in->file, ": Permission denied", 1);
-		}
+			return ;
+		lst_cmd->fd_in = open(ft_lstlast_tab(lst_cmd->lst_in)->file,
+				O_RDONLY);
+		if (lst_cmd->fd_in < 0)
+			return_error(lst_cmd->lst_in->file, ": Permission denied", 1);
 	}
 	if (lst_cmd->lst_out != NULL)
 	{
