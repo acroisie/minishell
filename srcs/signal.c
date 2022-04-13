@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:55:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 12:40:39 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 13:39:38 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ void	ft_ctrl_bslash(int signal)
 	if (signal == SIGQUIT)
 		ft_putstr_fd("\b\b  \b\b", 1);
 }
-

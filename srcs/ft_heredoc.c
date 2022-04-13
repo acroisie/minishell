@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 20:35:24 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 13:46:36 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 		exit (-1);
 	pid = fork();
 	signal(SIGQUIT, ft_ctrl_c_h);
-	signal(SIGINT ,sig_put_endl);
+	signal(SIGINT, sig_put_endl);
 	if (pid == 0)
 	{
 		signal(SIGINT, ft_ctrl_c_h);

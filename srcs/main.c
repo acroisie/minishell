@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 18:05:53 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 13:47:54 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	main(int argc, char **argv, char **env)
 /* Todo_list: */
 
 /* Error messages for builtin */
-/* Signals dans heredoc*/
-/* Leaks dans heredoc*/
+/* Signals dans heredoc */
+/* Leaks dans heredoc */
 /* Norm */

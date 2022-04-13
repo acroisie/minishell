@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/12 17:07:52 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/04/13 14:40:50 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a libft/libft.h
 					@mkdir -p objs
-					$(CC) $(CC_FLAGS) -c $< -o $@ 
+					$(CC) $(CC_FLAGS) -c $< -o $@ $(READLINE_INC_DIR_FLAG)
 
 libft :	
 		$(MAKE) -C libft
