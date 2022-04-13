@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 10:29:20 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 16:05:52 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_set_first_link(t_var *var)
 
 void	ft_trigger_space(char *line, t_var *var)
 {
-	if (var->j >= var->tab_size - 1)
+	if (var->j >= var->tab_size - 2)
 		var->lst_cmd->args = ft_double_array(var);
 	ft_space_process(line, var);
 }
