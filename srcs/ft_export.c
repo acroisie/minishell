@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 15:32:51 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 16:44:17 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	copy_dest(t_minishell *data, char **dest)
 	while (dest[++i])
 			data->new_env[i] = ft_strdup(dest[i]);
 		data->new_env[i] = NULL;
+	ft_free_split(dest);
 }
 
 int	count_equal(char *args)
@@ -96,12 +97,10 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 	while (data->new_env[++i])
 		dest[i] = ft_strdup(data->new_env[i]);
 	dest[i] = NULL;
-	if (!lst_cmd->args[1])
-		return (display_export(dest));
-	else
+	if (lst_cmd->args[1])
 	{
-		i = 1;
-		while (lst_cmd->args[i] != NULL)
+		i = 0;
+		while (lst_cmd->args[++i] != NULL)
 		{
 			dprintf(2, "{%s}\n", lst_cmd->args[i + 1]);
 			if (check_arg(lst_cmd->args[i]) == 0
@@ -110,10 +109,9 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 			else if (check_arg(lst_cmd->args[i]) == 0
 				&& count_equal(lst_cmd->args[i]) == 0)
 				dest = replace_exist_line(data, lst_cmd->args[i], dest);
-			i++;
 		}
-		copy_dest(data, dest);
-		ft_free_split(dest);
-		return ;
+		return (copy_dest(data, dest));
 	}
+	else
+		return (display_export(dest));
 }

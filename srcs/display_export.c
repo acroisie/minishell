@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:20:17 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/08 17:38:19 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 16:38:19 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ void	display_export(char **dest)
 	while (dest[++i])
 	{
 		split = ft_split(dest[i], '=');
-		free(dest[i]);
-		temp = ft_strjoin("=\"", split[1]);
-		temp = ft_strjoin_free_s1(temp, "\"");
-		temp = ft_strjoin_free_s2(split[0], temp);
-		dest[i] = ft_strjoin_free_s2("declare -x ", temp);
+		if (ft_strchr(dest[i], '='))
+		{
+			free(dest[i]);
+			temp = ft_strjoin("=\"", split[1]);
+			temp = ft_strjoin_free_s1(temp, "\"");
+			temp = ft_strjoin_free_s2(split[0], temp);
+			dest[i] = ft_strjoin_free_s2("declare -x ", temp);
+		}
+		else
+			dest[i] = ft_strjoin_free_s2("declare -x ", dest[i]);
 		ft_putendl_fd(dest[i], 1);
 		ft_free_split(split);
 	}
