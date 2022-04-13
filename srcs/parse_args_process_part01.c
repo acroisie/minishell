@@ -6,21 +6,21 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 10:52:06 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 10:06:48 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_insert(char *line, char **env, t_var *var, int k, int i)
+void	ft_insert(char *line, char **env, t_var *var, t_ki ki)
 {
 	char	*end;
 
 	end = ft_strdup(&line[var->i]);
-	var->i = (var->i - i - 1);
+	var->i = (var->i - ki.i - 1);
 	var->temp = ft_strdup(line);
 	var->temp[var->i] = '\0';
-	var->temp = ft_strjoin(var->temp, &env[k][i + 1]);
+	var->temp = ft_strjoin(var->temp, &env[ki.k][ki.i + 1]);
 	var->temp = ft_strjoin(var->temp, end);
 }
 
@@ -34,44 +34,54 @@ void	ft_trigger_interrogation(t_var *var)
 	ft_write_string_output(0, var, rvalue, -1);
 }
 
-void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
+void	ft_luther_le_bg(char *line, t_var *var)
+{
+	while (ft_isalnum(line[var->i]) || line[var->i] == '_')
+		var->i++;
+}
+
+void	ft_put_sign(char *line, t_var *var, char **env, int option)
 {
 	char	*temp;
 	int		mem;
-	int		k;
+	t_ki	ki;
 
-	k = 0;
+	ki.k = 0;
+	mem = var->i;
+	ft_luther_le_bg(line, var);
+	temp = ft_strndup(&line[mem], (var->i - mem));
+	ki.i = ft_strlen(temp);
+	while (env[ki.k])
+	{
+		if (!ft_strncmp(env[ki.k], temp, ft_strlen(temp)))
+		{
+			if (env[ki.k][ft_strlen(temp)] == '=')
+			{
+				if (option)
+					ft_insert(line, env, var, ki);
+				else
+					ft_write_string_output(ki.k, var, env, ft_strlen(temp));
+				return ;
+			}
+		}
+		ki.k++;
+	}
+	free(temp);
+}
+
+void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)
+{
 	if (line[var->i + 1] == ' ' || line[var->i + 1] == '\0'
 		|| line[var->i + 1] == '|')
 	{
 		ft_write_char_output(line, var);
-		var->i++;
 		return ;
 	}
 	var->i++;
-	mem = var->i;
 	if (line[var->i] == '?')
 	{
 		ft_trigger_interrogation(var);
 		return ;
 	}
-	while (ft_isalnum(line[var->i]) || line[var->i] == '_')
-		var->i++;
-	temp = ft_strndup(&line[mem], (var->i - mem));
-	while (env[k])
-	{
-		if (!ft_strncmp(env[k], temp, ft_strlen(temp)))
-		{
-			if (env[k][ft_strlen(temp)] == '=')
-			{
-				if (option)
-					ft_insert(line, env, var, k, ft_strlen(temp));
-				else
-					ft_write_string_output(k, var, env, ft_strlen(temp));
-				return ;
-			}
-		}
-		k++;
-	}
-	free(temp);
+	ft_put_sign(line, var, env, option);
 }

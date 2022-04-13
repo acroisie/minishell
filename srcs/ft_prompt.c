@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 15:52:18 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 08:36:42 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	ft_ctrl_c(int signal)
 {
 	(void) signal;
+	g_rvalue = 1;
 	ft_putchar_fd('\n', 0);
 	rl_replace_line("", 0);
-	rl_newline(0, 0);
+	rl_on_new_line();
 	rl_redisplay();
 }
 
