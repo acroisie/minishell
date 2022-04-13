@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:03:02 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/08 18:03:22 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 17:39:09 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(char *src)
 
 	i = 0;
 	len = ft_strlen(src);
-	copy = malloc((len + 1) * sizeof(char));
+	copy = ft_gc_calloc((len + 1), sizeof(char));
 	if (copy == NULL)
 		return (NULL);
 	while (src[i])

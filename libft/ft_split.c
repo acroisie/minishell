@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 11:27:49 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/08 17:38:07 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 17:39:56 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	**fill_tab(const char *str, char **tab, char sep)
 		end = start;
 		while (!detect_sep(str[end], sep) && str[end] != '\0')
 			end++;
-		tab[i] = malloc((end - start + 1) * sizeof(char));
+		tab[i] = ft_gc_calloc((end - start + 1), sizeof(char));
 		if (tab[i] == NULL)
 			return (0);
 		while (start < end)
@@ -75,7 +75,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	word_nb = word_count(s, c);
-	tab = malloc((word_nb + 1) * sizeof(char *));
+	tab = ft_gc_calloc((word_nb + 1), sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
 	tab = fill_tab(s, tab, c);

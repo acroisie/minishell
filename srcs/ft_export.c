@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 16:44:17 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 17:49:48 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 	int		i;
 
 	i = -1;
-	dest = ft_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
+	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
 	while (data->new_env[++i])
 		dest[i] = ft_strdup(data->new_env[i]);
 	dest[i] = NULL;
@@ -102,7 +102,6 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 		i = 0;
 		while (lst_cmd->args[++i] != NULL)
 		{
-			dprintf(2, "{%s}\n", lst_cmd->args[i + 1]);
 			if (check_arg(lst_cmd->args[i]) == 0
 				&& count_equal(lst_cmd->args[i]) > 0)
 				dest = replace_exist_line(data, lst_cmd->args[i], dest);

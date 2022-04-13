@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 08:07:41 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/15 09:27:39 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 17:39:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return (NULL);
 	i = 0;
 	len = ft_strlen(s);
-	new_str = malloc((len + 1) * sizeof(char));
+	new_str = ft_gc_calloc((len + 1), sizeof(char));
 	if (new_str == NULL)
 		return (NULL);
 	while (i < len)
