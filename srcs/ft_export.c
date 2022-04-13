@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 14:48:37 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 15:32:51 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,13 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 			dprintf(2, "{%s}\n", lst_cmd->args[i + 1]);
 			if (check_arg(lst_cmd->args[i]) == 0
 				&& count_equal(lst_cmd->args[i]) > 0)
-			{
 				dest = replace_exist_line(data, lst_cmd->args[i], dest);
-				copy_dest(data, dest);
-			}
+			else if (check_arg(lst_cmd->args[i]) == 0
+				&& count_equal(lst_cmd->args[i]) == 0)
+				dest = replace_exist_line(data, lst_cmd->args[i], dest);
 			i++;
 		}
+		copy_dest(data, dest);
 		ft_free_split(dest);
 		return ;
 	}

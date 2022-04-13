@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:00:59 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 14:30:43 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 15:06:47 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_cd2(t_minishell *data, int i, int j, char **cmd_args)
 	else if (!cmd_args[1])
 		chdir(home[1]);
 	getcwd(data->cd_pwd, sizeof(data->cd_pwd));
-	data->new_env[i] = ft_strjoin("PWD=", data->cd_pwd);
+	data->new_env[i] = ft_strjoin_free_s2("PWD=", data->cd_pwd);
 }
 
 void	ft_cd(t_minishell *data, char **cmd_args, t_lst_cmd *lst_cmd)
@@ -55,7 +55,7 @@ void	ft_cd(t_minishell *data, char **cmd_args, t_lst_cmd *lst_cmd)
 	if (j == ft_destlen(data->new_env) && !cmd_args[1])
 		return_error_builtin("cd: ", "HOME", " not set", 1);
 	getcwd(data->cd_pwd, sizeof(data->cd_pwd));
-	data->new_env[k] = ft_strjoin("OLDPWD=", data->cd_pwd);
+	data->new_env[k] = ft_strjoin_free_s2("OLDPWD=", data->cd_pwd);
 	ft_cd2(data, i, j, cmd_args);
 	if (lst_cmd->next || lst_cmd->prev)
 		exit(0);
