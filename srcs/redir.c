@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 13:13:08 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 15:00:34 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	open_redir2(t_lst_cmd *lst_cmd)
 {
-	while (lst_cmd->lst_out->next)
+	while (lst_cmd->lst_out)
 	{
 		if (lst_cmd->lst_out->append == 0)
 		{
+			dprintf(2, "debug");
 			if (open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
 					| O_CREAT, 0644) < 0)
 				return_error(lst_cmd->lst_out->file, ": Permission denied", 1);

@@ -17,6 +17,7 @@ void	ft_ctrl_c(int signal)
 	(void) signal;
 	if (signal == SIGINT)
 	{
+		ft_putstr_fd("\b\b  \b\b", 1);
 		printf("\n");
 		g_rvalue = 1;
 		rl_on_new_line();
@@ -29,9 +30,7 @@ void	ft_ctrl_c_h(int signal)
 {
 	(void) signal;
 	if (signal == SIGINT)
-	{
 		exit(130);
-	}
 }
 
 void	sig_put_endl(int signal)
