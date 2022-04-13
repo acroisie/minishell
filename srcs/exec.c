@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 18:02:01 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 13:19:06 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 		else if (lst_cmd->args[0][0] == '.' && lst_cmd->args[0][1] == '/')
 			execve(lst_cmd->args[0], lst_cmd->args, data->new_env);
 		else if (find_path(data, lst_cmd->args[0]) == 0
-			&& (lst_cmd->args[0][0] == '/' || ((lst_cmd->args[0][0]
-				== '/' && lst_cmd->args[0][1] == '/'))))
+			&& (lst_cmd->args[0][0] != '/' || (lst_cmd->args[0][0]
+			== '/' && lst_cmd->args[0][1] == '/')))
 		{
 			return_error(lst_cmd->args[0], ": command not found", 127);
 			exit (127);
@@ -55,18 +55,15 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 void	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	lst_cmd = data->start_cmd;
+	open_redir(lst_cmd);
 	while (lst_cmd)
 	{
-		open_redir(lst_cmd);
 		if (lst_cmd->next != NULL)
 			pipe(lst_cmd->pipe_fd);
 		while (lst_cmd->lst_herdoc != NULL)
 		{
 			if (!lst_cmd->lst_herdoc->file)
-			{
-				ft_putendl_fd("error syntax unexpected symbol", 2);
-				break ;
-			}
+				return (return_error("", "error syntax unexpected symbol", 2));
 			ft_heredoc(lst_cmd, data);
 			lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
 		}

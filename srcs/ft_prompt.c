@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 08:36:42 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 12:49:35 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	ft_ctrl_c(int signal)
-{
-	(void) signal;
-	g_rvalue = 1;
-	ft_putchar_fd('\n', 0);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
 
 char	*switch_display(char **prompt, char *line)
 {
@@ -67,6 +57,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 	while (1)
 	{
 		signal(SIGINT, ft_ctrl_c);
+		signal(SIGQUIT, ft_ctrl_bslash);
 		i = -1;
 		while (data->new_env[++i])
 			if (ft_strncmp(data->new_env[i], "PWD", 3) == 0)

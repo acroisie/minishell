@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 11:35:31 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 13:25:18 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,29 @@ char	**replace_exist_line(t_minishell *data, char **args, char **dest)
 	char	**split;
 	int		i;
 	char	*temp;
+	int		j;
 
-	i = -1;
-	temp = ft_strdup(args[1]);
-	split = ft_split(temp, '=');
-	while (data->new_env[++i] != NULL)
+	j = 1;
+	while (args[j])
 	{
-		if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
-			break ;
+		i = -1;
+		dprintf(2, "{%s}\n", args[j]);
+		temp = ft_strdup(args[j]);
+		split = ft_split(temp, '=');
+		while (data->new_env[++i] != NULL)
+		{
+			if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
+				break ;
+		}
+		if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
+				split[0], ft_strlen(split[0])))
+			dest[i] = ft_strdup(temp);
+		else
+			dest = ft_addline(dest, temp);
+		ft_free_split(split);
+		dprintf(2, "{%s}\n", args[j]);
+		j++;
 	}
-	if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
-			split[0], ft_strlen(split[0])))
-		dest[i] = ft_strdup(temp);
-	else
-		return (ft_addline(dest, temp));
-	ft_free_split(split);
-	free(temp);
 	return (dest);
 }
 
@@ -102,11 +109,16 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 		return (display_export(dest));
 	else
 	{
-		if (check_arg(lst_cmd->args[1]) == 0
-			&& count_equal(lst_cmd->args[1]) > 0)
+		i = 0;
+		while (lst_cmd->args[i])
 		{
-			dest = replace_exist_line(data, lst_cmd->args, dest);
-			return (copy_dest(data, dest));
+			if (check_arg(lst_cmd->args[i]) == 0
+				&& count_equal(lst_cmd->args[i]) > 0)
+			{
+				dest = replace_exist_line(data, lst_cmd->args, dest);
+				return (copy_dest(data, dest));
+			}
+			i++;
 		}
 		ft_free_split(dest);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 13:47:20 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 20:35:24 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ char	*dollar_here(char *line, t_minishell *data)
 
 	i = -1;
 	j = 0;
-	var_env = ft_strdup("");
 	while (line[++i])
 	{
 		if (line[i] == '$')
 		{
 			if (ft_isalnum(line[i++]) == 0)
 				return (line);
+			var_env = ft_strdup("");
 			while (ft_isalnum(line[i]) || line[i] == '_')
 				var_env[j++] = line[i++];
 			j = find_in_env(data, var_env, j);
@@ -84,10 +84,14 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 	int		fds[2];
 
 	if (pipe(fds) == -1)
-		return (-1);
+		exit (-1);
 	pid = fork();
+	signal(SIGQUIT, ft_ctrl_c_h);
+	signal(SIGINT ,sig_put_endl);
 	if (pid == 0)
 	{
+		signal(SIGINT, ft_ctrl_c_h);
+		signal(SIGQUIT, ft_ctrl_bslash);
 		close(fds[0]);
 		while (1)
 		{

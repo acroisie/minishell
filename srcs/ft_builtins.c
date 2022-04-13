@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:16:53 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 11:25:50 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 13:45:40 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	is_builtin(t_lst_cmd *lst_cmd)
 	}
 	if ((ft_strncmp(lst_cmd->args[0], "env",
 				ft_strlen(lst_cmd->args[0]) + 1) == 0)
-		|| (ft_strncmp(lst_cmd->args[0], "unset",
-				ft_strlen(lst_cmd->args[0]) + 1) == 0)
 		|| (ft_strncmp(lst_cmd->args[0], "pwd",
 				ft_strlen(lst_cmd->args[0]) + 1) == 0)
 		|| (ft_strncmp(lst_cmd->args[0], "echo",
@@ -34,6 +32,8 @@ int	is_builtin(t_lst_cmd *lst_cmd)
 		|| (ft_strncmp(lst_cmd->args[0], "exit",
 				ft_strlen(lst_cmd->args[0]) + 1) == 0)
 		|| (ft_strncmp(lst_cmd->args[0], "export",
+				ft_strlen(lst_cmd->args[0]) + 1) == 0)
+		|| (ft_strncmp(lst_cmd->args[0], "unset",
 				ft_strlen(lst_cmd->args[0]) + 1) == 0))
 		return (2);
 	else

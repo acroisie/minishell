@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
 /*   Updated: 2022/04/13 10:09:41 by acroisie         ###   ########lyon.fr   */
@@ -145,5 +145,10 @@ void		return_error_exit(char *cmd, char *arg, char *msg, int nb);
 int			return_error_export(char *cmd, char *arg, char *msg, int nb);
 void		display_export(char **dest);
 void		the_noar(char *line);
+void		ft_ctrl_c(int signal);
+void		ft_ctrl_c_h(int signal);
+void		ft_ctrl_bslash(int signal);
+void		ft_ctrl_bslash_h(int signal);
+void		sig_put_endl(int signal);
 
 #endif

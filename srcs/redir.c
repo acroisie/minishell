@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/12 11:36:23 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/12 13:13:08 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,17 @@ void	open_redir(t_lst_cmd *lst_cmd)
 	if (lst_cmd->lst_in != NULL)
 	{
 		if (lst_cmd->lst_in->file)
-			return ;
-		lst_cmd->fd_in = open(ft_lstlast_tab(lst_cmd->lst_in)->file,
-				O_RDONLY);
-		if (lst_cmd->fd_in < 0)
-			return_error(lst_cmd->lst_in->file, ": Permission denied", 1);
+		{
+			lst_cmd->fd_in = open(ft_lstlast_tab(lst_cmd->lst_in)->file,
+					O_RDONLY);
+			if (lst_cmd->fd_in < 0)
+				return_error(lst_cmd->lst_in->file,
+					": Permission denied or No such file or directory", 1);
+		}
 	}
 	if (lst_cmd->lst_out != NULL)
 	{
-		if (lst_cmd->lst_out->file != NULL)
+		if (lst_cmd->lst_out->file)
 		{
 			open_redir2(lst_cmd);
 		}
