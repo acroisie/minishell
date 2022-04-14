@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 09:48:31 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 14:32:18 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*dollar_here(char *line, t_minishell *data)
 
 	i = -1;
 	j = 0;
+	temp = NULL;
 	while (line[++i])
 	{
 		if (line[i] == '$')
@@ -74,6 +75,7 @@ char	*dollar_here(char *line, t_minishell *data)
 		else
 			temp = ft_add_char(temp, line[i]);
 	}
+	free(line);
 	return (temp);
 }
 
@@ -96,6 +98,7 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 		while (1)
 		{
 			line = readline("> ");
+			(void)data;
 			line = dollar_here(line, data);
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
 				ft_putendl_fd(line, fds[1]);

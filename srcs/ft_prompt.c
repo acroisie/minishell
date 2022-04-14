@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 09:47:34 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 14:34:32 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 			line = switch_display(prompt, line);
 		}
 		else
-			line = readline("minishel> ");
+			line = readline("minishell> ");
 		if (ft_strlen(line) != 0)
 			execute_line(lst_cmd, data, line);
 		else if (line)
