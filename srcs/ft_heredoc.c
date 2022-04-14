@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 08:50:24 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 09:48:31 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 				ft_putendl_fd(line, fds[1]);
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
 				the_noar(line);
-			ft_gc_free(line);
 		}
 	}
 	else

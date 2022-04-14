@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:39:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 08:38:19 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 09:46:46 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	the_noar(char	*line)
 {
-	ft_gc_free(line);
+	free(line);
 	exit(0);
 }
