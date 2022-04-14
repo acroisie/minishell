@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:20:17 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 16:38:19 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:36:29 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	display_export(char **dest)
 		split = ft_split(dest[i], '=');
 		if (ft_strchr(dest[i], '='))
 		{
-			free(dest[i]);
+			ft_gc_free(dest[i]);
 			temp = ft_strjoin("=\"", split[1]);
 			temp = ft_strjoin_free_s1(temp, "\"");
 			temp = ft_strjoin_free_s2(split[0], temp);

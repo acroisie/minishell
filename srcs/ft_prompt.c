@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 12:49:35 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 09:04:52 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char	*switch_display(char **prompt, char *line)
 	display = ft_strjoin_free_s2("\033[1;92m", prompt[i - 1]);
 	i = -1;
 	while (prompt[++i + 1])
-		free(prompt[i]);
-	free(prompt);
+		ft_gc_free(prompt[i]);
+	ft_gc_free(prompt);
 	display = ft_strjoin_free_s1(display, "> \033[0m");
 	line = readline(display);
-	free(display);
+	ft_gc_free(display);
 	return (line);
 }
 
@@ -33,7 +33,7 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 {
 	add_history(line);
 	lst_cmd = ft_parse_args(line, data->new_env);
-	free(line);
+	ft_gc_free(line);
 	data->start_cmd = lst_cmd;
 	if (lst_cmd)
 		exec_cmds(data, lst_cmd);
@@ -45,7 +45,7 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 			g_rvalue = WEXITSTATUS(g_rvalue);
 		lst_cmd = lst_cmd->next;
 	}
-	ft_gc_free(lst_cmd);
+	ft_gc_destroy();
 }
 
 void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
@@ -71,8 +71,8 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 			line = readline("\033[1;92mminishel> \033[0m");
 		if (ft_strlen(line) != 0)
 			execute_line(lst_cmd, data, line);
-		else if (line)
-			free(line);
+		if (line)
+			ft_gc_free(line);
 		if (!line)
 			the_noar2(0);
 	}

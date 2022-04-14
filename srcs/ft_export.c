@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 17:49:48 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:50:14 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	copy_dest(t_minishell *data, char **dest)
 
 	i = -1;
 	while (dest[++i])
-			data->new_env[i] = ft_strdup(dest[i]);
+			data->new_env[i] = ft_gc_strdup(dest[i]);
 		data->new_env[i] = NULL;
 	ft_free_split(dest);
 }
@@ -71,7 +71,7 @@ char	**replace_exist_line(t_minishell *data, char *args, char **dest)
 	char	*temp;
 
 	i = -1;
-	temp = ft_strdup(args);
+	temp = ft_gc_strdup(args);
 	split = ft_split(temp, '=');
 	while (data->new_env[++i] != NULL)
 	{
@@ -80,7 +80,7 @@ char	**replace_exist_line(t_minishell *data, char *args, char **dest)
 	}
 	if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
 			split[0], ft_strlen(split[0])))
-		dest[i] = ft_strdup(temp);
+		dest[i] = ft_gc_strdup(temp);
 	else
 		dest = ft_addline(dest, temp);
 	ft_free_split(split);
@@ -95,7 +95,7 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 	i = -1;
 	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
 	while (data->new_env[++i])
-		dest[i] = ft_strdup(data->new_env[i]);
+		dest[i] = ft_gc_strdup(data->new_env[i]);
 	dest[i] = NULL;
 	if (lst_cmd->args[1])
 	{

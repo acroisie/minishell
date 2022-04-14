@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:28:18 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/08 12:51:58 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:37:12 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	free_int_path(t_minishell *data)
 
 	i = -1;
 	while (data->path[++i])
-		free(data->path[i]);
-	free(data->path);
-	free(data->path_temp);
+		ft_gc_free(data->path[i]);
+	ft_gc_free(data->path);
+	ft_gc_free(data->path_temp);
 }
 
 void	free_temp(char **temp)
 {
-	free(temp[1]);
-	free(temp[0]);
-	free(temp);
+	ft_gc_free(temp[1]);
+	ft_gc_free(temp[0]);
+	ft_gc_free(temp);
 }
 
 char	*find_path(t_minishell *data, char *cmd)
@@ -44,7 +44,7 @@ char	*find_path(t_minishell *data, char *cmd)
 	i = -1;
 	while (data->path[++i])
 	{
-		free(data->path_temp);
+		ft_gc_free(data->path_temp);
 		data->path_temp = ft_strjoin(data->path[i], "/");
 		data->path_temp = ft_strjoin_free_s1(data->path_temp, cmd);
 		if (access(data->path_temp, X_OK) == 0)

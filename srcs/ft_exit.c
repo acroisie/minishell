@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:57:55 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 17:51:52 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 09:05:11 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	the_noar2(unsigned int nb)
 {
 	ft_putendl_fd("exit", 2);
 	g_rvalue = nb;
+	ft_gc_destroy();
 	exit(nb % 256);
 }
 

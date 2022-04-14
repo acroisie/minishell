@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/13 16:05:52 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:50:35 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char	**ft_double_array(t_var *var)
 	temp = ft_gc_calloc(var->tab_size + 1, sizeof(char *));
 	while (i <= var->j)
 	{
-		temp[i] = ft_strdup(var->lst_cmd->args[i]);
-		free(var->lst_cmd->args[i]);
+		temp[i] = ft_gc_strdup(var->lst_cmd->args[i]);
+		ft_gc_free(var->lst_cmd->args[i]);
 		i++;
 	}
 	temp[i] = "\0";
@@ -50,7 +50,7 @@ char	*ft_replace_line(t_var *var)
 {
 	char	*trash;
 
-	trash = ft_strdup(var->temp);
+	trash = ft_gc_strdup(var->temp);
 	var->temp = NULL;
 	return (trash);
 }

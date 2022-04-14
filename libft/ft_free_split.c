@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 08:27:59 by acroisie          #+#    #+#             */
-/*   Updated: 2022/01/14 08:28:30 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:34:43 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_free_split(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		free(tab[i]);
+		ft_gc_free(tab[i]);
 		i++;
 	}
-	free(tab);
+	ft_gc_free(tab);
 }

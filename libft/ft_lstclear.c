@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 13:31:56 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/15 14:30:09 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:35:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 		ft_lstdelone(*lst, del);
 		*lst = temp;
 	}
-	free(*lst);
+	ft_gc_free(*lst);
 	*lst = NULL;
 }

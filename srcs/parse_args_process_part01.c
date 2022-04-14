@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:26:56 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/13 14:12:35 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:50:33 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_insert(char *line, char **env, t_var *var, t_ki ki)
 {
 	char	*end;
 
-	end = ft_strdup(&line[var->i]);
+	end = ft_gc_strdup(&line[var->i]);
 	var->i = (var->i - ki.i - 1);
-	var->temp = ft_strdup(line);
+	var->temp = ft_gc_strdup(line);
 	var->temp[var->i] = '\0';
 	var->temp = ft_strjoin(var->temp, &env[ki.k][ki.i + 1]);
 	var->temp = ft_strjoin(var->temp, end);
@@ -66,7 +66,7 @@ void	ft_put_sign(char *line, t_var *var, char **env, int option)
 		}
 		ki.k++;
 	}
-	free(temp);
+	ft_gc_free(temp);
 }
 
 void	ft_dol_sign_process(char *line, t_var *var, char **env, int option)

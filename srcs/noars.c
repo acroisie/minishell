@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   noars.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:39:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/11 13:43:10 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:38:19 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	the_noar(char	*line)
 {
-	free(line);
+	ft_gc_free(line);
 	exit(0);
 }
