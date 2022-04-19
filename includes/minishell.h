@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 10:09:41 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 16:45:46 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,7 @@ void		ft_ctrl_c_h(int signal);
 void		ft_ctrl_bslash(int signal);
 void		ft_ctrl_bslash_h(int signal);
 void		sig_put_endl(int signal);
+int			find_in_env(t_minishell *data, char *var_env);
+void		copy_dest(t_minishell *data, char **dest);
 
 #endif

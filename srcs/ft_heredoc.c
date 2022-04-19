@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 14:32:18 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 16:46:47 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ char	*join_temp(t_minishell *data, char *var_env, char *temp, int j)
 	return (temp);
 }
 
-int	find_in_env(t_minishell *data, char *var_env, int j)
+int	find_in_env(t_minishell *data, char *var_env)
 {
+	int	j;
+
 	j = -1;
 	while (data->new_env[++j])
 		if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env)))
@@ -67,7 +69,7 @@ char	*dollar_here(char *line, t_minishell *data)
 			var_env = ft_gc_strdup("");
 			while (ft_isalnum(line[i]) || line[i] == '_')
 				var_env[j++] = line[i++];
-			j = find_in_env(data, var_env, j);
+			j = find_in_env(data, var_env);
 			if (j <= ft_destlen(data->new_env))
 				temp = join_temp(data, var_env, temp, j);
 			i--;

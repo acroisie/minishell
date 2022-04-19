@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:28:13 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 08:50:26 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 17:00:58 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,47 @@ int	check_arg_unset(char *args)
 	return (0);
 }
 
-int	ft_unset(t_minishell *data, char **args)
+char	**feed_temp(t_minishell *data, char **temp)
 {
-	int		i;
+	int	i;
+	int	j;
 
-	i = 1;
-	while (args[i])
-	{
-		if (check_arg_unset(args[i]))
-			return (0);
-		i++;
-	}
+	j = 0;
 	i = 0;
 	while (data->new_env[i])
 	{
-		if (ft_strncmp(args[1], data->new_env[i], ft_strlen(args[1])) == 0)
-			break ;
-		i++;
+		if (ft_strlen(data->new_env[i]) == 0)
+			i++;
+		else
+			temp[j++] = ft_gc_strdup(data->new_env[i++]);
 	}
-	if (i == ft_destlen(data->new_env))
-		return (1);
-	if (data->new_env[i])
-		data->new_env[i] = ft_gc_strdup("");
+	return (temp);
+}
+
+int	ft_unset(t_minishell *data, char **args)
+{
+	int		i;
+	char	**temp;
+	int		j;
+
+	i = 0;
+	temp = ft_gc_calloc(sizeof(char *), (size_t)ft_destlen(data->new_env));
+	while (args[++i])
+	{
+		if (!check_arg_unset(args[i]))
+		{
+			j = find_in_env(data, args[i]);
+			if (j <= ft_destlen(data->new_env) && j >= 0)
+			{
+				if (data->new_env[j])
+				{
+					data->new_env[j] = ft_gc_strdup("");
+					data->new_env = feed_temp(data, temp);
+				}
+			}
+			else
+				return (-1);
+		}
+	}
 	return (0);
 }

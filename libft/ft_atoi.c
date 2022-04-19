@@ -46,6 +46,15 @@ int	ft_atoi(char const *str)
 	return (result * sign);
 }
 
+static int	return_error_atol(char *cmd, char *arg, int nb)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(arg, 2);
+	ft_putendl_fd(": numeric argument required", 2);
+	return (nb);
+}
+
 unsigned int	ft_atol(char const *str)
 {
 	int				i;
@@ -72,5 +81,5 @@ unsigned int	ft_atol(char const *str)
 	}
 	if (overflow == 1)
 		return (result * sign);
-	return (overflow);
+	return (return_error_atol("exit: ", (char *)str, 2));
 }
