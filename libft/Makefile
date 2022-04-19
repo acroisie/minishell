@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 15:10:13 by acroisie          #+#    #+#              #
-#    Updated: 2022/04/07 18:19:53 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/14 10:10:13 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ all : $(NAME)
 $(NAME) : $(addprefix objs/, $(OBJS))
 	ar rcs $(NAME) $(addprefix objs/, $(OBJS))
 
-objs/%.o : %.c libft.h
+objs/%.o : %.c libft.h Makefile
 	mkdir -p objs
 	$(CC) -c $< -o $@
 	

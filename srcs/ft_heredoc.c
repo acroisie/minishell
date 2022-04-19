@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 13:46:36 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 14:32:18 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ char	*join_temp(t_minishell *data, char *var_env, char *temp, int j)
 	int		k;
 	char	*var;
 
-	temp = ft_strdup("");
+	temp = ft_gc_strdup("");
 	k = 0;
 	while (data->new_env[j][k] != '=')
 		k++;
 	var = ft_substr(data->new_env[j], k++,
 			ft_strlen(data->new_env[j]));
 	temp = ft_strjoin_free_s1(temp, var);
-	free(var);
-	free(var_env);
+	ft_gc_free(var);
+	ft_gc_free(var_env);
 	return (temp);
 }
 
@@ -57,13 +57,14 @@ char	*dollar_here(char *line, t_minishell *data)
 
 	i = -1;
 	j = 0;
+	temp = NULL;
 	while (line[++i])
 	{
 		if (line[i] == '$')
 		{
 			if (ft_isalnum(line[i++]) == 0)
 				return (line);
-			var_env = ft_strdup("");
+			var_env = ft_gc_strdup("");
 			while (ft_isalnum(line[i]) || line[i] == '_')
 				var_env[j++] = line[i++];
 			j = find_in_env(data, var_env, j);
@@ -74,6 +75,7 @@ char	*dollar_here(char *line, t_minishell *data)
 		else
 			temp = ft_add_char(temp, line[i]);
 	}
+	free(line);
 	return (temp);
 }
 
@@ -96,12 +98,12 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 		while (1)
 		{
 			line = readline("> ");
+			(void)data;
 			line = dollar_here(line, data);
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
 				ft_putendl_fd(line, fds[1]);
 			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
 				the_noar(line);
-			free(line);
 		}
 	}
 	else

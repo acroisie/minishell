@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:57:55 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/31 19:17:39 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 09:05:11 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	the_noar2(unsigned int nb)
 {
 	ft_putendl_fd("exit", 2);
 	g_rvalue = nb;
+	ft_gc_destroy();
 	exit(nb % 256);
 }
 

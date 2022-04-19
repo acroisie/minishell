@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 12:49:35 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 14:34:32 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char	*switch_display(char **prompt, char *line)
 	int		i;
 
 	i = ft_destlen(prompt);
-	display = ft_strjoin_free_s2("\033[1;92m", prompt[i - 1]);
+	display = ft_strjoin_free_s2("", prompt[i - 1]);
 	i = -1;
 	while (prompt[++i + 1])
-		free(prompt[i]);
-	free(prompt);
-	display = ft_strjoin_free_s1(display, "> \033[0m");
+		ft_gc_free(prompt[i]);
+	ft_gc_free(prompt);
+	display = ft_strjoin_free_s1(display, "> ");
 	line = readline(display);
-	free(display);
+	ft_gc_free(display);
 	return (line);
 }
 
@@ -68,7 +68,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 			line = switch_display(prompt, line);
 		}
 		else
-			line = readline("\033[1;92mminishel> \033[0m");
+			line = readline("minishell> ");
 		if (ft_strlen(line) != 0)
 			execute_line(lst_cmd, data, line);
 		else if (line)

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/13 13:47:54 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 09:29:07 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(int argc, char **argv, char **env)
 	if (!env)
 		return (0);
 	i = -1;
-	data.new_env = ft_calloc(sizeof(char *), ft_destlen(env));
+	data.new_env = ft_gc_calloc(sizeof(char *), ft_destlen(env));
 	while (env[++i])
-		data.new_env[i] = ft_strdup(env[i]);
+		data.new_env[i] = ft_gc_strdup(env[i]);
 	data.new_env[i] = NULL;
 	i = -1;
 	prompt(&lst_cmd, &data);

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 08:20:05 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/07 18:24:32 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:49:40 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void			ft_putstr_fd(char *s, int fd);
 char			**ft_split(char const *s, char c);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(char *src);
+char			*ft_gc_strdup(char *src);
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 char			**ft_addline(char **src1, char *s2);
 char			*ft_strjoin(char const *s1, char const *s2);

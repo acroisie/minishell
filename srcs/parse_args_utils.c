@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 10:29:49 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 08:50:34 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_add_char(char *s1, char c)
 
 	i = 0;
 	if (!s1)
-		return (ft_strdup(&c));
+		return (ft_gc_strdup(&c));
 	if (!c)
 		return (s1);
 	str = ft_gc_calloc((ft_strlen(s1) + 2), sizeof(char));
@@ -38,7 +38,7 @@ char	*ft_add_char(char *s1, char c)
 	str[i] = c;
 	i++;
 	str[i] = '\0';
-	free(s1);
+	ft_gc_free(s1);
 	return (str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:11:01 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/15 09:25:36 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 17:39:35 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*fill_str(const char *s1, int start, int end, int len_to_sub)
 	char	*new_str;
 
 	i = 0;
-	new_str = malloc((end - len_to_sub + 1) * sizeof(char));
+	new_str = ft_gc_calloc((end - len_to_sub + 1), sizeof(char));
 	if (new_str == NULL)
 		return (NULL);
 	while (start < end)
@@ -59,7 +59,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (c_in_set(s1[len_to_sub], set))
 		len_to_sub++;
 	if (len_to_sub == end)
-		return (ft_calloc(1, sizeof(char)));
+		return (ft_gc_calloc(1, sizeof(char)));
 	start = len_to_sub;
 	while (c_in_set(s1[end - 1], set))
 		end--;

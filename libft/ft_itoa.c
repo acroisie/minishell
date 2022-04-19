@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 16:55:57 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/10 07:37:46 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/13 17:38:14 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_itoa(int n)
 
 	buff = n;
 	len = num_len(buff);
-	str = malloc((len + 1) * sizeof(char));
+	str = ft_gc_calloc((len + 1), sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	str[len] = '\0';
