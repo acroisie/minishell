@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:55:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 09:28:12 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 15:17:40 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	ft_ctrl_c(int signal)
 {
-	(void) signal;
 	if (signal == SIGINT)
 	{
-		ft_putstr_fd("\b\b  \b\b", 1);
+		ft_putstr_fd(ft_strjoin(rl_prompt, rl_line_buffer), 2);
+		ft_putstr_fd("  \b\b", 2);
+		rl_redisplay();
+		g_rvalue = 131;
 		ft_putendl_fd("", 1);
-		g_rvalue = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
