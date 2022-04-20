@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/20 13:24:23 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 13:33:27 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**replace_exist_line(t_minishell *data, char *args, char **dest)
 	char	*temp;
 
 	i = -1;
-	temp = ft_strdup(args);
+	temp = ft_gc_strdup(args);
 	split = ft_split(temp, '=');
 	while (data->new_env[++i] != NULL)
 	{
@@ -80,7 +80,7 @@ char	**replace_exist_line(t_minishell *data, char *args, char **dest)
 	}
 	if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
 			split[0], ft_strlen(split[0])))
-		dest[i] = ft_strdup(temp);
+		dest[i] = ft_gc_strdup(temp);
 	else
 		dest = ft_addline(dest, temp);
 	ft_free_split(split);
