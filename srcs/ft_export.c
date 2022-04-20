@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 16:45:29 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 13:24:23 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	copy_dest(t_minishell *data, char **dest)
 
 	i = -1;
 	while (dest[++i])
-			data->new_env[i] = ft_strdup(dest[i]);
+			data->new_env[i] = ft_gc_strdup(dest[i]);
 		data->new_env[i] = NULL;
 	ft_free_split(dest);
 }
@@ -95,14 +95,13 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 	i = -1;
 	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
 	while (data->new_env[++i])
-		dest[i] = ft_strdup(data->new_env[i]);
+		dest[i] = ft_gc_strdup(data->new_env[i]);
 	dest[i] = NULL;
 	if (lst_cmd->args[1])
 	{
 		i = 0;
 		while (lst_cmd->args[++i] != NULL)
 		{
-			dprintf(2, "{%s}\n", lst_cmd->args[i + 1]);
 			if (check_arg(lst_cmd->args[i]) == 0
 				&& count_equal(lst_cmd->args[i]) >= 0)
 				dest = replace_exist_line(data, lst_cmd->args[i], dest);

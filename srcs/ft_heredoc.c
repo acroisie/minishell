@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 16:46:47 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 13:18:15 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,14 @@ char	*join_temp(t_minishell *data, char *var_env, char *temp, int j)
 	return (temp);
 }
 
-int	find_in_env(t_minishell *data, char *var_env)
+char	*dollar_here(char *line, t_minishell *data, char *temp)
 {
-	int	j;
-
-	j = -1;
-	while (data->new_env[++j])
-		if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env)))
-			break ;
-	return (j);
-}
-
-char	*dollar_here(char *line, t_minishell *data)
-{
-	char	*temp;
 	char	*var_env;
 	int		i;
 	int		j;
 
 	i = -1;
 	j = 0;
-	temp = NULL;
 	while (line[++i])
 	{
 		if (line[i] == '$')
@@ -81,6 +68,19 @@ char	*dollar_here(char *line, t_minishell *data)
 	return (temp);
 }
 
+void	here_prompt(char *line, t_lst_cmd *lst_cmd, t_minishell *data,
+	int fds[2])
+{
+	char	*temp;
+
+	temp = NULL;
+	line = dollar_here(line, data, temp);
+	if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
+		ft_putendl_fd(line, fds[1]);
+	if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
+		the_noar(line);
+}
+
 int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 {
 	char	*line;
@@ -100,12 +100,7 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 		while (1)
 		{
 			line = readline("> ");
-			(void)data;
-			line = dollar_here(line, data);
-			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
-				ft_putendl_fd(line, fds[1]);
-			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
-				the_noar(line);
+			here_prompt(line, lst_cmd, data, fds);
 		}
 	}
 	else

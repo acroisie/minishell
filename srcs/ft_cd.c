@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:00:59 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 11:33:53 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 13:21:40 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,9 @@ void	ft_cd(t_minishell *data, char **cmd_args, t_lst_cmd *lst_cmd)
 	i = -1;
 	j = -1;
 	k = -1;
-	while (ft_strncmp(data->new_env[++i], "PWD", 3))
-		;
-	while (ft_strncmp(data->new_env[++k], "OLDPWD", 6))
-		;
-	while (ft_strncmp(data->new_env[++j], "HOME", 4))
-		;
+	i = find_in_env(data, "PWD");
+	k = find_in_env(data, "OLDPWD");
+	j = find_in_env(data, "HOME");
 	if (j == ft_destlen(data->new_env) && !cmd_args[1])
 		return (return_error_builtin("cd: ", "HOME", " not set", 1));
 	getcwd(data->cd_pwd, sizeof(data->cd_pwd));

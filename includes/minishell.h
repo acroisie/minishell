@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 16:45:46 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 12:35:28 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void		init_dup(t_lst_cmd *lst_cmd);
 int			ft_strlencustom(char *s);
 int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 void		the_noar2(unsigned int nb);
+void		prompt(t_lst_cmd *lst_cmd, t_minishell *data);
 
 /***************************BUILTINS******************************/
 
@@ -140,6 +141,7 @@ void		ft_echo(char **args);
 /****************************UTILS*******************************/
 
 void		return_error(char *arg, char *msg, int nb);
+void		return_error_2(char *arg, char *msg, int nb);
 void		return_error_builtin(char *cmd, char *arg, char *msg, int nb);
 void		return_error_exit(char *cmd, char *arg, char *msg, int nb);
 int			return_error_export(char *cmd, char *arg, char *msg, int nb);

@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 12:23:19 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 12:25:08 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ void	do_execve(t_lst_cmd *lst_cmd, t_minishell *data)
 		exit(1);
 }
 
+void	exec_2(t_lst_cmd *lst_cmd, t_minishell *data)
+{
+	struct stat	s;
+
+	stat(lst_cmd->args[0], &s);
+	if (S_ISDIR(s.st_mode))
+		return_error_2(lst_cmd->args[0], ": is a directory", 126);
+	if (access(lst_cmd->args[0], X_OK) == -1
+		&& access(lst_cmd->args[0], F_OK) == 0)
+		return_error_2(lst_cmd->args[0], ": Permission denied", 126);
+	if (execve(lst_cmd->args[0], lst_cmd->args, data->new_env) == -1)
+		return_error_2(lst_cmd->args[0],
+			": No such file or directory", 127);
+}
+
 void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 {
 	lst_cmd->pid = fork();
@@ -39,7 +54,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 			exit(0);
 		}
 		else if (lst_cmd->args[0][0] == '.' && lst_cmd->args[0][1] == '/')
-			execve(lst_cmd->args[0], lst_cmd->args, data->new_env);
+			exec_2(lst_cmd, data);
 		else if (find_path(data, lst_cmd->args[0]) == 0
 			&& (lst_cmd->args[0][0] != '/' || (lst_cmd->args[0][0]
 			== '/' && lst_cmd->args[0][1] == '/')))

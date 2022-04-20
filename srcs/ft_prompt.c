@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 14:34:32 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 13:19:51 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 	{
 		signal(SIGINT, ft_ctrl_c);
 		signal(SIGQUIT, ft_ctrl_bslash);
-		i = -1;
-		while (data->new_env[++i])
-			if (ft_strncmp(data->new_env[i], "PWD", 3) == 0)
-				break ;
+		i = find_in_env(data, "PWD");
 		if (i != ft_destlen(data->new_env))
 		{
 			prompt = ft_split(data->new_env[i], '/');

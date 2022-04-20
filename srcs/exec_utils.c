@@ -6,11 +6,22 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/08 18:51:11 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 13:09:55 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	find_in_env(t_minishell *data, char *var_env)
+{
+	int	j;
+
+	j = -1;
+	while (data->new_env[++j])
+		if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env)))
+			break ;
+	return (j);
+}
 
 void	do_first_cmd(t_lst_cmd	*lst_cmd)
 {

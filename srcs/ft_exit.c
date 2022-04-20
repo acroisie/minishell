@@ -6,11 +6,20 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:57:55 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 17:07:14 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 17:30:05 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	the_noar_exit(unsigned int nb, t_lst_cmd *lst_cmd)
+{
+	if (!lst_cmd->prev && lst_cmd->next)
+		ft_putendl_fd("exit", 2);
+	g_rvalue = nb;
+	ft_gc_destroy();
+	exit(nb % 256);
+}
 
 void	the_noar2(unsigned int nb)
 {
@@ -44,7 +53,7 @@ void	ft_exit(t_lst_cmd *lst_cmd)
 	if (i <= 2)
 	{
 		if (lst_cmd->args[1])
-			the_noar2(ft_atol(lst_cmd->args[1]));
-		the_noar2(0);
+			the_noar_exit(ft_atol(lst_cmd->args[1]), lst_cmd);
+		the_noar_exit(0, lst_cmd);
 	}
 }
