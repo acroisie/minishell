@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/14 08:50:35 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 17:52:04 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**ft_double_array(t_var *var)
 		ft_gc_free(var->lst_cmd->args[i]);
 		i++;
 	}
-	temp[i] = "\0";
+	temp[i] = NULL;
 	return (temp);
 }
 
