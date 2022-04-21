@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/21 17:02:30 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 18:10:02 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 {
 	lst_cmd->pid = fork();
 	if (lst_cmd->pid == -1)
-		exit(1);
+		printf("fork: Resource temporarily unavailable");
 	else if (lst_cmd->pid == 0)
 	{
 		data->error = 00700;
@@ -59,11 +59,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 		else if (find_path(data, lst_cmd->args[0]) == 0
 			&& (lst_cmd->args[0][0] != '/' || (lst_cmd->args[0][0]
 			== '/' && lst_cmd->args[0][1] == '/')))
-		{
-			dprintf(2, "path %s\n", lst_cmd->path); 
-			return_error(lst_cmd->args[0], ": command not found", 127);
-			exit (127);
-		}
+			return_error_2(lst_cmd->args[0], ": command not found", 127);
 		else
 			do_execve(lst_cmd, data);
 	}
