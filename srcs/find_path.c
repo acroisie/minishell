@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:28:18 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/21 17:10:14 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 22:10:55 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ char	*find_path(t_minishell *data, char *cmd)
 	if (access(cmd, X_OK) == 0 && ft_strrchr(cmd, '/'))
 		return (cmd);
 	data->path_temp = NULL;
-	i = find_in_env(data, "PATH");
-	temp = ft_split(data->new_env[i], '=');
+	temp = ft_split(data->new_env[find_in_env(data, "PATH")], '=');
+	if (!temp)
+		return ("nopath");
 	data->path = ft_split(temp[1], ':');
 	i = -1;
 	while (data->path[++i])

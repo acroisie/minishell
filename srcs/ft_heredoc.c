@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/20 13:18:15 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/22 00:41:57 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,20 @@ char	*dollar_here(char *line, t_minishell *data, char *temp)
 		else
 			temp = ft_add_char(temp, line[i]);
 	}
-	free(line);
 	return (temp);
 }
 
 void	here_prompt(char *line, t_lst_cmd *lst_cmd, t_minishell *data,
-	int fds[2])
+	int *fds)
 {
 	char	*temp;
 
 	temp = NULL;
 	line = dollar_here(line, data, temp);
+	(void)data;
 	if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
 		ft_putendl_fd(line, fds[1]);
-	if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
+	else if (ft_strncmp(line, lst_cmd->lst_herdoc->file, ft_strlen(line)) == 0)
 		the_noar(line);
 }
 
@@ -87,16 +87,25 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 	pid_t	pid;
 	int		fds[2];
 
+	signal(SIGQUIT, ft_ctrl_c_h);
+	signal(SIGINT, sig_put_endl);
 	if (pipe(fds) == -1)
 		exit (-1);
 	pid = fork();
-	signal(SIGQUIT, ft_ctrl_c_h);
-	signal(SIGINT, sig_put_endl);
 	if (pid == 0)
 	{
 		signal(SIGINT, ft_ctrl_c_h);
 		signal(SIGQUIT, ft_ctrl_bslash);
 		close(fds[0]);
+		while (lst_cmd->lst_herdoc->next)
+		{
+			line = readline("> ");
+			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
+			{
+				lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
+			}
+			free(line);
+		}
 		while (1)
 		{
 			line = readline("> ");

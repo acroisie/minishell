@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/21 14:06:25 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 23:11:35 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ char	*switch_display(char **prompt, char *line)
 	return (line);
 }
 
+void	return_for_failed(t_lst_cmd *lst_cmd)
+{
+	while (lst_cmd)
+	{
+		waitpid(lst_cmd->pid, 0, 0);
+		lst_cmd = lst_cmd->next;
+	}
+	ft_gc_free(lst_cmd);
+}
+
 void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 {
 	add_history(line);
@@ -36,7 +46,10 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 	free(line);
 	data->start_cmd = lst_cmd;
 	if (lst_cmd)
-		exec_cmds(data, lst_cmd);
+	{
+		if (exec_cmds(data, lst_cmd) == -1)
+			return (return_for_failed(lst_cmd));
+	}
 	lst_cmd = data->start_cmd;
 	while (lst_cmd)
 	{
@@ -46,6 +59,21 @@ void	execute_line(t_lst_cmd *lst_cmd, t_minishell *data, char *line)
 		lst_cmd = lst_cmd->next;
 	}
 	ft_gc_free(lst_cmd);
+}
+
+int	check_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isspace(line[i]))
+			i++;
+	}
+	if (i == ft_strlen(line))
+		return (-1);
+	return (0);
 }
 
 void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)

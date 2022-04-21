@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_in_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 00:19:48 by lnemor           ###   ########lyon.fr   */
+/*   Created: 2022/04/21 23:46:29 by lnemor            #+#    #+#             */
+/*   Updated: 2022/04/22 00:07:47 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	is_in_env(t_minishell *data, char *arg)
 {
-	t_lst_cmd	lst_cmd;
-	t_minishell	data;
-	int			i;
+	int		i;
+	char	**split;
 
-	if (argc != 1)
-		return (0);
-	if (!argv)
-		return (0);
-	if (!env)
-		return (0);
-	i = -1;
-	data.new_env = ft_gc_calloc(sizeof(char *), ft_destlen(env));
-	while (env[++i])
-		data.new_env[i] = ft_gc_strdup(env[i]);
-	data.new_env[i] = NULL;
-	i = -1;
-	prompt(&lst_cmd, &data);
+	split = ft_split(arg, '=');
+	i = 0;
+	while (data->new_env[i])
+	{
+		if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
+		{
+			ft_free_split(split);
+			return (1);
+		}
+		i++;
+	}
+	ft_free_split(split);
 	return (0);
 }
-
-/* Todo_list: */
-
-/* Error messages for builtin */
-/* Signals dans heredoc */

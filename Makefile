@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/21 16:37:22 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/22 00:32:19 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,10 @@ SRCS := main.c \
 		display_export.c \
 		ft_heredoc.c \
 		noars.c	\
-		signal.c
+		signal.c \
+		return_error_syntax.c \
+		is_in_env.c \
+		shlvl.c
 
 ifneq ($(shell uname), Linux)
 READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
@@ -53,8 +56,8 @@ OBJS := $(SRCS:.c=.o)
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline
-#				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a  -lreadline $(READLINE_LIB_DIR_FLAG) $(READLINE_INC_DIR_FLAG) -g3 -fsanitize=address
+#				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline
+				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a  -lreadline $(READLINE_LIB_DIR_FLAG) $(READLINE_INC_DIR_FLAG) -g3 -fsanitize=address
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a libft/libft.h Makefile
 					@mkdir -p objs

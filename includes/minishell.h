@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/21 13:58:25 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/22 00:31:01 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_minishell
 	t_lst_cmd			*start_cmd;
 	char				*line;
 	int					error;
-
+	int					shell_lvl;
 }t_minishell;
 /************************LINKED_LISTS****************************/
 
@@ -118,7 +118,7 @@ int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 /****************************EXEC*********************************/
 
 void		prompt(t_lst_cmd *lst_cmd, t_minishell *data);
-void		exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd);
+int			exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd);
 char		*find_path(t_minishell *data, char *cmd);
 void		open_redir(t_lst_cmd *lst_cmd);
 void		init_dup(t_lst_cmd *lst_cmd);
@@ -138,6 +138,8 @@ int			ft_pwd(t_minishell *data);
 void		ft_export(t_minishell *data, t_lst_cmd *lst_cmd);
 void		ft_exit(t_lst_cmd *lst_cmd);
 void		ft_echo(char **args);
+char		**replace_exist_line(t_minishell *data, char *args, char **dest);
+char		**replace_exist_line_2(t_minishell *data, char *args, char **dest);
 
 /****************************UTILS*******************************/
 
@@ -146,6 +148,9 @@ void		return_error_2(char *arg, char *msg, int nb);
 void		return_error_builtin(char *cmd, char *arg, char *msg, int nb);
 void		return_error_exit(char *cmd, char *arg, char *msg, int nb);
 int			return_error_export(char *cmd, char *arg, char *msg, int nb);
+int			return_error_syntax(void);
+int			return_error_syntax_2(void);
+int			return_error_fork(void);
 void		display_export(char **dest);
 void		the_noar(char *line);
 void		ft_ctrl_c(int signal);
@@ -156,5 +161,6 @@ void		ft_ctrl_c_f(int signal);
 void		sig_put_endl(int signal);
 int			find_in_env(t_minishell *data, char *var_env);
 void		copy_dest(t_minishell *data, char **dest);
+int			is_in_env(t_minishell *data, char *arg);
 
 #endif
