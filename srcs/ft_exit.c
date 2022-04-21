@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:57:55 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 17:30:05 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 14:36:49 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_exit(t_lst_cmd *lst_cmd)
 		while (lst_cmd->args[i][++j])
 			if (ft_isdigit(lst_cmd->args[i][j]) == 0)
 				return_error_exit("exit: ", lst_cmd->args[1],
-					": numeric argument required", -1);
+					": numeric argument required", 255);
 	}
 	if (i <= 2)
 	{

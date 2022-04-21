@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 09:29:07 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 14:13:06 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,3 @@ int	main(int argc, char **argv, char **env)
 
 /* Error messages for builtin */
 /* Signals dans heredoc */
-/* Leaks dans heredoc */
-/* Norm */

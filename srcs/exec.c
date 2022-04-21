@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/20 12:25:08 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 17:02:30 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 		exit(1);
 	else if (lst_cmd->pid == 0)
 	{
+		data->error = 00700;
 		init_dup(lst_cmd);
 		if (is_builtin(lst_cmd) != 0)
 		{
@@ -59,6 +60,7 @@ void	ft_fork(t_lst_cmd *lst_cmd, t_minishell *data)
 			&& (lst_cmd->args[0][0] != '/' || (lst_cmd->args[0][0]
 			== '/' && lst_cmd->args[0][1] == '/')))
 		{
+			dprintf(2, "path %s\n", lst_cmd->path); 
 			return_error(lst_cmd->args[0], ": command not found", 127);
 			exit (127);
 		}

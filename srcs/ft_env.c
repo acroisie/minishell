@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 14:24:41 by lnemor            #+#    #+#             */
-/*   Updated: 2022/03/24 16:48:48 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 15:34:39 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_env(t_minishell *data)
 	i = 0;
 	while (dest[i])
 	{
-		ft_putendl_fd(dest[i], 1);
+		if (ft_strchr(dest[i], '='))
+			ft_putendl_fd(dest[i], 1);
 		i++;
 	}
 	exit(0);

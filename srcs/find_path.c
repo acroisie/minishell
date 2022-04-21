@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:28:18 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 08:37:12 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 17:10:14 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	*find_path(t_minishell *data, char *cmd)
 	int		i;
 	char	**temp;
 
-	i = 0;
+	if (access(cmd, X_OK) == 0 && ft_strrchr(cmd, '/'))
+		return (cmd);
 	data->path_temp = NULL;
-	while (ft_strncmp("PATH", data->new_env[i], 4) != 0)
-		i++;
+	i = find_in_env(data, "PATH");
 	temp = ft_split(data->new_env[i], '=');
 	data->path = ft_split(temp[1], ':');
 	i = -1;

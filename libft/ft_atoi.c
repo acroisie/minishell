@@ -81,5 +81,5 @@ unsigned int	ft_atol(char const *str)
 	}
 	if (overflow == 1)
 		return (result * sign);
-	return (return_error_atol("exit: ", (char *)str, 2));
+	return (return_error_atol("exit: ", (char *)str, 255));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:28:13 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/19 17:00:58 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 16:36:08 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,13 @@ char	**feed_temp(t_minishell *data, char **temp)
 		if (ft_strlen(data->new_env[i]) == 0)
 			i++;
 		else
-			temp[j++] = ft_gc_strdup(data->new_env[i++]);
+		{
+			temp[j] = ft_gc_strdup(data->new_env[i]);
+			j++;
+			i++;
+		}
 	}
+	temp[j] = NULL;
 	return (temp);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/20 12:35:28 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 13:58:25 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_minishell
 	char				*path_temp;
 	t_lst_cmd			*start_cmd;
 	char				*line;
+	int					error;
 
 }t_minishell;
 /************************LINKED_LISTS****************************/
@@ -151,6 +152,7 @@ void		ft_ctrl_c(int signal);
 void		ft_ctrl_c_h(int signal);
 void		ft_ctrl_bslash(int signal);
 void		ft_ctrl_bslash_h(int signal);
+void		ft_ctrl_c_f(int signal);
 void		sig_put_endl(int signal);
 int			find_in_env(t_minishell *data, char *var_env);
 void		copy_dest(t_minishell *data, char **dest);

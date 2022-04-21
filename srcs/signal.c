@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 16:55:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/20 12:36:14 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/21 13:48:41 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ void	ft_ctrl_c(int signal)
 	}
 }
 
+void	ft_ctrl_c_f(int signal)
+{
+	if (signal == SIGINT)
+	{
+		rl_redisplay();
+		g_rvalue = 131;
+	}
+}
+
 void	ft_ctrl_c_h(int signal)
 {
 	(void) signal;
@@ -44,5 +53,9 @@ void	ft_ctrl_bslash(int signal)
 {
 	(void) signal;
 	if (signal == SIGQUIT)
-		ft_putstr_fd("\b\b  \b\b", 1);
+	{
+		ft_putstr_fd(ft_strjoin(rl_prompt, rl_line_buffer), 2);
+		ft_putstr_fd("  \b\b", 2);
+		rl_redisplay();
+	}
 }
