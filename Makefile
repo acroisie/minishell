@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/22 00:32:19 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/04/22 22:17:28 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS := main.c \
 		ft_heredoc.c \
 		noars.c	\
 		signal.c \
+		signal2.c \
 		return_error_syntax.c \
 		is_in_env.c \
 		shlvl.c

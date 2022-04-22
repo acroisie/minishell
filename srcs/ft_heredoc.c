@@ -6,20 +6,22 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:38:32 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 00:41:57 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/22 22:13:09 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_heredoc2(t_lst_cmd *lst_cmd, pid_t pid, int fds[2])
+int	ft_heredoc2(t_lst_cmd *lst_cmd, pid_t pid, int fds[2])
 {
-	waitpid(pid, 0, 0);
+	waitpid(pid, &g_rvalue, 0);
+	if (WIFEXITED(g_rvalue))
+		g_rvalue = WEXITSTATUS(g_rvalue);
+	if (g_rvalue == 1)
+		return (-1);
 	close(fds[1]);
-	if (lst_cmd->lst_herdoc->next == NULL)
-		lst_cmd->fd_in = fds[0];
-	if (lst_cmd->lst_herdoc->next)
-		close(fds[0]);
+	lst_cmd->fd_in = fds[0];
+	return (0);
 }
 
 char	*join_temp(t_minishell *data, char *var_env, char *temp, int j)
@@ -72,13 +74,21 @@ void	here_prompt(char *line, t_lst_cmd *lst_cmd, t_minishell *data,
 {
 	char	*temp;
 
-	temp = NULL;
-	line = dollar_here(line, data, temp);
-	(void)data;
-	if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
-		ft_putendl_fd(line, fds[1]);
-	else if (ft_strncmp(line, lst_cmd->lst_herdoc->file, ft_strlen(line)) == 0)
-		the_noar(line);
+	while (1)
+	{
+		close(fds[0]);
+		temp = NULL;
+		line = readline("> ");
+		if (!line)
+			the_noar(line);
+		line = dollar_here(line, data, temp);
+		(void)data;
+		if (ft_strcmp(line, lst_cmd->lst_herdoc->file) != 0)
+			ft_putendl_fd(line, fds[1]);
+		else if (ft_strncmp(line, lst_cmd->lst_herdoc->file,
+				ft_strlen(line)) == 0)
+			the_noar(line);
+	}
 }
 
 int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
@@ -87,32 +97,25 @@ int	ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 	pid_t	pid;
 	int		fds[2];
 
-	signal(SIGQUIT, ft_ctrl_c_h);
-	signal(SIGINT, sig_put_endl);
+	signal(SIGINT, ft_ctrl_c_h);
+	signal(SIGQUIT, sig_exit);
 	if (pipe(fds) == -1)
 		exit (-1);
 	pid = fork();
 	if (pid == 0)
 	{
-		signal(SIGINT, ft_ctrl_c_h);
+		signal(SIGINT, sig_exit);
 		signal(SIGQUIT, ft_ctrl_bslash);
-		close(fds[0]);
 		while (lst_cmd->lst_herdoc->next)
 		{
 			line = readline("> ");
-			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0)
-			{
+			if (ft_strcmp(line, lst_cmd->lst_herdoc->file) == 0 || !line)
 				lst_cmd->lst_herdoc = lst_cmd->lst_herdoc->next;
-			}
 			free(line);
 		}
-		while (1)
-		{
-			line = readline("> ");
-			here_prompt(line, lst_cmd, data, fds);
-		}
+		here_prompt(line, lst_cmd, data, fds);
 	}
 	else
-		ft_heredoc2(lst_cmd, pid, fds);
+		return (ft_heredoc2(lst_cmd, pid, fds));
 	return (0);
 }

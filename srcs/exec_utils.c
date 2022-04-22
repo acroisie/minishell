@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/21 16:35:29 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/22 13:45:02 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ int	find_in_env(t_minishell *data, char *var_env)
 
 	j = -1;
 	while (data->new_env[++j])
+	{
 		if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env))
 			&& data->new_env[j][ft_strlen(var_env)] == '=')
 			break ;
+	}
 	return (j);
 }
 

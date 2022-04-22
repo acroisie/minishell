@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 00:31:01 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/22 22:25:04 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,10 +157,13 @@ void		ft_ctrl_c(int signal);
 void		ft_ctrl_c_h(int signal);
 void		ft_ctrl_bslash(int signal);
 void		ft_ctrl_bslash_h(int signal);
-void		ft_ctrl_c_f(int signal);
-void		sig_put_endl(int signal);
+void		ft_ctrl_f_bslash(int signal);
+void		sig_do_nothing(int signal);
+void		sig_exit(int signal);
+void		ft_ctrl_c_fork(int signal);
 int			find_in_env(t_minishell *data, char *var_env);
 void		copy_dest(t_minishell *data, char **dest);
 int			is_in_env(t_minishell *data, char *arg);
+int			do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 
 #endif

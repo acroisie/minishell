@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/21 13:08:19 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/22 22:24:51 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
+{
+	if (lst_cmd->lst_herdoc)
+	{
+		if (!lst_cmd->lst_herdoc->file)
+			return (return_error_syntax_2());
+		else if (ft_heredoc(lst_cmd, data) == -1)
+			return (-1);
+	}
+	return (0);
+}
 
 void	open_redir2(t_lst_cmd *lst_cmd)
 {
@@ -54,6 +66,8 @@ void	open_redir3(t_lst_cmd	*lst_cmd)
 
 void	open_redir(t_lst_cmd *lst_cmd)
 {
+	if (lst_cmd->next != NULL)
+		pipe(lst_cmd->pipe_fd);
 	if (lst_cmd->lst_in != NULL)
 	{
 		if (lst_cmd->lst_in->file)
