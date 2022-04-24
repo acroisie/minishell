@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 00:31:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 14:24:41 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/24 11:19:22 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 char	**replace_exist_line_2(t_minishell *data, char *args, char **dest)
 {
 	char	**split;
-	int		i;
 	char	*temp;
 	int		shlvl;
 
-	i = -1;
 	if (args)
 	{
 		temp = ft_gc_strdup(args);
