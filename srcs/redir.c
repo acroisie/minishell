@@ -6,11 +6,26 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 22:24:51 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 14:36:14 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	check_redir(t_lst_cmd *lst_cmd)
+{
+	if (lst_cmd->lst_in)
+	{
+		if (!lst_cmd->lst_in->file)
+			return (-1);
+	}
+	if (lst_cmd->lst_out)
+	{
+		if (!lst_cmd->lst_out->file)
+			return (-1);
+	}
+	return (0);
+}
 
 int	do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 {

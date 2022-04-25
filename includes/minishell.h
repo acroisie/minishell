@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/25 12:41:45 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 14:36:49 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,6 @@ int			find_in_env(t_minishell *data, char *var_env);
 void		copy_dest(t_minishell *data, char **dest);
 int			is_in_env(t_minishell *data, char *arg);
 int			do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
+int			check_redir(t_lst_cmd *lst_cmd);
 
 #endif
