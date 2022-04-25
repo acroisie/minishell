@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/22 22:17:28 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/04/25 13:08:17 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,8 @@ OBJS := $(SRCS:.c=.o)
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-#				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline
-				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a  -lreadline $(READLINE_LIB_DIR_FLAG) $(READLINE_INC_DIR_FLAG) -g3 -fsanitize=address
+				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline
+#				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a  -lreadline $(READLINE_LIB_DIR_FLAG) $(READLINE_INC_DIR_FLAG) -g3 -fsanitize=address
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a libft/libft.h Makefile
 					@mkdir -p objs
