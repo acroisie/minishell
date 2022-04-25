@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 00:32:32 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/24 11:10:15 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	char	**dest;
 	int		i;
+	int		check_args;
 
 	i = -1;
 	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
@@ -102,11 +103,10 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 		i = 0;
 		while (lst_cmd->args[++i] != NULL)
 		{
-			if (check_arg(lst_cmd->args[i]) == 0
-				&& count_equal(lst_cmd->args[i]) > 0)
+			check_args = check_arg(lst_cmd->args[i]);
+			if (!check_args && count_equal(lst_cmd->args[i]) > 0)
 				dest = replace_exist_line(data, lst_cmd->args[i], dest);
-			if (check_arg(lst_cmd->args[i]) == 0
-				&& count_equal(lst_cmd->args[i]) == 0
+			if (!check_args && count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
 				dest = ft_addline(dest, lst_cmd->args[i]);
 		}
