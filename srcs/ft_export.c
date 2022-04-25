@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/24 11:10:15 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/23 16:35:08 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	copy_dest(t_minishell *data, char **dest)
 
 	i = -1;
 	while (dest[++i])
-			data->new_env[i] = ft_gc_strdup(dest[i]);
-		data->new_env[i] = NULL;
+		data->new_env[i] = ft_gc_strdup(dest[i]);
+	data->new_env[i] = NULL;
 	ft_free_split(dest);
 }
 
