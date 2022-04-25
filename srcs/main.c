@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:46 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 21:16:18 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 12:37:41 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,3 @@ int	main(int argc, char **argv, char **env)
 	prompt(&lst_cmd, &data);
 	return (0);
 }
-
-/* Todo_list: */
-
-/* Error messages for builtin */
-/* Signals dans heredoc */

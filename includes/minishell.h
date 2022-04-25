@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 22:25:04 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 14:36:49 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void		init_dup(t_lst_cmd *lst_cmd);
 int			ft_strlencustom(char *s);
 int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 void		the_noar2(unsigned int nb);
+void		the_noar3(unsigned int nb);
 void		prompt(t_lst_cmd *lst_cmd, t_minishell *data);
 
 /***************************BUILTINS******************************/
@@ -140,6 +141,7 @@ void		ft_exit(t_lst_cmd *lst_cmd);
 void		ft_echo(char **args);
 char		**replace_exist_line(t_minishell *data, char *args, char **dest);
 char		**replace_exist_line_2(t_minishell *data, char *args, char **dest);
+char		**replace_exist_line_3(t_minishell *data, char *args, char **dest);
 
 /****************************UTILS*******************************/
 
@@ -165,5 +167,6 @@ int			find_in_env(t_minishell *data, char *var_env);
 void		copy_dest(t_minishell *data, char **dest);
 int			is_in_env(t_minishell *data, char *arg);
 int			do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
+int			check_redir(t_lst_cmd *lst_cmd);
 
 #endif

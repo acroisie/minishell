@@ -91,7 +91,6 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	char	**dest;
 	int		i;
-	int		check_args;
 
 	i = -1;
 	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
@@ -103,10 +102,9 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 		i = 0;
 		while (lst_cmd->args[++i] != NULL)
 		{
-			check_args = check_arg(lst_cmd->args[i]);
-			if (!check_args && count_equal(lst_cmd->args[i]) > 0)
+			if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) > 0)
 				dest = replace_exist_line(data, lst_cmd->args[i], dest);
-			if (!check_args && count_equal(lst_cmd->args[i]) == 0
+			if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
 				dest = ft_addline(dest, lst_cmd->args[i]);
 		}

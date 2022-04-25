@@ -31,6 +31,10 @@ char	**replace_exist_line_2(t_minishell *data, char *args, char **dest)
 	if (is_in_env(data, "SHLVL"))
 		dest[find_in_env(data, "SHLVL")] = ft_gc_strdup(temp);
 	else
+	{
+		getcwd(data->pwd, sizeof(data->pwd));
+		dest = ft_addline(dest, ft_strjoin("PWD=", data->pwd));
 		dest = ft_addline(dest, temp);
+	}
 	return (dest);
 }
