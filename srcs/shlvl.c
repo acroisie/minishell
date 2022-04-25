@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 00:31:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 14:24:41 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 12:36:37 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ char	**replace_exist_line_2(t_minishell *data, char *args, char **dest)
 	if (is_in_env(data, "SHLVL"))
 		dest[find_in_env(data, "SHLVL")] = ft_gc_strdup(temp);
 	else
+	{
+		getcwd(data->pwd, sizeof(data->pwd));
+		dest = ft_addline(dest, ft_strjoin("PWD=", data->pwd));
 		dest = ft_addline(dest, temp);
+	}
 	return (dest);
 }
