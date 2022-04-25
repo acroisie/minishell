@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:28:13 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/22 14:02:43 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 13:36:51 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	check_arg_unset(char *args)
 	while (args[j])
 	{
 		if (!ft_isalpha(args[0]) && !(args[0] == '_'))
-			return (return_error_export("export: `", args,
+			return (return_error_export("unset: `", args,
 					"': not a valid identifier", 1));
 		if (ft_isalnum(args[j]) || args[j] == '_' || ft_isspace(j))
 			j++;
 		else
-			return (return_error_export("export: `", args,
+			return (return_error_export("unset: `", args,
 					"': not a valid identifier", 1));
 	}
 	return (0);
