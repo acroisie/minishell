@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:20:17 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/14 08:36:29 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 18:21:12 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,25 @@ void	display_export(char **dest)
 	int		i;
 	char	**split;
 	char	*temp;
+	char **sorted;
 
 	i = -1;
-	dest = sort_env((dest));
-	while (dest[++i])
+	sorted = sort_env((dest));
+	while (sorted[++i])
 	{
-		split = ft_split(dest[i], '=');
-		if (ft_strchr(dest[i], '='))
+		split = ft_split(sorted[i], '=');
+		if (ft_strchr(sorted[i], '='))
 		{
-			ft_gc_free(dest[i]);
+			ft_gc_free(sorted[i]);
 			temp = ft_strjoin("=\"", split[1]);
 			temp = ft_strjoin_free_s1(temp, "\"");
 			temp = ft_strjoin_free_s2(split[0], temp);
-			dest[i] = ft_strjoin_free_s2("declare -x ", temp);
+			sorted[i] = ft_strjoin_free_s2("declare -x ", temp);
 		}
 		else
-			dest[i] = ft_strjoin_free_s2("declare -x ", dest[i]);
-		ft_putendl_fd(dest[i], 1);
+			sorted[i] = ft_strjoin_free_s2("declare -x ", sorted[i]);
+		ft_putendl_fd(sorted[i], 1);
 		ft_free_split(split);
 	}
-	ft_free_split(dest);
+	ft_free_split(sorted);
 }

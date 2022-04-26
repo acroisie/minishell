@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:07:24 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/14 08:50:01 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 18:17:00 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,25 @@ char	**ft_addline(char **src1, char *s2)
 {
 	int		i;
 	int		j;
-	char	**dest;
+	char	**dest = NULL;
 
 	i = 0;
 	j = 0;
 	dest = ft_gc_calloc((ft_destlen(src1) + 2), sizeof(char *));
 	if (dest == NULL)
 		return (NULL);
-	while (src1[j])
-		dest[i++] = ft_gc_strdup(src1[j++]);
+	while (src1[i])
+	{
+		dest[i] = ft_gc_strdup(src1[i]);
+		// dprintf(2, "Dest: %s\n", dest[i]); // to delete
+		i++;
+	}
 	j = 0;
 	dest[i] = ft_gc_strdup(s2);
 	dest[i + 1] = NULL;
-	dest[ft_destlen(dest)] = NULL;
+	// // dest[ft_destlen(dest)] = NULL;
+	// dprintf(2, "Destend: %s\n", dest[i]); // to delete
+	// dprintf(2, "Destend 0: %s\n", dest[i + 1]); // to delete
 	ft_free_split(src1);
 	ft_gc_free(s2);
 	return (dest);

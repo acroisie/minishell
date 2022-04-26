@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/23 16:35:08 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 08:07:29 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,34 +82,48 @@ char	**replace_exist_line(t_minishell *data, char *args, char **dest)
 			split[0], ft_strlen(split[0])))
 		dest[i] = ft_gc_strdup(temp);
 	else
-		dest = ft_addline(dest, temp);
+		data->new_env = ft_addline(dest, temp);
 	ft_free_split(split);
 	return (dest);
 }
 
 void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 {
-	char	**dest;
+	char	**dest = NULL;
 	int		i;
 
-	i = -1;
-	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
-	while (data->new_env[++i])
-		dest[i] = ft_gc_strdup(data->new_env[i]);
-	dest[i] = NULL;
-	if (lst_cmd->args[1])
+	// i = 0;
+	// while (data->new_env[i])
+	// {
+	// 	dest[i] = ft_gc_strdup(data->new_env[i]);
+	// 	dprintf(2, "test : %s\n", data->new_env[i]);
+	// 	// print_lst(lst_cmd);
+	// 	i++;
+	// }
+	// // dest[i] = ft_gc_strdup(data->new_env[i]);
+	// dest[i + 1] = NULL;
+	// dprintf(2, "\n\n\nICI%s\n\n\n", lst_cmd->args[1]); // Debug
+	if (lst_cmd && lst_cmd->args[1])
 	{
+		dest = ft_gc_calloc(ft_destlen(data->new_env), sizeof(char *));
+		i = -1;
+		while (data->new_env[++i])
+			dest[i] = ft_gc_strdup(data->new_env[i]);
+		dest[i] = NULL;
 		i = 0;
-		while (lst_cmd->args[++i] != NULL)
+		while (lst_cmd->args[i] != NULL)
 		{
-			if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) > 0)
+			if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) >= 0)
 				dest = replace_exist_line(data, lst_cmd->args[i], dest);
-			if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) == 0
-				&& !is_in_env(data, lst_cmd->args[i]))
-				dest = ft_addline(dest, lst_cmd->args[i]);
+			// if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) == 0
+			// 	&& !is_in_env(data, lst_cmd->args[i]))
+			// 	dest = ft_addline(dest, lst_cmd->args[i]);
+			i++;
+			data->new_env = dest;
 		}
 		return (copy_dest(data, dest));
 	}
 	else
-		return (display_export(dest));
+		return (display_export(data->new_env));
+	dprintf(2, "test : %s\n", data->new_env[i]);
 }
