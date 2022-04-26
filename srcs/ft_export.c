@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 09:17:16 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 16:37:14 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	replace_exist_line(t_minishell *data, char *args)
 	split = ft_split(temp, '=');
 	while (data->new_env[++i] != NULL)
 	{
-		if (!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
+		if ((!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0]))))
 			break ;
 	}
 	if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
@@ -89,17 +89,18 @@ void	replace_exist_line(t_minishell *data, char *args)
 void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	int		i;
+	int		check;
 
 	if (lst_cmd->args[1])
 	{
 		i = 0;
+		check = 0;
 		while (lst_cmd->args[++i] != NULL)
 		{
-			if (!check_arg(lst_cmd->args[i])
-				&& count_equal(lst_cmd->args[i]) > 0)
+			check = check_arg(lst_cmd->args[i]);
+			if (check == 0 && count_equal(lst_cmd->args[i]) > 0)
 				replace_exist_line(data, lst_cmd->args[i]);
-			if (!check_arg(lst_cmd->args[i])
-				&& count_equal(lst_cmd->args[i]) == 0
+			else if (check == 0 && count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
 				data->new_env = ft_addline(data->new_env, lst_cmd->args[i]);
 		}
