@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/25 14:37:29 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 12:05:45 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ int	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 	{
 		if (check_redir(lst_cmd) == -1)
 			return (return_error_syntax_2());
-		open_redir(lst_cmd);
-		if (do_heredoc(lst_cmd, data) == -1)
+		if (open_redir(lst_cmd) == -1 || do_heredoc(lst_cmd, data) == -1)
 			return (-1);
 		if (is_builtin(lst_cmd) == 2 && !lst_cmd->prev && !lst_cmd->next)
 			do_builtin(data, lst_cmd);

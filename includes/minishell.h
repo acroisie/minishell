@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 09:16:22 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 11:57:09 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 void		prompt(t_lst_cmd *lst_cmd, t_minishell *data);
 int			exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd);
 char		*find_path(t_minishell *data, char *cmd);
-void		open_redir(t_lst_cmd *lst_cmd);
+int			open_redir(t_lst_cmd *lst_cmd);
 void		init_dup(t_lst_cmd *lst_cmd);
 int			ft_strlencustom(char *s);
 int			ft_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
@@ -168,5 +168,6 @@ void		copy_dest(t_minishell *data, char **dest);
 int			is_in_env(t_minishell *data, char *arg);
 int			do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 int			check_redir(t_lst_cmd *lst_cmd);
+int			return_error_redir(char *arg, char *msg);
 
 #endif
