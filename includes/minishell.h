@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/25 14:36:49 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 09:16:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int			ft_pwd(t_minishell *data);
 void		ft_export(t_minishell *data, t_lst_cmd *lst_cmd);
 void		ft_exit(t_lst_cmd *lst_cmd);
 void		ft_echo(char **args);
-char		**replace_exist_line(t_minishell *data, char *args, char **dest);
+void		replace_exist_line(t_minishell *data, char *args);
 char		**replace_exist_line_2(t_minishell *data, char *args, char **dest);
 char		**replace_exist_line_3(t_minishell *data, char *args, char **dest);
 
@@ -153,7 +153,7 @@ int			return_error_export(char *cmd, char *arg, char *msg, int nb);
 int			return_error_syntax(void);
 int			return_error_syntax_2(void);
 int			return_error_fork(void);
-void		display_export(char **dest);
+void		display_export(t_minishell *data);
 void		the_noar(char *line);
 void		ft_ctrl_c(int signal);
 void		ft_ctrl_c_h(int signal);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 08:41:09 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 09:17:16 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_arg(char *args)
 	return (0);
 }
 
-char	**replace_exist_line(t_minishell *data, char *args, char **dest)
+void	replace_exist_line(t_minishell *data, char *args)
 {
 	char	**split;
 	int		i;
@@ -80,23 +80,16 @@ char	**replace_exist_line(t_minishell *data, char *args, char **dest)
 	}
 	if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
 			split[0], ft_strlen(split[0])))
-		dest[i] = ft_gc_strdup(temp);
+		data->new_env[i] = ft_gc_strdup(temp);
 	else
-		dest = ft_addline(dest, temp);
+		data->new_env = ft_addline(data->new_env, temp);
 	ft_free_split(split);
-	return (dest);
 }
 
 void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 {
-	char	**dest;
 	int		i;
 
-	i = -1;
-	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env));
-	while (data->new_env[++i])
-		dest[i] = ft_gc_strdup(data->new_env[i]);
-	dest[i] = NULL;
 	if (lst_cmd->args[1])
 	{
 		i = 0;
@@ -104,14 +97,13 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 		{
 			if (!check_arg(lst_cmd->args[i])
 				&& count_equal(lst_cmd->args[i]) > 0)
-				data->new_env = replace_exist_line(data,
-						lst_cmd->args[i], dest);
+				replace_exist_line(data, lst_cmd->args[i]);
 			if (!check_arg(lst_cmd->args[i])
 				&& count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
-				data->new_env = ft_addline(dest, lst_cmd->args[i]);
+				data->new_env = ft_addline(data->new_env, lst_cmd->args[i]);
 		}
 	}
 	else
-		return (display_export(dest));
+		display_export(data);
 }
