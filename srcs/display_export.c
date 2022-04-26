@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:20:17 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 10:05:18 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 10:56:53 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ char	**sort_env(char **dest, t_minishell *data)
 			break ;
 		if (ft_strcmp(dest[i], dest[i + 1]) > 0)
 		{
-			temp = ft_strdup(dest[i]);
-			dest[i] = ft_strdup(dest[i + 1]);
-			dest[i + 1] = ft_strdup(temp);
+			temp = ft_gc_strdup(dest[i]);
+			dest[i] = ft_gc_strdup(dest[i + 1]);
+			dest[i + 1] = ft_gc_strdup(temp);
 			i = 0;
 		}
 		else
@@ -55,7 +55,6 @@ void	display_export(t_minishell *data)
 		if (ft_strchr(dest[i], '='))
 		{
 			split = ft_split(dest[i], '=');
-			ft_gc_free(dest[i]);
 			temp = ft_strjoin("=\"", split[1]);
 			temp = ft_strjoin_free_s1(temp, "\"");
 			temp = ft_strjoin_free_s2(split[0], temp);
