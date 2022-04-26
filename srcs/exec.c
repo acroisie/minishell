@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 18:13:51 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 18:45:20 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 	{
 		if (!ft_strlen(lst_cmd->args[0]) && lst_cmd->next)
 			return (return_error_syntax());
+		dprintf(2, "debug: %s\n", lst_cmd->lst_out->file);
 		lst_cmd = lst_cmd->next;
 	}
 	lst_cmd = data->start_cmd;
