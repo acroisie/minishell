@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part02.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/13 17:46:55 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 14:25:06 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_set_ouput_out(char *line, t_var *var)
 {
 	if (!var->lst_cmd->lst_out)
 	{
-		var->lst_cmd->lst_out = ft_lstadd_tab(var->lst_cmd->lst_out, NULL);
+		var->lst_cmd->lst_out = ft_create_tab(NULL);
 		var->first_out = var->lst_cmd->lst_out;
 		if (line[var->i + 1] == '>')
 		{

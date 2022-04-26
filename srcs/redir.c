@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 12:05:25 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 14:41:26 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	open_redir2(t_lst_cmd *lst_cmd)
 {
 	while (lst_cmd->lst_out->next)
 	{
-		if (lst_cmd->lst_out->append == 0)
+		if (ft_lstlast_tab(lst_cmd->lst_out)->append == 0)
 		{
 			if (open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
 					| O_CREAT, 0644) < 0)
@@ -66,6 +66,7 @@ int	open_redir3(t_lst_cmd	*lst_cmd)
 {
 	if (ft_lstlast_tab(lst_cmd->lst_out)->append == 0)
 	{
+		//dprintf(2, "file2 %s \n", ft_lstlast_tab(lst_cmd->lst_out)->file);
 		lst_cmd->fd_out = open(ft_lstlast_tab(lst_cmd->lst_out)->file,
 				O_TRUNC | O_RDWR | O_CREAT, 0644);
 		if (lst_cmd->fd_out < 0)
@@ -76,6 +77,7 @@ int	open_redir3(t_lst_cmd	*lst_cmd)
 	{
 		lst_cmd->fd_out = open(ft_lstlast_tab(lst_cmd->lst_out)->file,
 				O_APPEND | O_RDWR | O_CREAT, 0644);
+		//dprintf(2, "debug %s \n", ft_lstlast_tab(lst_cmd->lst_out)->file);
 		if (lst_cmd->fd_out < 0)
 			return (return_error_redir(lst_cmd->lst_out->file, \
 				": Permission denied\n"));
@@ -85,24 +87,33 @@ int	open_redir3(t_lst_cmd	*lst_cmd)
 
 int	open_redir(t_lst_cmd *lst_cmd)
 {
-	if (lst_cmd->next != NULL)
-		pipe(lst_cmd->pipe_fd);
+	//dprintf(2, "args %s\n", lst_cmd->args[0]); //to delete
+	if (lst_cmd->lst_out != NULL)
+	{
+		if (lst_cmd->lst_out->file)
+		{
+			if (open_redir2(lst_cmd) == -1)
+				return (-1);
+			if (open_redir3(lst_cmd) == -1)
+				return (-1);
+		}
+	}
 	if (lst_cmd->lst_in != NULL)
 	{
 		if (lst_cmd->lst_in->file)
 		{
 			lst_cmd->fd_in = open(ft_lstlast_tab(lst_cmd->lst_in)->file,
 					O_RDONLY);
+			if (access(lst_cmd->lst_in->file, X_OK) == -1
+				&& access(lst_cmd->lst_in->file, F_OK) == 0)
+				return (return_error_redir(lst_cmd->lst_in->file, \
+					": Permission denied"));
 			if (lst_cmd->fd_in < 0)
 				return (return_error_redir(lst_cmd->lst_in->file, \
-					": Permission denied or No such file or directory\n"));
+					": No such file or directory\n"));
 		}
 	}
-	if (lst_cmd->lst_out != NULL)
-	{
-		if (lst_cmd->lst_out->file)
-			if (open_redir2(lst_cmd) == -1 || open_redir3(lst_cmd) == -1)
-				return (-1);
-	}
+	if (lst_cmd->next != NULL)
+		pipe(lst_cmd->pipe_fd);
 	return (0);
 }
