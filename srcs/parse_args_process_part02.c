@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_process_part02.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/26 14:25:06 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 18:10:49 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_set_ouput_in(t_var *var)
 	if (!var->lst_cmd->lst_in)
 	{
 		var->lst_cmd->lst_in = ft_lstadd_tab(var->lst_cmd->lst_in, NULL);
-		var->first_in = var->lst_cmd->lst_in;
+		var->lst_cmd->first_in = var->lst_cmd->lst_in;
 	}
 	else
 	{
@@ -52,7 +52,8 @@ void	ft_set_ouput_out(char *line, t_var *var)
 	if (!var->lst_cmd->lst_out)
 	{
 		var->lst_cmd->lst_out = ft_create_tab(NULL);
-		var->first_out = var->lst_cmd->lst_out;
+		if (!var->lst_cmd->first_out)
+			var->lst_cmd->first_out = var->lst_cmd->lst_out;
 		if (line[var->i + 1] == '>')
 		{
 			var->i++;
@@ -78,7 +79,7 @@ void	ft_heredoc_process(t_var *var)
 	{
 		var->lst_cmd->lst_herdoc = ft_lstadd_tab(
 				var->lst_cmd->lst_herdoc, NULL);
-		var->first_here = var->lst_cmd->lst_herdoc;
+		var->lst_cmd->first_here = var->lst_cmd->lst_herdoc;
 	}
 	else
 	{

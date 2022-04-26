@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 11:57:09 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 18:14:05 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_lst_redir
 
 typedef struct s_lst_cmd
 {
+	t_lst_redir			*first_out;
+	t_lst_redir			*first_in;
+	t_lst_redir			*first_here;
 	pid_t				pid;
 	char				**args;
 	char				*path;
@@ -84,9 +87,6 @@ void		print_lst(t_lst_cmd *lst);
 typedef struct s_var
 {
 	t_lst_cmd	*lst_cmd;
-	t_lst_redir	*first_out;
-	t_lst_redir	*first_in;
-	t_lst_redir	*first_here;
 	int			output;
 	int			i;
 	int			j;

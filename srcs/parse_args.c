@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/22 18:43:41 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 18:13:25 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ char	**ft_double_array(t_var *var)
 void	ft_set_first_link(t_var *var)
 {
 	while (var->lst_cmd->prev)
+	{
 		var->lst_cmd = var->lst_cmd->prev;
-	var->lst_cmd->lst_out = var->first_out;
-	var->lst_cmd->lst_in = var->first_in;
-	var->lst_cmd->lst_herdoc = var->first_here;
+		var->lst_cmd->lst_out = var->lst_cmd->first_out;
+		var->lst_cmd->lst_in = var->lst_cmd->first_in;
+		var->lst_cmd->lst_herdoc = var->lst_cmd->first_here;
+	}
 }
 
 void	ft_trigger_space(char *line, t_var *var)
