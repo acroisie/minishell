@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:20:17 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 10:56:53 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 16:17:28 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**sort_env(char **dest, t_minishell *data)
 	int		i;
 
 	i = -1;
-	dest = ft_gc_calloc(ft_destlen(data->new_env), sizeof(char *));
+	dest = ft_gc_calloc(ft_destlen(data->new_env) + 1, sizeof(char *));
 	while (data->new_env[++i])
 		dest[i] = ft_gc_strdup(data->new_env[i]);
 	dest[i] = NULL;
