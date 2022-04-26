@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/23 16:35:08 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 08:41:09 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 	int		i;
 
 	i = -1;
-	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env) + 2);
+	dest = ft_gc_calloc(sizeof(char *), ft_destlen(data->new_env));
 	while (data->new_env[++i])
 		dest[i] = ft_gc_strdup(data->new_env[i]);
 	dest[i] = NULL;
@@ -102,13 +102,15 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 		i = 0;
 		while (lst_cmd->args[++i] != NULL)
 		{
-			if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) > 0)
-				dest = replace_exist_line(data, lst_cmd->args[i], dest);
-			if (!check_arg(lst_cmd->args[i]) && count_equal(lst_cmd->args[i]) == 0
+			if (!check_arg(lst_cmd->args[i])
+				&& count_equal(lst_cmd->args[i]) > 0)
+				data->new_env = replace_exist_line(data,
+						lst_cmd->args[i], dest);
+			if (!check_arg(lst_cmd->args[i])
+				&& count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
-				dest = ft_addline(dest, lst_cmd->args[i]);
+				data->new_env = ft_addline(dest, lst_cmd->args[i]);
 		}
-		return (copy_dest(data, dest));
 	}
 	else
 		return (display_export(dest));
