@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 08:07:29 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 08:17:12 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,16 @@ char	**replace_exist_line(t_minishell *data, char *args, char **dest)
 
 void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 {
-	char	**dest = NULL;
+	char	**dest;
 	int		i;
 
-	// i = 0;
-	// while (data->new_env[i])
-	// {
-	// 	dest[i] = ft_gc_strdup(data->new_env[i]);
-	// 	dprintf(2, "test : %s\n", data->new_env[i]);
-	// 	// print_lst(lst_cmd);
-	// 	i++;
-	// }
-	// // dest[i] = ft_gc_strdup(data->new_env[i]);
-	// dest[i + 1] = NULL;
-	// dprintf(2, "\n\n\nICI%s\n\n\n", lst_cmd->args[1]); // Debug
+	i = 0;
+	while (data->new_env[i])
+	{
+		dest[i] = ft_gc_strdup(data->new_env[i]);
+		i++;
+	}
+	dest[i + 1] = NULL;
 	if (lst_cmd && lst_cmd->args[1])
 	{
 		dest = ft_gc_calloc(ft_destlen(data->new_env), sizeof(char *));
@@ -125,5 +121,4 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 	}
 	else
 		return (display_export(data->new_env));
-	dprintf(2, "test : %s\n", data->new_env[i]);
 }
