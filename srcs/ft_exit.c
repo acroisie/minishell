@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:57:55 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/25 13:01:02 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 13:53:42 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_exit(t_lst_cmd *lst_cmd)
 		if (i > 1)
 		{
 			g_rvalue = 1;
-			return (ft_putendl_fd("bash: exit: too many arguments", 2));
+			return (ft_putendl_fd("minishell: exit: too many arguments", 2));
 		}
 		if (lst_cmd->args[i][0] == '-' || lst_cmd->args[i][0] == '+')
 			j++;

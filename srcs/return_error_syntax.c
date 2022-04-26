@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:11:15 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 11:56:33 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 13:53:42 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	return_error_syntax_2(void)
 
 int	return_error_fork(void)
 {
-	ft_putstr_fd("bash: fork: Resource temporarily unavailable\n", 2);
+	ft_putstr_fd("minishell: fork: Resource temporarily unavailable\n", 2);
 	g_rvalue = 1;
 	return (-1);
 }
