@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shlvl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 00:31:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/23 16:33:58 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 14:28:38 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,16 @@ char	**replace_exist_line_2(t_minishell *data, char *args, char **dest)
 		dest = ft_addline(dest, temp);
 	}
 	return (dest);
+}
+
+void	oldpwd(t_minishell *data)
+{
+	if (is_in_env(data, "OLDPWD"))
+		data->new_env[find_in_env(data, "OLDPWD")] = ft_gc_strdup(data->cd_pwd);
+	else
+	{
+		getcwd(data->pwd, sizeof(data->pwd));
+		data->new_env = ft_addline(data->new_env,
+				ft_strjoin("OLDPWD=", data->cd_pwd));
+	}
 }

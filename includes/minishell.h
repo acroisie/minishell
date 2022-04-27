@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 18:14:05 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 14:28:43 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,6 @@ int			is_in_env(t_minishell *data, char *arg);
 int			do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data);
 int			check_redir(t_lst_cmd *lst_cmd);
 int			return_error_redir(char *arg, char *msg);
+void		oldpwd(t_minishell *data);
 
 #endif

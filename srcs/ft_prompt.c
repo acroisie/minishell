@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:34:25 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 13:05:44 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 14:30:46 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,20 @@ int	check_line(char *line)
 void	prompt(t_lst_cmd *lst_cmd, t_minishell *data)
 {
 	char		*line;
-	//int			i;
-	//char		**prompt;
+	int			i;
+	char		**prompt;
 
 	while (1)
 	{
 		signal(SIGINT, ft_ctrl_c);
 		signal(SIGQUIT, ft_ctrl_bslash);
-		//i = find_in_env(data, "PWD");
-		//if (i != ft_destlen(data->new_env))
-		//{
-		//	prompt = ft_split(data->new_env[i], '/');
-		//	line = switch_display(prompt, line);
-		//}
-		//else
+		i = find_in_env(data, "PWD");
+		if (i != ft_destlen(data->new_env))
+		{
+			prompt = ft_split(data->new_env[i], '/');
+			line = switch_display(prompt, line);
+		}
+		else
 			line = readline("minishell> ");
 		if (ft_strlen(line) != 0)
 			execute_line(lst_cmd, data, line);
