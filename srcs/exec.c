@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 18:58:29 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 13:31:09 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 {
 	while (lst_cmd)
 	{
-		if (!ft_strlen(lst_cmd->args[0]) && lst_cmd->next)
+		if (!ft_strlen(lst_cmd->args[0]) && !lst_cmd->lst_herdoc && lst_cmd->next)
 			return (return_error_syntax());
 		lst_cmd = lst_cmd->next;
 	}

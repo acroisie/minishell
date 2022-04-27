@@ -6,22 +6,11 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 16:37:14 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 12:49:52 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	copy_dest(t_minishell *data, char **dest)
-{
-	int	i;
-
-	i = -1;
-	while (dest[++i])
-		data->new_env[i] = ft_gc_strdup(dest[i]);
-	data->new_env[i] = NULL;
-	ft_free_split(dest);
-}
 
 int	count_equal(char *args)
 {
@@ -78,8 +67,7 @@ void	replace_exist_line(t_minishell *data, char *args)
 		if ((!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0]))))
 			break ;
 	}
-	if (i != ft_destlen(data->new_env) && !ft_strncmp(data->new_env[i],
-			split[0], ft_strlen(split[0])))
+	if (ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
 		data->new_env[i] = ft_gc_strdup(temp);
 	else
 		data->new_env = ft_addline(data->new_env, temp);
@@ -102,7 +90,10 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 				replace_exist_line(data, lst_cmd->args[i]);
 			else if (check == 0 && count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
+			{
+				dprintf(2, "debug\n");
 				data->new_env = ft_addline(data->new_env, lst_cmd->args[i]);
+			}
 		}
 	}
 	else

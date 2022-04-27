@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   is_in_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 23:46:29 by lnemor            #+#    #+#             */
 /*   Updated: 2022/04/27 13:00:17 by acroisie         ###   ########lyon.fr   */
