@@ -6,16 +6,14 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:57:55 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 09:51:08 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 09:57:07 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	the_noar_exit(unsigned int nb, t_lst_cmd *lst_cmd)
+void	the_noar_exit(unsigned int nb)
 {
-	if (!lst_cmd->prev && lst_cmd->next)
-		ft_putendl_fd("exit", 2);
 	g_rvalue = nb;
 	ft_gc_destroy();
 	exit(nb % 256);
