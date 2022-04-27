@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 16:39:02 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 16:47:09 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,33 @@ int	open_redir2(t_lst_cmd *lst_cmd)
 {
 	int		fd;
 
-	if (ft_strlen(lst_cmd->lst_out->file))
+	while (lst_cmd->lst_out->file)
 	{
-		if (lst_cmd->lst_out->append == 0)
+		if (ft_strlen(lst_cmd->lst_out->file))
 		{
-			fd = open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
-					| O_CREAT, 0644);
-			if (fd < 0)
-				return (return_error_redir(lst_cmd->lst_out->file, \
-					": Permission denied\n"));
+			if (lst_cmd->lst_out->append == 0)
+			{
+				fd = open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
+						| O_CREAT, 0644);
+				if (fd < 0)
+					return (return_error_redir(lst_cmd->lst_out->file, \
+						": Permission denied\n"));
+			}
+			else
+			{
+				fd = open(lst_cmd->lst_out->file, O_APPEND | O_RDWR
+						| O_CREAT, 0644);
+				if (fd < 0)
+					return (return_error_redir(lst_cmd->lst_out->file, \
+						": Permission denied\n"));
+			}
+			close(fd);
 		}
 		else
-		{
-			fd = open(lst_cmd->lst_out->file, O_APPEND | O_RDWR
-					| O_CREAT, 0644);
-			if (fd < 0)
-				return (return_error_redir(lst_cmd->lst_out->file, \
-					": Permission denied\n"));
-		}
-		close(fd);
+			return (return_error_redir(lst_cmd->lst_out->file, \
+						": syntax error near unexpected token `newline'\n"));
+		lst_cmd->lst_out = lst_cmd->lst_out->next;
 	}
-	else
-		return (return_error_redir(lst_cmd->lst_out->file, \
-					": syntax error near unexpected token `newline'\n"));
-	lst_cmd->lst_out = lst_cmd->lst_out->next;
 	return (0);
 }
 
