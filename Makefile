@@ -6,13 +6,13 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/23 11:07:15 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/27 13:36:05 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc 
 
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 
 NAME := minishell
 
@@ -57,7 +57,7 @@ OBJS := $(SRCS:.c=.o)
 all : libft $(NAME)
 
 $(NAME):		$(addprefix objs/, $(OBJS)) Makefile
-				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline
+				$(CC) $(CC_FLAGS) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a $(READLINE_LIB_DIR_FLAG) -lreadline
 #				$(CC) -o $(NAME) $(addprefix objs/, $(OBJS)) libft/libft.a  -lreadline $(READLINE_LIB_DIR_FLAG) $(READLINE_INC_DIR_FLAG) -g3 -fsanitize=address
 
 objs/%.o:		srcs/%.c includes/minishell.h libft/libft.a libft/libft.h Makefile
