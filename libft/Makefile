@@ -6,7 +6,7 @@
 #    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 15:10:13 by acroisie          #+#    #+#              #
-#    Updated: 2022/04/14 10:10:13 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/27 17:42:49 by acroisie         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,6 @@ objs/%.o : %.c libft.h Makefile
 	
 clean :
 	rm -rf objs
-	rm -rf $(addprefix objs/, $(OBJS))
 
 fclean : clean
 	rm -rf $(NAME)
