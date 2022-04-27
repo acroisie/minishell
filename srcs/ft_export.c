@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 15:02:08 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 18:28:20 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,10 @@ void	replace_exist_line(t_minishell *data, char *args)
 	int		i;
 	char	*temp;
 
-	i = -1;
 	temp = ft_gc_strdup(args);
 	split = ft_split(temp, '=');
-	while (data->new_env[++i] != NULL)
-	{
-		if ((!ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0]))))
-			break ;
-	}
-	if (ft_strncmp(data->new_env[i], split[0], ft_strlen(split[0])))
+	i = find_in_env(data, split[0]);
+	if (is_in_env(data, split[0]))
 		data->new_env[i] = ft_gc_strdup(temp);
 	else
 		data->new_env = ft_addline(data->new_env, temp);
@@ -90,7 +85,7 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 				replace_exist_line(data, lst_cmd->args[i]);
 			else if (check == 0 && count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
-				data->new_env = ft_addline(data->new_env, lst_cmd->args[i]);
+					data->new_env = ft_addline(data->new_env, lst_cmd->args[i]);
 		}
 	}
 	else

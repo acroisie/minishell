@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:52:00 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 15:02:35 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 18:22:55 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	find_in_env(t_minishell *data, char *var_env)
 	j = 0;
 	while (data->new_env[j])
 	{
-		if (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env))
-			&& data->new_env[j][ft_strlen(var_env)] == '=')
+		if ((!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env)) \
+			&& data->new_env[j][ft_strlen(var_env)] == '=') \
+		|| (!ft_strncmp(data->new_env[j], var_env, ft_strlen(var_env))
+			&& data->new_env[j][ft_strlen(var_env)] == '\0'))
 			break ;
 		j++;
 	}
