@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shlvl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 00:31:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 14:28:38 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 19:06:37 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ char	**replace_exist_line_2(t_minishell *data, char *args, char **dest)
 void	oldpwd(t_minishell *data)
 {
 	if (is_in_env(data, "OLDPWD"))
-		data->new_env[find_in_env(data, "OLDPWD")] = ft_gc_strdup(data->cd_pwd);
+		data->new_env[find_in_env(data, "OLDPWD")] = ft_strjoin("OLDPWD=", \
+			ft_gc_strdup(data->cd_pwd));
 	else
 	{
 		getcwd(data->pwd, sizeof(data->pwd));

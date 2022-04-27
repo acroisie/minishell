@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 17:41:22 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 18:51:47 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,11 @@ int	check_redir(t_lst_cmd *lst_cmd)
 	return (0);
 }
 
-int	open_prev_fd(t_lst_cmd *lst_cmd, int fd)
-{
-	fd = open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
-			| O_CREAT, 0644);
-	if (fd < 0)
-		return (return_error_redir(lst_cmd->lst_out->file, \
-			": Permission denied\n"));
-	return (0);
-}
+//int	open_prev_fd(t_lst_cmd *lst_cmd, int fd)
+//{
+//	
+//	return (0);
+//}
 
 int	open_redir2(t_lst_cmd *lst_cmd)
 {
@@ -46,14 +42,26 @@ int	open_redir2(t_lst_cmd *lst_cmd)
 		if (ft_strlen(lst_cmd->lst_out->file))
 		{
 			if (lst_cmd->lst_out->append == 0)
-				return (open_prev_fd(lst_cmd, fd));
+			{
+				fd = open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
+			| O_CREAT, 0644);
+				if (fd < 0)
+				{
+					close(fd);
+					return (return_error_redir(lst_cmd->lst_out->file, \
+						": Permission denied\n"));
+				}
+			}
 			else
 			{
 				fd = open(lst_cmd->lst_out->file, O_APPEND | O_RDWR
 						| O_CREAT, 0644);
 				if (fd < 0)
+				{
+					close(fd);
 					return (return_error_redir(lst_cmd->lst_out->file, \
 						": Permission denied\n"));
+				}
 			}
 			close(fd);
 		}
