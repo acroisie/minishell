@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/27 13:36:05 by acroisie         ###   ########lyon.fr    #
+#    Updated: 2022/04/27 17:36:50 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRCS := main.c \
 		signal2.c \
 		return_error_syntax.c \
 		is_in_env.c \
-		shlvl.c
+		shlvl.c \
+		ft_heredoc_utils.c   
 
 ifneq ($(shell uname), Linux)
 READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
