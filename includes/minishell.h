@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 17:36:32 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 21:24:55 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int			return_error_export(char *cmd, char *arg, char *msg, int nb);
 int			return_error_syntax(void);
 int			return_error_syntax_2(void);
 int			return_error_fork(void);
+int			return_error_syntax_redir(void);
 void		display_export(t_minishell *data);
 void		the_noar(char *line);
 void		ft_ctrl_c(int signal);

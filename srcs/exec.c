@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 17:07:55 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 22:24:28 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 void	do_execve(t_lst_cmd *lst_cmd, t_minishell *data)
 {
+	struct stat	s;
+
+	stat(lst_cmd->args[0], &s);
 	if (lst_cmd->args[0][0] == '/')
 	{
+		if (!S_ISDIR(s.st_mode) && !S_ISREG(s.st_mode))
+			return_error_2(lst_cmd->args[0], ":  No such file or directory", 127);
+		if (access(lst_cmd->args[0], X_OK) == -1
+			&& access(lst_cmd->args[0], F_OK) == 0)
+			return_error_2(lst_cmd->args[0], ": Permission denied", 126);
 		if (execve(lst_cmd->args[0], lst_cmd->args, data->new_env) < 0)
 			return_error_2(lst_cmd->args[0],
-				": No such file or directory", 127);
+				": command not found", 127);
 	}
 	if (execve(lst_cmd->path, lst_cmd->args, data->new_env) == -1
 		&& ft_strlen(lst_cmd->args[0]))
@@ -91,6 +99,21 @@ int	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 		if (!ft_strlen(lst_cmd->args[0]) && lst_cmd->next
 			&& !lst_cmd->lst_herdoc)
 			return (return_error_syntax());
+		if (!ft_strlen(lst_cmd->args[0]) && lst_cmd->next
+			&& !lst_cmd->lst_out)
+			return (return_error_syntax());
+		if (!ft_strlen(lst_cmd->args[0]) && lst_cmd->next
+			&& !lst_cmd->lst_in)
+			return (return_error_syntax());
+		if (lst_cmd->lst_in)
+			if (!ft_strlen(lst_cmd->lst_in->file))
+				return (return_error_syntax_redir());
+		if (lst_cmd->lst_out)
+			if (!ft_strlen(lst_cmd->lst_out->file))
+				return (return_error_syntax_redir());
+		if (lst_cmd->lst_herdoc)
+			if (!ft_strlen(lst_cmd->lst_herdoc->file))
+				return (return_error_syntax_redir());
 		lst_cmd = lst_cmd->next;
 	}
 	lst_cmd = data->start_cmd;

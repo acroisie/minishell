@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 18:51:47 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 22:57:42 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int	check_redir(t_lst_cmd *lst_cmd)
 //	return (0);
 //}
 
-int	open_redir2(t_lst_cmd *lst_cmd)
+int	open_redir2(t_lst_cmd *lst_cmd, struct stat *s)
 {
 	int		fd;
 
+	stat(lst_cmd->lst_out->file, s);
 	while (lst_cmd->lst_out->next)
 	{
 		if (ft_strlen(lst_cmd->lst_out->file))
@@ -44,10 +45,13 @@ int	open_redir2(t_lst_cmd *lst_cmd)
 			if (lst_cmd->lst_out->append == 0)
 			{
 				fd = open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
-			| O_CREAT, 0644);
+						| O_CREAT, 0644);
 				if (fd < 0)
 				{
 					close(fd);
+					if (!S_ISDIR(s->st_mode) && !S_ISREG(s->st_mode))
+						return (return_error_redir(lst_cmd->lst_out->file, \
+							": No such file or directory\n"));
 					return (return_error_redir(lst_cmd->lst_out->file, \
 						": Permission denied\n"));
 				}
@@ -59,6 +63,9 @@ int	open_redir2(t_lst_cmd *lst_cmd)
 				if (fd < 0)
 				{
 					close(fd);
+					if (!S_ISDIR(s->st_mode) && !S_ISREG(s->st_mode))
+						return (return_error_redir(lst_cmd->lst_out->file, \
+							": No such file or directory\n"));
 					return (return_error_redir(lst_cmd->lst_out->file, \
 						": Permission denied\n"));
 				}
@@ -73,8 +80,9 @@ int	open_redir2(t_lst_cmd *lst_cmd)
 	return (0);
 }
 
-int	open_redir3(t_lst_cmd	*lst_cmd)
+int	open_redir3(t_lst_cmd	*lst_cmd, struct stat *s)
 {
+	stat(lst_cmd->lst_out->file, s);
 	if (ft_strlen(ft_lstlast_tab(lst_cmd->lst_out)->file))
 	{
 		if (ft_lstlast_tab(lst_cmd->lst_out)->append == 0)
@@ -82,8 +90,13 @@ int	open_redir3(t_lst_cmd	*lst_cmd)
 			lst_cmd->fd_out = open(ft_lstlast_tab(lst_cmd->lst_out)->file,
 					O_TRUNC | O_RDWR | O_CREAT, 0644);
 			if (lst_cmd->fd_out < 0)
+			{
+				if (!S_ISDIR(s->st_mode) && !S_ISREG(s->st_mode))
+					return (return_error_redir(lst_cmd->lst_out->file, \
+						": No such file or directory\n"));
 				return (return_error_redir(lst_cmd->lst_out->file, \
 					": Permission denied\n"));
+			}
 		}
 		else
 		{
@@ -91,6 +104,9 @@ int	open_redir3(t_lst_cmd	*lst_cmd)
 					O_APPEND | O_RDWR | O_CREAT, 0644);
 			if (lst_cmd->fd_out < 0)
 			{
+				if (!S_ISDIR(s->st_mode) && !S_ISREG(s->st_mode))
+					return (return_error_redir(lst_cmd->lst_out->file, \
+						": No such file or directory\n"));
 				return (return_error_redir(lst_cmd->lst_out->file, \
 					": Permission denied\n"));
 			}
@@ -111,19 +127,20 @@ int	open_redir(t_lst_cmd *lst_cmd)
 	if (lst_cmd->lst_out != NULL)
 	{
 		if (ft_strlen(lst_cmd->lst_out->file))
-			if (open_redir2(lst_cmd) == -1 || open_redir3(lst_cmd) == -1)
+			if (open_redir2(lst_cmd, &s) == -1
+				|| open_redir3(lst_cmd, &s) == -1)
 				return (-1);
 	}
 	if (lst_cmd->lst_in != NULL)
 	{
 		stat(lst_cmd->lst_in->file, &s);
-		if (!S_ISDIR(s.st_mode) && !S_ISREG(s.st_mode))
-			return (return_error_redir(lst_cmd->lst_in->file, \
-					": No such file or directory\n"));
 		lst_cmd->fd_in = open(ft_lstlast_tab(lst_cmd->lst_in)->file,
 				O_RDONLY);
 		if (lst_cmd->fd_in < 0)
 		{
+			if (!S_ISDIR(s.st_mode) && !S_ISREG(s.st_mode))
+				return (return_error_redir(lst_cmd->lst_in->file, \
+					": No such file or directory\n"));
 			return (return_error_redir(lst_cmd->lst_in->file, \
 				": Permission denied\n"));
 		}
