@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/26 18:10:49 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 13:39:13 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_set_ouput_in(t_var *var)
 {
 	if (!var->lst_cmd->lst_in)
 	{
-		var->lst_cmd->lst_in = ft_lstadd_tab(var->lst_cmd->lst_in, NULL);
+		var->lst_cmd->lst_in = ft_create_tab(NULL);
 		var->lst_cmd->first_in = var->lst_cmd->lst_in;
 	}
 	else

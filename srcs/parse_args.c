@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:47:25 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/26 18:53:27 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 13:27:07 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void	ft_set_first_link(t_var *var)
 		var->lst_cmd->lst_herdoc = var->lst_cmd->first_here;
 		var->lst_cmd = var->lst_cmd->prev;
 	}
+		var->lst_cmd->lst_out = var->lst_cmd->first_out;
+		var->lst_cmd->lst_in = var->lst_cmd->first_in;
+		var->lst_cmd->lst_herdoc = var->lst_cmd->first_here;
 }
 
 void	ft_trigger_space(char *line, t_var *var)
