@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 16:47:09 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 17:08:06 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	open_redir2(t_lst_cmd *lst_cmd)
 {
 	int		fd;
 
-	while (lst_cmd->lst_out->file)
+	while (lst_cmd->lst_out->next)
 	{
 		if (ft_strlen(lst_cmd->lst_out->file))
 		{
@@ -106,6 +106,8 @@ int	open_redir(t_lst_cmd *lst_cmd)
 {
 	struct stat	s;
 
+	if (lst_cmd->next != NULL)
+		pipe(lst_cmd->pipe_fd);
 	if (lst_cmd->lst_out != NULL)
 	{
 		if (ft_strlen(lst_cmd->lst_out->file))
