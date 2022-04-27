@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/26 18:38:49 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 16:39:02 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,45 +41,61 @@ int	do_heredoc(t_lst_cmd *lst_cmd, t_minishell *data)
 
 int	open_redir2(t_lst_cmd *lst_cmd)
 {
-	while (lst_cmd->lst_out->next)
+	int		fd;
+
+	if (ft_strlen(lst_cmd->lst_out->file))
 	{
-		if (ft_lstlast_tab(lst_cmd->lst_out)->append == 0)
+		if (lst_cmd->lst_out->append == 0)
 		{
-			if (open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
-					| O_CREAT, 0644) < 0)
+			fd = open(lst_cmd->lst_out->file, O_TRUNC | O_RDWR
+					| O_CREAT, 0644);
+			if (fd < 0)
 				return (return_error_redir(lst_cmd->lst_out->file, \
 					": Permission denied\n"));
 		}
 		else
 		{
-			if (open(lst_cmd->lst_out->file, O_APPEND | O_RDWR
-					| O_CREAT, 0644) < 0)
+			fd = open(lst_cmd->lst_out->file, O_APPEND | O_RDWR
+					| O_CREAT, 0644);
+			if (fd < 0)
 				return (return_error_redir(lst_cmd->lst_out->file, \
 					": Permission denied\n"));
 		}
-		lst_cmd->lst_out = lst_cmd->lst_out->next;
+		close(fd);
 	}
+	else
+		return (return_error_redir(lst_cmd->lst_out->file, \
+					": syntax error near unexpected token `newline'\n"));
+	lst_cmd->lst_out = lst_cmd->lst_out->next;
 	return (0);
 }
 
 int	open_redir3(t_lst_cmd	*lst_cmd)
 {
-	if (ft_lstlast_tab(lst_cmd->lst_out)->append == 0)
+	if (ft_strlen(ft_lstlast_tab(lst_cmd->lst_out)->file))
 	{
-		lst_cmd->fd_out = open(ft_lstlast_tab(lst_cmd->lst_out)->file,
-				O_TRUNC | O_RDWR | O_CREAT, 0644);
-		if (lst_cmd->fd_out < 0)
-			return (return_error_redir(lst_cmd->lst_out->file, \
-				": Permission denied\n"));
+		if (ft_lstlast_tab(lst_cmd->lst_out)->append == 0)
+		{
+			lst_cmd->fd_out = open(ft_lstlast_tab(lst_cmd->lst_out)->file,
+					O_TRUNC | O_RDWR | O_CREAT, 0644);
+			if (lst_cmd->fd_out < 0)
+				return (return_error_redir(lst_cmd->lst_out->file, \
+					": Permission denied\n"));
+		}
+		else
+		{
+			lst_cmd->fd_out = open(ft_lstlast_tab(lst_cmd->lst_out)->file,
+					O_APPEND | O_RDWR | O_CREAT, 0644);
+			if (lst_cmd->fd_out < 0)
+			{
+				return (return_error_redir(lst_cmd->lst_out->file, \
+					": Permission denied\n"));
+			}
+		}
 	}
 	else
-	{
-		lst_cmd->fd_out = open(ft_lstlast_tab(lst_cmd->lst_out)->file,
-				O_APPEND | O_RDWR | O_CREAT, 0644);
-		if (lst_cmd->fd_out < 0)
-			return (return_error_redir(lst_cmd->lst_out->file, \
-				": Permission denied\n"));
-	}
+		return (return_error_redir(ft_lstlast_tab(lst_cmd->lst_out)->file, \
+					": syntax error near unexpected token `newline'\n"));
 	return (0);
 }
 
@@ -89,7 +105,7 @@ int	open_redir(t_lst_cmd *lst_cmd)
 
 	if (lst_cmd->lst_out != NULL)
 	{
-		if (lst_cmd->lst_out->file)
+		if (ft_strlen(lst_cmd->lst_out->file))
 			if (open_redir2(lst_cmd) == -1 || open_redir3(lst_cmd) == -1)
 				return (-1);
 	}
@@ -102,10 +118,10 @@ int	open_redir(t_lst_cmd *lst_cmd)
 		lst_cmd->fd_in = open(ft_lstlast_tab(lst_cmd->lst_in)->file,
 				O_RDONLY);
 		if (lst_cmd->fd_in < 0)
+		{
 			return (return_error_redir(lst_cmd->lst_in->file, \
 				": Permission denied\n"));
+		}
 	}
-	if (lst_cmd->next != NULL)
-		pipe(lst_cmd->pipe_fd);
 	return (0);
 }

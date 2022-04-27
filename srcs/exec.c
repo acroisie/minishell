@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:11:51 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 14:31:30 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 16:04:12 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,18 @@ int	exec_cmds(t_minishell *data, t_lst_cmd *lst_cmd)
 	lst_cmd = data->start_cmd;
 	while (lst_cmd)
 	{
+		if (lst_cmd->next != NULL)
+			pipe(lst_cmd->pipe_fd);
 		if (check_redir(lst_cmd) == -1)
 			return (return_error_syntax_2());
-		if (open_redir(lst_cmd) == -1 || do_heredoc(lst_cmd, data) == -1)
-			return (-1);
+		if ((open_redir(lst_cmd) == -1 || do_heredoc(lst_cmd, data) == -1))
+		{
+			if (!lst_cmd->next)
+			{
+				close_fds(lst_cmd);
+				return (-1);
+			}
+		}
 		if (is_builtin(lst_cmd) == 2 && !lst_cmd->prev && !lst_cmd->next)
 			do_builtin(data, lst_cmd);
 		else
