@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:34:41 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/27 13:39:13 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 14:03:22 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ void	ft_heredoc_process(t_var *var)
 {
 	if (!var->lst_cmd->lst_herdoc)
 	{
-		var->lst_cmd->lst_herdoc = ft_lstadd_tab(
-				var->lst_cmd->lst_herdoc, NULL);
+		var->lst_cmd->lst_herdoc = ft_create_tab(NULL);
 		var->lst_cmd->first_here = var->lst_cmd->lst_herdoc;
 	}
 	else

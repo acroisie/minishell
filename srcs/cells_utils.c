@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/12 10:14:46 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 14:05:10 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ t_lst_redir	*ft_create_tab(char *file)
 {
 	t_lst_redir	*lst;
 
+	(void) file;
 	lst = ft_gc_calloc(1, sizeof(t_lst_redir));
 	if (lst == NULL)
 		return (NULL);
-	lst->file = file;
+	lst->file = ft_gc_calloc(1, sizeof(char));
 	lst->next = NULL;
 	lst->append = 0;
 	return (lst);
