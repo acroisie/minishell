@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 19:54:31 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 12:49:52 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 15:02:08 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,7 @@ void	ft_export(t_minishell *data, t_lst_cmd *lst_cmd)
 				replace_exist_line(data, lst_cmd->args[i]);
 			else if (check == 0 && count_equal(lst_cmd->args[i]) == 0
 				&& !is_in_env(data, lst_cmd->args[i]))
-			{
-				dprintf(2, "debug\n");
 				data->new_env = ft_addline(data->new_env, lst_cmd->args[i]);
-			}
 		}
 	}
 	else
