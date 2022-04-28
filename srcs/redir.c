@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/28 14:52:22 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 15:55:14 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,6 @@ int	open_redir(t_lst_cmd *lst_cmd)
 
 	if (lst_cmd->next != NULL)
 		pipe(lst_cmd->pipe_fd);
-	if (lst_cmd->lst_out != NULL)
-	{
-		if (ft_strlen(lst_cmd->lst_out->file))
-			if (open_redir2(lst_cmd, &s) == -1
-				|| open_redir3(lst_cmd, &s) == -1)
-				return (-1);
-	}
 	if (lst_cmd->lst_in != NULL)
 	{
 		stat(lst_cmd->lst_in->file, &s);
@@ -125,9 +118,16 @@ int	open_redir(t_lst_cmd *lst_cmd)
 		if (lst_cmd->fd_in < 0)
 		{
 			if (!S_ISDIR(s.st_mode) && !S_ISREG(s.st_mode))
-				return (rterf(lst_cmd->lst_in->file));
-			return (rterp(lst_cmd->lst_in->file));
+				return (rterf(ft_lstlast_tab(lst_cmd->lst_in)->file));
+			return (rterp(ft_lstlast_tab(lst_cmd->lst_in)->file));
 		}
+	}
+	if (lst_cmd->lst_out != NULL)
+	{
+		if (ft_strlen(lst_cmd->lst_out->file))
+			if (open_redir2(lst_cmd, &s) == -1
+				|| open_redir3(lst_cmd, &s) == -1)
+				return (-1);
 	}
 	return (0);
 }
