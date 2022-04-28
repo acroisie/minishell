@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 14:20:33 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/28 14:21:29 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 14:52:22 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 int	check_redir(t_lst_cmd *lst_cmd)
 {
-	if (lst_cmd->lst_in)
+	while (lst_cmd)
 	{
-		if (!lst_cmd->lst_in->file)
-			return (-1);
-	}
-	if (lst_cmd->lst_out)
-	{
-		if (!lst_cmd->lst_out->file)
-			return (-1);
+		if (!ft_strlen(lst_cmd->args[0]) && lst_cmd->next
+			&& !lst_cmd->lst_herdoc && !lst_cmd->lst_out
+			&& !lst_cmd->lst_in)
+			return (return_error_syntax());
+		if (lst_cmd->lst_in)
+			if (!ft_strlen(lst_cmd->lst_in->file))
+				return (return_error_syntax_redir());
+		if (lst_cmd->lst_out)
+			if (!ft_strlen(lst_cmd->lst_out->file))
+				return (return_error_syntax_redir());
+		if (lst_cmd->lst_herdoc)
+			if (!ft_strlen(lst_cmd->lst_herdoc->file))
+				return (return_error_syntax_redir());
+		lst_cmd = lst_cmd->next;
 	}
 	return (0);
 }
