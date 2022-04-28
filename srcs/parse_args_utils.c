@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 15:53:16 by acroisie          #+#    #+#             */
-/*   Updated: 2022/04/14 08:50:34 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 10:07:30 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

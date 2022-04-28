@@ -6,7 +6,7 @@
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:50:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 21:24:55 by lnemor           ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 10:41:30 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct s_minishell
 	struct s_lst_cmd	*cmd;
 	char				**new_env;
 	char				**path;
-	char				cd_pwd[256];
-	char				pwd[256];
+	char				*cd_pwd;
+	char				*pwd;
 	char				*path_temp;
 	t_lst_cmd			*start_cmd;
 	char				*line;

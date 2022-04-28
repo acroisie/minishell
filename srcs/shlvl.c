@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shlvl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 00:31:22 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/27 19:06:37 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 11:12:48 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ char	**replace_exist_line_2(t_minishell *data, char *args, char **dest)
 		dest[find_in_env(data, "SHLVL")] = ft_gc_strdup(temp);
 	else
 	{
-		getcwd(data->pwd, sizeof(data->pwd));
+		data->pwd = getcwd(NULL, 0);
 		dest = ft_addline(dest, ft_strjoin("PWD=", data->pwd));
+		free(data->cd_pwd);
 		dest = ft_addline(dest, temp);
 	}
 	return (dest);
@@ -42,12 +43,17 @@ char	**replace_exist_line_2(t_minishell *data, char *args, char **dest)
 void	oldpwd(t_minishell *data)
 {
 	if (is_in_env(data, "OLDPWD"))
-		data->new_env[find_in_env(data, "OLDPWD")] = ft_strjoin("OLDPWD=", \
-			ft_gc_strdup(data->cd_pwd));
+	{
+		data->new_env[find_in_env(data, "OLDPWD")]
+			= ft_strjoin("OLDPWD=",
+				data->cd_pwd);
+		free(data->cd_pwd);
+	}
 	else
 	{
-		getcwd(data->pwd, sizeof(data->pwd));
+		data->pwd = getcwd(NULL, 0);
 		data->new_env = ft_addline(data->new_env,
 				ft_strjoin("OLDPWD=", data->cd_pwd));
+		free(data->cd_pwd);
 	}
 }
