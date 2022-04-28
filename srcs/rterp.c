@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal2.c                                          :+:      :+:    :+:   */
+/*   rterp.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 22:16:47 by lnemor            #+#    #+#             */
-/*   Updated: 2022/04/28 14:23:18 by lnemor           ###   ########lyon.fr   */
+/*   Created: 2022/04/28 14:23:45 by lnemor            #+#    #+#             */
+/*   Updated: 2022/04/28 14:25:05 by lnemor           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_ctrl_bslash(int signal)
+int	rterp(char *arg)
 {
-	(void) signal;
-	if (signal == SIGQUIT)
-	{
-		ft_putstr_fd(ft_strjoin(rl_prompt, rl_line_buffer), 2);
-		ft_putstr_fd("  \b\b", 2);
-		rl_redisplay();
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+	g_rvalue = 1;
+	return (-1);
 }
 
-void	ft_ctrl_f_bslash(int signal)
+int	rterf(char *arg)
 {
-	(void) signal;
-	if (signal == SIGQUIT)
-	{
-		g_rvalue = 131;
-		ft_putstr_fd("Quit: 3\n", 2);
-		rl_redisplay();
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	g_rvalue = 1;
+	return (-1);
 }

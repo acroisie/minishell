@@ -6,7 +6,7 @@
 #    By: lnemor <lnemor@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 14:11:10 by lnemor            #+#    #+#              #
-#    Updated: 2022/04/28 10:42:13 by lnemor           ###   ########lyon.fr    #
+#    Updated: 2022/04/28 14:25:25 by lnemor           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRCS := main.c \
 		return_error_syntax.c \
 		is_in_env.c \
 		shlvl.c \
-		ft_heredoc_utils.c   
+		ft_heredoc_utils.c \
+		rterp.c
 
 ifneq ($(shell uname), Linux)
 READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
