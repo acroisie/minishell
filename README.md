@@ -3,7 +3,7 @@
 Here is the minishell project wroted by [Luthernmr](https://github.com/Luthernmr) and I.
 
 The goal of this project is to achieve a basic shell in C with some missing features but fully functional.
-We divde the work in two different parts, I managed parsing then [Luthernmr](https://github.com/Luthernmr) execute.
+We divide the work in two different parts, I managed parsing then [Luthernmr](https://github.com/Luthernmr) execute.
 
 The rules:
 
